@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.mad.studecare.LoadingScreen">
+
+    <RelativeLayout
+        android:id="@+id/loading_header_upper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:background="@drawable/border"-->
+        <!--android:src="@mipmap/paper"-->
+        <!--android:scaleType="fitXY"/>-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_header_lower"
+        android:layout_below="@+id/loading_header_upper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <!--<ImageView-->
+        <!--android:id="@+id/loading_image"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:src="@mipmap/logo"/>-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_body"
+        android:layout_below="@id/loading_header_lower"
+        android:layout_above="@id/loading_footer_lower"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center_vertical">
+
+        <com.github.glomadrian.grav.GravView
+            android:id="@+id/loading_grav_3"
+            android:layout_centerInParent="true"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:colorGenerator="com.github.glomadrian.grav.generator.paint.ArrayColorGenerator"
+            app:array_colors="@array/loadingColors"
+            app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
+            app:regular_cell_size="150"
+            app:regular_variance="100"
+            app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+            app:ball_size_from_size="3dp"
+            app:ball_size_to_size="6dp"
+            app:animationGenerators="@array/array_reference"
+            app:path_variance_from="-10dp"
+            app:path_variance_to="12dp"
+            app:path="@string/circle"
+            app:path_original_width="@integer/circle_original_width"
+            app:path_original_height="@integer/circle_original_height"
+            app:path_min_duration="1000"
+            app:path_max_duration="2000"
+            />
+
+        <com.github.glomadrian.grav.GravView
+            android:id="@+id/loading_grav"
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:colorGenerator="com.github.glomadrian.grav.generator.paint.ArrayColorGenerator"
+            app:array_colors="@array/loadingColors"
+            app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
+            app:regular_cell_size="150"
+            app:regular_variance="100"
+            app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+            app:ball_size_from_size="3dp"
+            app:ball_size_to_size="6dp"
+            app:animationGenerators="@array/array_reference"
+            app:path_variance_from="-10dp"
+            app:path_variance_to="12dp"
+            app:path="@string/circle"
+            app:path_original_width="@integer/circle_original_width"
+            app:path_original_height="@integer/circle_original_height"
+            app:path_min_duration="1000"
+            app:path_max_duration="2000"
+            />
+
+        <TextView
+            android:id="@+id/loading_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Loading"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="@android:color/black"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_footer_lower"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/border"
+            android:src="@mipmap/uts"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

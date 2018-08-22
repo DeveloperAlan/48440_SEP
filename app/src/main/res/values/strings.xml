@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">StudeCare: UTS Health Tracking</string>
+
+    <!--Loading-->
+    <string name="loading_percent">%</string>
+    <string name="loading_format">%1$d%2$s</string>
+
+    <!--Login-->
+    <string name="login_student_id">Student ID</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Sign In</string>
+    <string name="login_register">Register</string>
+
+    <string-array name="array_reference">
+        <item>com.github.glomadrian.grav.generator.animation.PathAnimator</item>
+        <item>com.github.glomadrian.grav.generator.animation.BallSizeAnimator</item>
+    </string-array>
+
+    <string name="circle">
+M527.023,71.8233 C780.213,71.8233,985.464,277.075,985.464,530.265
+C985.464,783.455,780.213,988.707,527.023,988.707
+C273.832,988.707,68.5809,783.455,68.5809,530.265
+C68.5809,277.075,273.832,71.8233,527.023,71.8233 Z
+    </string>
+
+    <string name="circle_inverse">
+        71.8233, 527.023, 71.8233, 273.832, 277.075, C68.5809,
+        530.265, 68.5809, 783.455, 68.5809, 988.707, C273.832,
+        988.707, 527.023, 988.707, 780.213, 783.455, C985.464,
+        530.265, 985.464, 277.075, 985.464, 71.8233, C780.213,
+        71.8233, M527.023 Z
+    </string>
+
+    <integer name="circle_original_width">1062</integer>
+    <integer name="circle_original_height">1062</integer>
+
+</resources>
