@@ -39,6 +39,7 @@
 
         <Button
             android:id="@+id/login_login"
+            android:onClick="login"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
