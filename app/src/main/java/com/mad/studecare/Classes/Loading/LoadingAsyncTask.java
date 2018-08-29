@@ -1,4 +1,4 @@
-package com.mad.studecare;
+package com.mad.studecare.Classes.Loading;
 
 import android.os.AsyncTask;
 

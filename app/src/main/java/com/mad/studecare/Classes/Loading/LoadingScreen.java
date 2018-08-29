@@ -1,4 +1,4 @@
-package com.mad.studecare;
+package com.mad.studecare.Classes.Loading;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.glomadrian.grav.GravView;
+import com.mad.studecare.Classes.Login.LoginScreen;
+import com.mad.studecare.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

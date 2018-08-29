@@ -1,4 +1,4 @@
-package com.mad.studecare;
+package com.mad.studecare.Models;
 
 /**
  * Created by trevorlao on 22/8/18.

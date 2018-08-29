@@ -1,4 +1,10 @@
-package com.mad.studecare;
+package com.mad.studecare.Classes.Home;
+
+import android.content.Intent;
+
+import com.mad.studecare.Classes.Appointment.AppointmentScreen;
+import com.mad.studecare.Models.Appointments;
+import com.mad.studecare.Models.AppointmentsAdapter;
 
 import java.util.ArrayList;
 
@@ -7,6 +13,17 @@ import java.util.ArrayList;
  */
 
 public class HomePresenter implements HomeScreenContract.presenter {
+
+    private HomeScreenContract.view mView;
+
+    public HomePresenter(HomeScreenContract.view view) {
+        this.mView = view;
+    }
+
+    @Override
+    public void addAppointment() {
+        mView.addApointment();
+    }
 
     @Override
     public void prepareMovieData(ArrayList appointmentsList, AppointmentsAdapter adapter) {

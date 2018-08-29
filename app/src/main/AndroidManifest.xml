@@ -9,15 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoadingScreen">
+        <activity android:name=".Classes.Loading.LoadingScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginScreen" />
-        <activity android:name=".HomeScreen"></activity>
+        <activity android:name=".Classes.Login.LoginScreen" />
+        <activity android:name=".Classes.Home.HomeScreen" />
+        <activity android:name=".Classes.Profile.ProfileScreen" />
+        <activity android:name=".Classes.Appointment.AppointmentScreen" />
+        <activity android:name=".Classes.Settings.SettingsScreen" />
+        <activity android:name=".Classes.Register.RegisterScreen"></activity>
     </application>
 
 </manifest>

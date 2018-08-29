@@ -1,4 +1,4 @@
-package com.mad.studecare;
+package com.mad.studecare.Classes.Loading;
 
 /**
  * Created by trevorlao on 15/8/18.

@@ -1,4 +1,4 @@
-package com.mad.studecare;
+package com.mad.studecare.Classes.Login;
 
 import android.view.View;
 
@@ -9,11 +9,10 @@ import android.view.View;
 public interface LoginScreenContract {
     interface view {
         void login(View v);
+        void register(View v);
 
     }
 
     interface presenter {
-        void login(View v);
-
     }
 }

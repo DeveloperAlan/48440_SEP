@@ -1,4 +1,6 @@
-package com.mad.studecare;
+package com.mad.studecare.Classes.Home;
+
+import com.mad.studecare.Models.AppointmentsAdapter;
 
 import java.util.ArrayList;
 
@@ -8,12 +10,13 @@ import java.util.ArrayList;
 
 public interface HomeScreenContract {
     interface view {
-
+        void addApointment();
 
     }
 
     interface presenter {
         void prepareMovieData(ArrayList appointmentsList, AppointmentsAdapter appointmentsAdapter);
+        void addAppointment();
 
     }
 }

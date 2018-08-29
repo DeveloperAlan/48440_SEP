@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="com.mad.studecare.LoginScreen">
+    tools:context=".Classes.Login.LoginScreen">
 
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:id="@+id/login_area_main"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:gravity="center_horizontal">
 
         <EditText
@@ -40,6 +41,8 @@
         <Button
             android:id="@+id/login_login"
             android:onClick="login"
+            android:backgroundTint="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
@@ -51,6 +54,27 @@
             android:layout_height="50dp"
             android:hint="@string/login_login"/>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_area_lower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/login_area_main">
+
+        <Button
+            android:id="@+id/login_register"
+            android:onClick="register"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/edittext"
+            android:text="@string/login_register"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:hint="@string/login_register"/>
     </RelativeLayout>
 
 </RelativeLayout>
