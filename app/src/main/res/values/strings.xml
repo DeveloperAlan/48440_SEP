@@ -46,5 +46,6 @@ C68.5809,277.075,273.832,71.8233,527.023,71.8233 Z
     <!--Apppointments-->
     <string name="DatePickerDialog">DatePickerDialog</string>
     <string name="TimePicker">TimePicker</string>
+    <string name="logout">logout</string>
 
 </resources>

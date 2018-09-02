@@ -1,12 +1,16 @@
 package com.mad.studecare.Classes.Register;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.mad.studecare.Classes.Home.HomeScreen;
+import com.mad.studecare.Classes.Login.LoginScreen;
 import com.mad.studecare.R;
 
 import butterknife.BindView;
@@ -32,7 +36,21 @@ public class RegisterScreen extends AppCompatActivity implements RegisterScreenC
 
     @Override
     public void register(View v) {
-        presenter.RegisterUser(email.getText().toString(), password.getText().toString(), this);
+        presenter.RegisterUser(email.getText().toString(), password.getText().toString(), getApplicationContext());
         finish();
+    }
+
+    public void signInSucess(String message, Context context){
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        //Intent intent = new Intent(RegisterScreen.this, HomeScreen.class); //this, RegisterScreen.this, getApplicationContext, context
+        //startActivity(intent);
+    }
+
+    public void signInFail(String message,Context context){
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void emptyDetails(Context context){
+        Toast.makeText(context, "Please make sure both fields have been entered", Toast.LENGTH_SHORT).show();
     }
 }

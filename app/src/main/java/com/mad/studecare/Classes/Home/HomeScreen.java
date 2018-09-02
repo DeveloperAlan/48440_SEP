@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mad.studecare.Classes.Appointment.AppointmentScreen;
 import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
@@ -32,6 +34,7 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
     Toolbar mToolbar;
     @BindView(R.id.home_add)
     FloatingActionButton mAddButton;
+    FirebaseAuth firebaseAuth;
 
     private AppointmentsAdapter mAppointmentsAdapter;
     private ArrayList<Appointments> mAppointmentsList = new ArrayList<>();
@@ -43,6 +46,8 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
 
         ButterKnife.bind(this);
         presenter = new HomePresenter(this);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         mAppointmentsAdapter = new AppointmentsAdapter(mAppointmentsList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -70,14 +75,14 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.toolbar_settings: {
-                // do your stuff
-                break;
-            }
-            // case blocks for other MenuItems (if any)
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
+            firebaseAuth.signOut();
+            finish();
+            return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
