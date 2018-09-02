@@ -17,7 +17,7 @@ public class LoadingAsyncTask extends AsyncTask<Void, Integer, String> {
     protected String doInBackground(Void... voids) {
         for (int i = 0; i < 100; i++) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(10);
                 publishProgress(i);
             } catch (InterruptedException e) {
 

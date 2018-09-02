@@ -6,10 +6,18 @@
     <string name="loading_format">%1$d%2$s</string>
 
     <!--Login-->
-    <string name="login_student_id">Student ID</string>
+    <string name="login_student_id">Email</string>
     <string name="login_password">Password</string>
     <string name="login_login">Sign In</string>
     <string name="login_register">Register</string>
+    <string name="login_error_response">Error connecting with the server.</string>
+    <string name="login_error_incorrect_details">Invalid username or password.</string>
+
+    <!--API-->
+    <string name="api_email">"email"</string>
+    <string name="api_user">"user"</string>
+    <string name="api_name">"name"</string>
+    <string name="api_access_token">"token"</string>
 
     <string-array name="array_reference">
         <item>com.github.glomadrian.grav.generator.animation.PathAnimator</item>

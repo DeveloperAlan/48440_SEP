@@ -1,6 +1,7 @@
 package com.mad.studecare.Classes.Home;
 
-import com.mad.studecare.Models.AppointmentsAdapter;
+
+import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 
 import java.util.ArrayList;
 

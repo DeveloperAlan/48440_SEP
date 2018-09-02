@@ -1,4 +1,4 @@
-package com.mad.studecare.Models;
+package com.mad.studecare.Models.Appointments;
 
 /**
  * Created by trevorlao on 22/8/18.

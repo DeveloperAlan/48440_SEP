@@ -13,8 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.mad.studecare.Classes.Appointment.AppointmentScreen;
-import com.mad.studecare.Models.Appointments;
-import com.mad.studecare.Models.AppointmentsAdapter;
+import com.mad.studecare.Models.Appointments.Appointments;
+import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.R;
 
 import java.util.ArrayList;

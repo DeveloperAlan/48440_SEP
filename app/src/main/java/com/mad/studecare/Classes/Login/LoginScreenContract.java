@@ -1,5 +1,6 @@
 package com.mad.studecare.Classes.Login;
 
+import android.content.Context;
 import android.view.View;
 
 /**
@@ -9,10 +10,12 @@ import android.view.View;
 public interface LoginScreenContract {
     interface view {
         void login(View v);
+        void loginAuthenticated();
         void register(View v);
 
     }
 
     interface presenter {
+        void authenticate(String username, String password, Context context);
     }
 }

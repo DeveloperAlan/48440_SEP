@@ -1,10 +1,7 @@
 package com.mad.studecare.Classes.Home;
 
-import android.content.Intent;
-
-import com.mad.studecare.Classes.Appointment.AppointmentScreen;
-import com.mad.studecare.Models.Appointments;
-import com.mad.studecare.Models.AppointmentsAdapter;
+import com.mad.studecare.Models.Appointments.Appointments;
+import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 
 import java.util.ArrayList;
 
