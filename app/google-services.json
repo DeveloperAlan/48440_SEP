@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "817795724450",
+    "firebase_url": "https://smaa-e8e8c.firebaseio.com",
+    "project_id": "smaa-e8e8c",
+    "storage_bucket": "smaa-e8e8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817795724450:android:49b6e94058e0c776",
+        "android_client_info": {
+          "package_name": "com.mad.studecare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817795724450-go3c3l19aoplkn7ellq4bo18b88u6uuf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mad.studecare",
+            "certificate_hash": "cfc8d79359554f3de18c1080987dcef798a67580"
+          }
+        },
+        {
+          "client_id": "817795724450-fqbec5tv4occegn0nog8p6p3ek79b1bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3rrUEIn2PTNOy3h3yMcLDkBgcto0swZk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817795724450-fqbec5tv4occegn0nog8p6p3ek79b1bk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
