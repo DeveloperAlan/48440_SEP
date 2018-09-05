@@ -8,24 +8,10 @@
     tools:context=".Classes.Login.LoginScreen">
 
     <RelativeLayout
-        android:id="@+id/image_area"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/logo"/>
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/login_area_main"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/image_area">
+        android:gravity="center_horizontal">
 
         <EditText
             android:id="@+id/login_user"

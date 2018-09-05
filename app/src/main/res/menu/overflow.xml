@@ -5,15 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.MainActivity">
 
-    <!--<item-->
-        <!--android:id="@+id/toolbar_settings"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="Settings"-->
-        <!--android:icon="@drawable/ic_action_settings"-->
-        <!--app:showAsAction="always" />-->
     <item
-        android:id="@+id/action_logout"
+        android:id="@+id/toolbar_settings"
         android:orderInCategory="100"
-        android:title="@string/logout"
-        app:showAsAction="never" />
+        android:title="Settings"
+        android:icon="@drawable/ic_action_settings"
+        app:showAsAction="always" />
+
 </menu>
