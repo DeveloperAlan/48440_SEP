@@ -5,55 +5,109 @@
     android:layout_height="wrap_content"
     tools:style="@style/CardView"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#CABBBBBB"
     android:clickable="true"
     android:focusable="true"
     android:elevation="3dp"
     android:layout_margin="6dp">
 
     <RelativeLayout
+        android:id="@+id/appointments_card_header"
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text="TEST"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:id="@+id/appointments_card_colour_container"
+            android:background="@drawable/border_no_corners"
+            android:layout_width="80dp"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/genre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TEST"
-            android:layout_below="@id/title" />
+            <ImageView
+                android:id="@+id/appointments_card_colour"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_red_dark"/>
 
-        <TextView
-            android:id="@+id/year"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/appointments_card_body"
+            android:background="@drawable/border_no_corners"
+            android:layout_toRightOf="@+id/appointments_card_colour_container"
+            android:layout_toEndOf="@+id/appointments_card_colour_container"
+            android:layout_toLeftOf="@id/appointments_card_footer"
+            android:layout_toStartOf="@id/appointments_card_footer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEST"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/appointments_overflow"
-            android:layout_width="20dp"
-            android:layout_height="30dp"
+            <TextView
+                android:id="@+id/appointments_card_doctor"
+                android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="Doctor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/appointments_card_time_date"
+                android:paddingLeft="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"
+                android:textStyle="italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time and Date"
+                android:layout_below="@id/appointments_card_doctor" />
+
+            <TextView
+                android:id="@+id/appointments_card_description"
+                android:padding="5dp"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:layout_below="@id/appointments_card_time_date"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/appointments_card_footer"
+            android:background="@drawable/border_no_corners"
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_action_overflow"/>
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/appointments_card_edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="15dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_action_edit"/>
+
+            <ImageView
+                android:id="@+id/appointments_card_cancel"
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_action_cancel"/>
+
+
+        </LinearLayout>
+
 
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="yeah"
-        />
 
 </android.support.v7.widget.CardView>

@@ -60,6 +60,9 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
                 presenter.addAppointment();
             }
         });
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Welcome, PLACEHOLDER");
     }
 
     @Override
@@ -81,7 +84,7 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
     }
 
     @Override
-    public void addApointment() {
+    public void addAppointment() {
         Intent myIntent = new Intent(HomeScreen.this, AppointmentScreen.class);
         HomeScreen.this.startActivity(myIntent);
     }

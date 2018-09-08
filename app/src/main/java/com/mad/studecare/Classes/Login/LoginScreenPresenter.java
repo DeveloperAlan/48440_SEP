@@ -34,5 +34,6 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         this.mUsername = email;
         this.mPassword = password;
 
+        mView.loginAuthenticated();
     }
 }

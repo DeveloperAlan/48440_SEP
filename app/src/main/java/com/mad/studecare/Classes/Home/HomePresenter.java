@@ -19,36 +19,33 @@ public class HomePresenter implements HomeScreenContract.presenter {
 
     @Override
     public void addAppointment() {
-        mView.addApointment();
+        mView.addAppointment();
     }
 
     @Override
     public void prepareMovieData(ArrayList appointmentsList, AppointmentsAdapter adapter) {
-        Appointments appointments = new Appointments("Mad Max: Fury Road", "Action & Adventure", "2015");
+        Appointments appointments = new Appointments("Dr. Adrian Pham",
+                "3:53pm 09/04/18",
+                "Colonoscopy, checking of the lower bowel system for any inconsistencies. Bladder feels heavy at times",
+                0);
         appointmentsList.add(appointments);
 
-        appointments = new Appointments("Inside Out", "Animation, Kids & Family", "2015");
+        appointments = new Appointments("Dr. Sarah Cheung",
+                "6:30pm 12/06/19",
+                "Regular checkup. I think i have the flu, but symptons seem to be a bit more severe. I am very worried",
+                1);
         appointmentsList.add(appointments);
 
-        appointments = new Appointments("Star Wars: Episode VII - The Force Awakens", "Action", "2015");
+        appointments = new Appointments("Dr. Sarah Cheung",
+                "9:30pm 12/06/19",
+                "Regular checkup. I think i have the flu, but symptons seem to be a bit more severe. I am very worried",
+                2);
         appointmentsList.add(appointments);
 
-        appointments = new Appointments("Shaun the Sheep", "Animation", "2015");
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("The Martian", "Science Fiction & Fantasy", "2015");
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("Mission: Impossible Rogue Nation", "Action", "2015");
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("Up", "Animation", "2009");
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("Star Trek", "Science Fiction", "2009");
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("The LEGO Appointments", "Animation", "2014");
+        appointments = new Appointments("Dr. Geoffrey Kostanidos",
+                "6:30pm 18/06/19",
+                "Lump in throat, worried about what it could mean",
+                1);
         appointmentsList.add(appointments);
 
         adapter.notifyDataSetChanged();

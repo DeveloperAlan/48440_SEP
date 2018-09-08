@@ -6,38 +6,48 @@ package com.mad.studecare.Models.Appointments;
 
 public class Appointments {
 
-    private String title, genre, year;
+    private String doctor;
+    private String timeDate;
+    private String description;
+    private int status;
 
-    public Appointments() {
+    public Appointments(String doctor, String timeDate, String description, int status) {
+        this.doctor = doctor;
+        this.timeDate = timeDate;
+        this.description = description;
+        this.status = status;
     }
 
-    public Appointments(String title, String genre, String year) {
-        this.title = title;
-        this.genre = genre;
-        this.year = year;
+    public int getStatus() {
+        return status;
     }
 
-    public String getTitle() {
-        return title;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public String getDoctor() {
+        return doctor;
     }
 
-    public String getYear() {
-        return year;
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public String getTimeDate() {
+        return timeDate;
     }
 
-    public String getGenre() {
-        return genre;
+    public void setTimeDate(String timeDate) {
+        this.timeDate = timeDate;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public String getDescription() {
+        return description;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }

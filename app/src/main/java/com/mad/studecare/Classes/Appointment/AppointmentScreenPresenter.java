@@ -3,8 +3,12 @@ package com.mad.studecare.Classes.Appointment;
 import android.content.Context;
 
 import com.mad.studecare.Classes.Home.HomeScreenContract;
+import com.mad.studecare.Models.TimeSlots.TimeSlots;
+import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
 import com.mad.studecare.Utils.CreateAppointmentInteractor;
 import com.mad.studecare.Utils.OnCreateAppointmentFinishedListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by trevorlao on 29/8/18.
@@ -43,5 +47,12 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     @Override
     public void onError(String error) {
         mView.error(error);
+    }
+
+    @Override
+    public void populateSample(ArrayList timeslotsList, TimeSlotsAdapter timeslotsAdapter) {
+        TimeSlots timeslot = new TimeSlots("Mad Max: Fury Road", "Action & Adventure", "2015");
+        timeslotsList.add(timeslot);
+
     }
 }

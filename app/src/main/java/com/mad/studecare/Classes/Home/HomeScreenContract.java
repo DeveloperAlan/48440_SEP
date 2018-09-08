@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface HomeScreenContract {
     interface view {
-        void addApointment();
+        void addAppointment();
 
     }
 

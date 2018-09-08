@@ -7,6 +7,7 @@ package com.mad.studecare.Models.Appointments;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -31,24 +32,26 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         @Nullable
-        @BindView(R.id.title)
-        TextView title;
+        @BindView(R.id.appointments_card_doctor)
+        TextView doctor;
         @Nullable
-        @BindView(R.id.genre)
-        TextView genre;
+        @BindView(R.id.appointments_card_time_date)
+        TextView timeDate;
         @Nullable
-        @BindView(R.id.year)
-        TextView year;
+        @BindView(R.id.appointments_card_description)
+        TextView description;
         @Nullable
-        @BindView(R.id.appointments_overflow)
-        ImageView mOverflow;
-
-        public TextView test;
+        @BindView(R.id.appointments_card_colour)
+        ImageView status;
+        @Nullable
+        @BindView(R.id.appointments_card_edit)
+        ImageView edit_button;
+        @BindView(R.id.appointments_card_cancel)
+        ImageView cancel_button;
 
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            test = view.findViewById(R.id.genre);
 
         }
     }
@@ -70,26 +73,45 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Appointments appointment = mAppointmentsList.get(position);
-        holder.title.setText(appointment.getTitle());
-        holder.genre.setText(appointment.getGenre());
-        holder.year.setText(appointment.getYear());
-        holder.test.setText(appointment.getGenre());
+        holder.doctor.setText(appointment.getDoctor());
+        holder.timeDate.setText(appointment.getTimeDate());
+        holder.description.setText(appointment.getDescription());
 
-        holder.mOverflow.setOnClickListener(new View.OnClickListener() {
+        switch (appointment.getStatus()) {
+            // Pending
+            case 0: holder.status.setBackgroundColor(mContext.getResources().getColor(R.color.appointment_status_pending));
+            break;
+            // Confirmed
+            case 1: holder.status.setBackgroundColor(mContext.getResources().getColor(R.color.appointment_status_confirmed));
+            break;
+            // Cancelled
+            case 2: holder.status.setBackgroundColor(mContext.getResources().getColor(R.color.appointment_status_cancelled));
+            break;
+        }
+
+        // Edit Button
+        holder.edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(holder.mOverflow);
+            }
+        });
+
+        // Cancel Button
+        holder.cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
             }
         });
     }
 
-    private void showPopupMenu(View view) {
-        PopupMenu popup = new PopupMenu(mContext, view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_album, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MenuItemClickListener());
-        popup.show();
-    }
+    // Use for popup menus from button clicks
+//    private void showPopupMenu(View view) {
+//        PopupMenu popup = new PopupMenu(mContext, view);
+//        MenuInflater inflater = popup.getMenuInflater();
+//        inflater.inflate(R.menu.menu_album, popup.getMenu());
+//        popup.setOnMenuItemClickListener(new MenuItemClickListener());
+//        popup.show();
+//    }
 
     @Override
     public int getItemCount() {
