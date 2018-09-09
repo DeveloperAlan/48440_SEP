@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,8 +36,6 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
     @BindView(R.id.appointments_timeslots)
     RecyclerView mTimeSlots;
-    @BindView(R.id.appointments_confirm)
-    Button mCreateButton;
     @BindView(R.id.appointments_date)
     Button mDateButton;
     @BindView(R.id.appointments_time)
@@ -81,15 +80,16 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
                 final com.wdullaer.materialdatetimepicker.date.DatePickerDialog dialog = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                        // Using SimpleDateFormat to format date, then changing button text to it
+                        // Using SimpleDateFormat to format date, then change button text to it
                         try {
-                            final SimpleDateFormat formatted = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH);
-                            final Date date = formatted.parse(getResources().getString(R.string.time_concatenate_date,
+                            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+                            Date date = fmt.parse(getResources().getString(R.string.time_concatenate_date,
                                     dayOfMonth,
                                     monthOfYear,
                                     year));
-                            String dateString = formatted.format(date);
-                            mDateButton.setText(dateString);
+                            SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+
+                            mDateButton.setText(fmtOut.format(date));
                         } catch (final ParseException e) {
                             e.printStackTrace();
                         }
@@ -107,21 +107,7 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
             }
         });
 
-        mCreateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewSchedule();
-            }
-        });
-
         presenter.populateSample(mTimeSlotsList, mTimeSlotsAdapter);
-    }
-
-    @Override
-    public void createNewSchedule() {
-
-        mProgressDialog.setMessage("Placeholdering...");
-        mProgressDialog.show();
     }
 
     @Override
@@ -158,14 +144,15 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-        // Using SimpleDateFormat to format time, then changing button text to it
+        // Using SimpleDateFormat to format time, then change button text to it
         try {
-            final SimpleDateFormat formatted = new SimpleDateFormat("kk:mm a", Locale.ENGLISH);
-            final Date date = formatted.parse(getResources().getString(R.string.time_concatenate_time,
+            SimpleDateFormat fmt = new SimpleDateFormat("hh:mm", Locale.US);
+            Date date = fmt.parse(getResources().getString(R.string.time_concatenate_time,
                     hourOfDay,
                     minute));
-            String dateString = formatted.format(date);
-            mTimeButton.setText(dateString);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("K:mm a", Locale.US);
+
+            mTimeButton.setText(fmtOut.format(date));
         } catch (final ParseException e) {
             e.printStackTrace();
         }

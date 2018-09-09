@@ -5,48 +5,93 @@
     android:layout_height="wrap_content"
     tools:style="@style/CardView"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#CABBBBBB"
     android:clickable="true"
     android:focusable="true"
     android:elevation="3dp"
     android:layout_margin="6dp">
 
     <RelativeLayout
+        android:id="@+id/timeslots_card_header"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="70dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text="TEST"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:id="@id/timeslots_card_time_container"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/border_no_corners_coloured">
 
-        <TextView
-            android:id="@+id/genre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TEST"
-            android:layout_below="@id/title" />
+            <TextView
+                android:id="@+id/timeslots_card_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:text="Time"
+                />
 
-        <TextView
-            android:id="@+id/year"
+            <TextView
+                android:id="@+id/timeslots_card_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:layout_below="@id/timeslots_card_time"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:textSize="14sp"
+                android:text="Date"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/timeslots_card_body"
+            android:background="@drawable/border_no_corners"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/timeslots_card_time_container"
+            android:layout_toEndOf="@+id/timeslots_card_time_container"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEST"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/timeSlots_overflow"
-            android:layout_width="20dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_action_overflow"/>
+            <TextView
+                android:id="@+id/timeslots_card_doctor"
+                android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:fontFamily="sans-serif"
+                android:text="Doctor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/timeslots_card_qualifications"
+                android:paddingLeft="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:text="Qualifications"
+                android:layout_below="@id/timeslots_card_doctor" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

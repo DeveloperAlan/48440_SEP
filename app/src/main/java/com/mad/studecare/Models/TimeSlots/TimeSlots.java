@@ -6,35 +6,44 @@ package com.mad.studecare.Models.TimeSlots;
 
 public class TimeSlots {
 
-    private String title, genre, year;
+    private String time, date, doctor, qualifications, specialties;
 
-    public TimeSlots(String title, String genre, String year) {
-        this.title = title;
-        this.genre = genre;
-        this.year = year;
+    public TimeSlots(String time, String date, String doctor, String qualifications, String specialties) {
+        this.time = time;
+        this.date = date;
+        this.doctor = doctor;
+        this.qualifications = qualifications;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTime() {
+        return time;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getYear() {
-        return year;
+    public String getDate() {
+        return date;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getDoctor() {
+        return doctor;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(String qualifications) {
+        this.qualifications = qualifications;
     }
 }

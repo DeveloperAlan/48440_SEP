@@ -28,8 +28,8 @@
     <string name="appointments_confirm">Confirm</string>
 
     <!--Time-->
-    <string name="time_concatenate_date">%1$d/%2d/%3d</string>
-    <string name="time_concatenate_time">%1$d:%2d</string>
+    <string name="time_concatenate_date">%1$d/%2$d/%3$d</string>
+    <string name="time_concatenate_time">%1$d:%2$d</string>
 
     <string-array name="array_reference">
         <item>com.github.glomadrian.grav.generator.animation.PathAnimator</item>

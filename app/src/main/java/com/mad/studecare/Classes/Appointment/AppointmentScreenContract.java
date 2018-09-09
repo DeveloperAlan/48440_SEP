@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public interface AppointmentScreenContract {
     interface view {
-        void createNewSchedule();
 
         void scheduleSuccessfullyCreated();
 
@@ -22,6 +21,7 @@ public interface AppointmentScreenContract {
     }
 
     interface presenter {
+
         void createSchedule(String name, String location, String date, String time);
 
         void onEmptyDetails();

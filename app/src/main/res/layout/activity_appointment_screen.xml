@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
             android:padding="10dp">
+
             <Button
                 android:id="@+id/appointments_time"
                 android:layout_marginRight="20dp"
@@ -26,6 +28,7 @@
                 android:text="@string/appointments_time"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/appointments_date"
                 android:background="@drawable/buttons_black"
@@ -35,14 +38,18 @@
                 android:text="@string/appointments_date"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content" />
+
         </RelativeLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/appointments_body"
+        android:id="@+id/appointments_footer"
         android:layout_below="@id/appointments_header"
         android:layout_width="match_parent"
-        android:layout_height="400dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:layout_alignParentBottom="true">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/appointments_timeslots"
@@ -50,22 +57,6 @@
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/appointments_footer"
-        android:layout_below="@id/appointments_body"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/appointments_confirm"
-            android:background="@drawable/buttons_black"
-            android:textColor="@android:color/white"
-            android:text="@string/appointments_confirm"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -51,8 +51,60 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
 
     @Override
     public void populateSample(ArrayList timeslotsList, TimeSlotsAdapter timeslotsAdapter) {
-        TimeSlots timeslot = new TimeSlots("Mad Max: Fury Road", "Action & Adventure", "2015");
+        TimeSlots timeslot = new TimeSlots(
+                "4:30PM",
+                "Wed, 05/07/2018",
+                "Dr. Sarah Cheung",
+                "PhD (University of Sydney)",
+                "Specializes in bowel problems, areas of the stomach. Colonscopies, Flexible Sigmoidoscopy and Upper Endoscopy.");
         timeslotsList.add(timeslot);
 
+        timeslot = new TimeSlots(
+                "5:00PM",
+                "Wed, 05/07/2018",
+                "Dr. Sarah Cheung",
+                "PhD (University of Sydney)",
+                "Specializes in bowel problems, areas of the stomach. Colonscopies, Flexible Sigmoidoscopy and Upper Endoscopy.");
+        timeslotsList.add(timeslot);
+
+        timeslot = new TimeSlots(
+                "4:30PM",
+                "Wed, 05/07/2018",
+                "Dr. Sarah Cheung",
+                "PhD (University of Sydney)",
+                "Specializes in bowel problems, areas of the stomach. Colonscopies, Flexible Sigmoidoscopy and Upper Endoscopy.");
+        timeslotsList.add(timeslot);
+
+        timeslot = new TimeSlots(
+                "5:30PM",
+                "Wed, 05/07/2018",
+                "Dr. Sarah Cheung",
+                "PhD (University of Sydney)",
+                "Specializes in bowel problems, areas of the stomach. Colonscopies, Flexible Sigmoidoscopy and Upper Endoscopy.");
+        timeslotsList.add(timeslot);
+
+        timeslot = new TimeSlots(
+                "6:30PM",
+                "Wed, 05/07/2018",
+                "Dr. Sarah Cheung",
+                "PhD (University of Sydney)",
+                "Specializes in bowel problems, areas of the stomach. Colonscopies, Flexible Sigmoidoscopy and Upper Endoscopy.");
+        timeslotsList.add(timeslot);
+
+        timeslot = new TimeSlots(
+                "8:30PM",
+                "Wed, 05/07/2018",
+                "Dr. Sarah Cheung",
+                "PhD (University of Sydney)",
+                "Specializes in bowel problems, areas of the stomach. Colonscopies, Flexible Sigmoidoscopy and Upper Endoscopy.");
+        timeslotsList.add(timeslot);
+
+        timeslot = new TimeSlots(
+                "10:30PM",
+                "Wed, 05/07/2018",
+                "Dr. Sarah Cheung",
+                "PhD (University of Sydney)",
+                "Specializes in bowel problems, areas of the stomach. Colonscopies, Flexible Sigmoidoscopy and Upper Endoscopy.");
+        timeslotsList.add(timeslot);
     }
 }

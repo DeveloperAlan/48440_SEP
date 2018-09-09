@@ -25,23 +25,23 @@ import butterknife.ButterKnife;
 
 public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyViewHolder> {
 
-    private List<TimeSlots> mAppointmentsList;
+    private List<TimeSlots> mTimeSlotsList;
     private Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         @Nullable
-        @BindView(R.id.title)
-        TextView title;
+        @BindView(R.id.timeslots_card_time)
+        TextView time;
         @Nullable
-        @BindView(R.id.genre)
-        TextView genre;
+        @BindView(R.id.timeslots_card_date)
+        TextView date;
         @Nullable
-        @BindView(R.id.year)
-        TextView year;
+        @BindView(R.id.timeslots_card_doctor)
+        TextView doctor;
         @Nullable
-        @BindView(R.id.timeSlots_overflow)
-        ImageView mOverflow;
+        @BindView(R.id.timeslots_card_qualifications)
+        TextView qualifications;
 
         public MyViewHolder(View view) {
             super(view);
@@ -50,8 +50,8 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
     }
 
 
-    public TimeSlotsAdapter(List<TimeSlots> appointmentsList, Context context) {
-        this.mAppointmentsList =  appointmentsList;
+    public TimeSlotsAdapter(List<TimeSlots> timeSlotsList, Context context) {
+        this.mTimeSlotsList =  timeSlotsList;
         this.mContext = context;
     }
 
@@ -65,29 +65,15 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        TimeSlots appointment = mAppointmentsList.get(position);
-        holder.title.setText(appointment.getTitle());
-        holder.genre.setText(appointment.getGenre());
-        holder.year.setText(appointment.getYear());
-
-        holder.mOverflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.mOverflow);
-            }
-        });
-    }
-
-    private void showPopupMenu(View view) {
-        PopupMenu popup = new PopupMenu(mContext, view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_album, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MenuItemClickListener());
-        popup.show();
+        TimeSlots timeslot = mTimeSlotsList.get(position);
+        holder.time.setText(timeslot.getTime());
+        holder.date.setText(timeslot.getDate());
+        holder.doctor.setText(timeslot.getDoctor());
+        holder.qualifications.setText(timeslot.getQualifications());
     }
 
     @Override
     public int getItemCount() {
-        return mAppointmentsList.size();
+        return mTimeSlotsList.size();
     }
 }

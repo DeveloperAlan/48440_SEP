@@ -11,7 +11,7 @@
         <item>#000000</item>
     </string-array>
 
-    <color name="appointment_status_pending">#3232FF</color>
-    <color name="appointment_status_confirmed">#23B223</color>
-    <color name="appointment_status_cancelled">#FF3232</color>
+    <color name="appointment_status_pending">#6F6FFF</color>
+    <color name="appointment_status_confirmed">#44CC44</color>
+    <color name="appointment_status_cancelled">#FF6F6F</color>
 </resources>
