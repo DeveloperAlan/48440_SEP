@@ -12,6 +12,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/appointments_doctors"
+            android:background="@drawable/border_no_corners"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/appointments_body"
+        android:layout_below="@id/appointments_header"
+        android:background="@drawable/border_no_corners"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,10 +62,10 @@
 
     <RelativeLayout
         android:id="@+id/appointments_footer"
-        android:layout_below="@id/appointments_header"
+        android:layout_below="@id/appointments_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
+        android:background="@drawable/border_no_corners"
         android:layout_alignParentBottom="true">
 
         <android.support.v7.widget.RecyclerView

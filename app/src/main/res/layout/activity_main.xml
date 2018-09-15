@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Classes.Profile.ProfileScreen">
+    tools:context="com.mad.studecare.Classes.Profile.Student.ProfileStudentScreen">
 
 </android.support.constraint.ConstraintLayout>

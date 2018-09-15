@@ -5,4 +5,11 @@ package com.mad.studecare.Classes.Appointment.Information;
  */
 
 public interface AppointmentInformationContract {
+    interface view {
+
+    }
+
+    interface presenter {
+
+    }
 }

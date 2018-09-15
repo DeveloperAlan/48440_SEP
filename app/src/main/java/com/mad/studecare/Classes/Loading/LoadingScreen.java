@@ -7,7 +7,12 @@ import android.widget.TextView;
 
 import com.github.glomadrian.grav.GravView;
 import com.mad.studecare.Classes.Login.LoginScreen;
+import com.mad.studecare.Models.Doctors.Doctors;
+import com.mad.studecare.Models.Doctors.DoctorsList;
+import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.R;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +34,7 @@ public class LoadingScreen extends AppCompatActivity implements LoadingScreenCon
 
         presenter = new LoadingPresenter(this);
 
-        presenter.startLoading();
+        presenter.startLoading(this);
     }
 
     @Override
@@ -42,6 +47,7 @@ public class LoadingScreen extends AppCompatActivity implements LoadingScreenCon
     @Override
     public void startApp() {
         Intent intent = new Intent(this, LoginScreen.class);
+
         startActivity(intent);
         finish();
     }

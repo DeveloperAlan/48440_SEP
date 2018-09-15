@@ -3,6 +3,7 @@ package com.mad.studecare.Classes.Appointment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mad.studecare.Classes.Home.HomeScreenContract;
+import com.mad.studecare.Models.Doctors.DoctorsList;
+import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
 import com.mad.studecare.R;
@@ -36,6 +39,8 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
     @BindView(R.id.appointments_timeslots)
     RecyclerView mTimeSlots;
+    @BindView(R.id.appointments_doctors)
+    RecyclerView mDoctors;
     @BindView(R.id.appointments_date)
     Button mDateButton;
     @BindView(R.id.appointments_time)
@@ -43,6 +48,7 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
     private ProgressDialog mProgressDialog;
     private ArrayList<TimeSlots> mTimeSlotsList = new ArrayList<>();
+    private DoctorsSlideAdapter mDoctorsSlideAdapter;
 
     AppointmentScreenContract.presenter presenter;
     TimeSlotsAdapter mTimeSlotsAdapter;
@@ -69,11 +75,19 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
         // RecyclerView
         mTimeSlotsAdapter = new TimeSlotsAdapter(mTimeSlotsList, this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mTimeSlots.setLayoutManager(mLayoutManager);
+        RecyclerView.LayoutManager timeslotsLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mTimeSlots.setLayoutManager(timeslotsLayoutManager);
         mTimeSlots.setItemAnimator(new DefaultItemAnimator());
         mTimeSlots.setAdapter(mTimeSlotsAdapter);
 
+        // ViewPager
+        mDoctorsSlideAdapter = new DoctorsSlideAdapter(DoctorsList.getInstance().getList(), this);
+        mDoctorsSlideAdapter.notifyDataSetChanged();
+        LinearLayoutManager doctorsLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mDoctors.setLayoutManager(doctorsLayoutManager);
+        mDoctors.setAdapter(mDoctorsSlideAdapter);
+
+        // Date/Time picker
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

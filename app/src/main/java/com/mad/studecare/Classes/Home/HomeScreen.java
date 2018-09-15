@@ -15,6 +15,8 @@ import android.view.View;
 import com.mad.studecare.Classes.Appointment.AppointmentScreen;
 import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
+import com.mad.studecare.Models.Doctors.Doctors;
+import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.R;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
     private AppointmentsAdapter mAppointmentsAdapter;
     private ArrayList<Appointments> mAppointmentsList = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +47,13 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
         ButterKnife.bind(this);
         presenter = new HomePresenter(this);
 
+        // Setting RecyclerView adapter
         mAppointmentsAdapter = new AppointmentsAdapter(mAppointmentsList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mAppointments.setLayoutManager(mLayoutManager);
         mAppointments.setItemAnimator(new DefaultItemAnimator());
         mAppointments.setAdapter(mAppointmentsAdapter);
 
-        presenter.prepareMovieData(mAppointmentsList, mAppointmentsAdapter);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
