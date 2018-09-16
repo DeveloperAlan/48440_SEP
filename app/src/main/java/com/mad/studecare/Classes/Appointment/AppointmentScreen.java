@@ -1,6 +1,6 @@
 package com.mad.studecare.Classes.Appointment;
 
-import android.app.ProgressDialog;
+import android.app.*;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -23,6 +23,7 @@ import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
 import com.mad.studecare.R;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.sql.Time;
 import java.text.ParseException;
@@ -53,12 +54,6 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     AppointmentScreenContract.presenter presenter;
     TimeSlotsAdapter mTimeSlotsAdapter;
 
-    final Calendar calendar = Calendar.getInstance();
-    final int day = calendar.get(Calendar.DAY_OF_MONTH);
-    final int month = calendar.get(Calendar.MONTH);
-    final int year = calendar.get(Calendar.YEAR);
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,108 +63,56 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
         presenter = new AppointmentScreenPresenter(this, getApplicationContext());
         mProgressDialog = new ProgressDialog(this);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
         // RecyclerView
-        mTimeSlotsAdapter = new TimeSlotsAdapter(mTimeSlotsList, this);
+        mTimeSlotsAdapter = new TimeSlotsAdapter(mTimeSlotsList, this, presenter);
         RecyclerView.LayoutManager timeslotsLayoutManager = new LinearLayoutManager(getApplicationContext());
         mTimeSlots.setLayoutManager(timeslotsLayoutManager);
         mTimeSlots.setItemAnimator(new DefaultItemAnimator());
         mTimeSlots.setAdapter(mTimeSlotsAdapter);
 
         // ViewPager
-        mDoctorsSlideAdapter = new DoctorsSlideAdapter(DoctorsList.getInstance().getList(), this);
+        mDoctorsSlideAdapter = new DoctorsSlideAdapter(presenter.doctorsList(), this, presenter);
         mDoctorsSlideAdapter.notifyDataSetChanged();
         LinearLayoutManager doctorsLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mDoctors.setLayoutManager(doctorsLayoutManager);
         mDoctors.setAdapter(mDoctorsSlideAdapter);
 
-        // Date/Time picker
-        mDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final com.wdullaer.materialdatetimepicker.date.DatePickerDialog dialog = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                        // Using SimpleDateFormat to format date, then change button text to it
-                        try {
-                            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-                            Date date = fmt.parse(getResources().getString(R.string.time_concatenate_date,
-                                    dayOfMonth,
-                                    monthOfYear,
-                                    year));
-                            SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-
-                            mDateButton.setText(fmtOut.format(date));
-                        } catch (final ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, year, month, day);
-                dialog.show(getFragmentManager(), getString(R.string.DatePickerDialog));
-            }
-        });
-
-        mTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AppointmentScreen.this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-                timePickerDialog.show(getFragmentManager(), getString(R.string.TimePicker));
-            }
-        });
-
-        presenter.populateSample(mTimeSlotsList, mTimeSlotsAdapter);
+        presenter.setDateButton(mDateButton);
+        presenter.setTimeButton(mTimeButton);
+        presenter.feedAdaptersList(mTimeSlotsAdapter, mDoctorsSlideAdapter, mTimeSlotsList);
+        presenter.populateSample();
     }
 
     @Override
-    public void scheduleSuccessfullyCreated() {
-        mProgressDialog.dismiss();
-//        Intent intent = new Intent(AppointmentScreen.this, GroupActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtra(getString(R.string.uid), mGroupUid);
-//        intent.putExtra(getString(R.string.name), mGroupName);
-//        startActivity(intent);
+    public void setDateText(Button date, String fmtOut) {
+        date.setText(fmtOut);
     }
 
     @Override
-    public void emptyDetails() {
-        mProgressDialog.dismiss();
-//        Toast.makeText(getApplicationContext(), getString(R.string.emptyFields_prompt), Toast.LENGTH_LONG).show();
+    public void setDateDialog(DatePickerDialog dialog) {
+        dialog.show(getFragmentManager(), getString(R.string.DatePickerDialog));
     }
 
     @Override
-    public void error(String error) {
-        mProgressDialog.dismiss();
-//        Toast.makeText(getApplicationContext(), getString(R.string.error_prompt) + error, Toast.LENGTH_LONG).show();
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+    public void setTimeDialog(Calendar calendar) {
+        TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(
+                AppointmentScreen.this,
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                false);
+        timePickerDialog.show(getFragmentManager(), getString(R.string.TimePicker));
     }
 
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         // Using SimpleDateFormat to format time, then change button text to it
-        try {
-            SimpleDateFormat fmt = new SimpleDateFormat("hh:mm", Locale.US);
-            Date date = fmt.parse(getResources().getString(R.string.time_concatenate_time,
-                    hourOfDay,
-                    minute));
-            SimpleDateFormat fmtOut = new SimpleDateFormat("K:mm a", Locale.US);
-
-            mTimeButton.setText(fmtOut.format(date));
-        } catch (final ParseException e) {
-            e.printStackTrace();
-        }
+        presenter.setTimeText(hourOfDay, minute, second);
     }
+
+    @Override
+    public void setTimeText(String text) {
+        mTimeButton.setText(text);
+    }
+
 }
 

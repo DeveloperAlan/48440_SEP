@@ -3,17 +3,22 @@ package com.mad.studecare.Models.TimeSlots;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.mad.studecare.Classes.Appointment.AppointmentScreen;
+import com.mad.studecare.Classes.Appointment.AppointmentScreenContract;
 import com.mad.studecare.R;
 import com.mad.studecare.Utils.MenuItemClickListener;
 
+import java.sql.Time;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,6 +32,7 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
 
     private List<TimeSlots> mTimeSlotsList;
     private Context mContext;
+    private AppointmentScreenContract.presenter mPresenter;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -50,14 +56,15 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
     }
 
 
-    public TimeSlotsAdapter(List<TimeSlots> timeSlotsList, Context context) {
+    public TimeSlotsAdapter(List<TimeSlots> timeSlotsList, Context context, AppointmentScreenContract.presenter presenter) {
         this.mTimeSlotsList =  timeSlotsList;
         this.mContext = context;
+        this.mPresenter = presenter;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+    public MyViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+        final View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.model_timeslots, parent, false);
 
         return new MyViewHolder(itemView);
@@ -65,11 +72,12 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        TimeSlots timeslot = mTimeSlotsList.get(position);
+        final TimeSlots timeslot = mTimeSlotsList.get(position);
+
         holder.time.setText(timeslot.getTime());
         holder.date.setText(timeslot.getDate());
-        holder.doctor.setText(timeslot.getDoctor());
-        holder.qualifications.setText(timeslot.getQualifications());
+        holder.doctor.setText(timeslot.getDoctor().getName());
+        holder.qualifications.setText(timeslot.getDoctor().getSpecialties());
     }
 
     @Override

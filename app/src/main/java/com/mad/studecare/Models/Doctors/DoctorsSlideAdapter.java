@@ -6,14 +6,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mad.studecare.Classes.Appointment.AppointmentScreenContract;
 import com.mad.studecare.Models.Doctors.Doctors;
 import com.mad.studecare.R;
 
@@ -30,7 +33,7 @@ import butterknife.ButterKnife;
 public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapter.ViewHolder> {
 
     private Context mContext;
-    private LayoutInflater mInflater;
+    private AppointmentScreenContract.presenter mPresenter;
     private ArrayList<Doctors> mDoctorsList = new ArrayList<>();
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,6 +52,9 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
         @Nullable
         @BindView(R.id.slider_rating)
         RatingBar rating;
+        @Nullable
+        @BindView(R.id.slider_checkbox)
+        CheckBox selected;
 
         public ViewHolder(View v) {
             super(v);
@@ -56,9 +62,10 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
             ButterKnife.bind(this, v);
         }
     }
-    public DoctorsSlideAdapter(ArrayList<Doctors> doctors, Context context) {
+    public DoctorsSlideAdapter(ArrayList<Doctors> doctors, Context context, AppointmentScreenContract.presenter presenter) {
         this.mDoctorsList = doctors;
         this.mContext = context;
+        this.mPresenter = presenter;
     }
 
     @Override
@@ -69,15 +76,27 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
     }
 
     @Override
-    public void onBindViewHolder(DoctorsSlideAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final DoctorsSlideAdapter.ViewHolder holder, int position) {
         // Getting specific doctor
-        Doctors doctor = mDoctorsList.get(position);
+        final Doctors doctor = mDoctorsList.get(position);
 
         holder.image.setImageResource(doctor.getPicture());
         holder.name.setText(doctor.getName());
         holder.qualifications.setText(doctor.getQualifications());
         holder.specialties.setText(doctor.getSpecialties());
         holder.rating.setRating(doctor.getRating());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.filterDoctor(doctor, holder.selected.isChecked());
+                if (holder.selected.isChecked()) {
+                    holder.selected.setChecked(false);
+                } else {
+                    holder.selected.setChecked(true);
+                }
+            }
+        });
     }
 
     @Override

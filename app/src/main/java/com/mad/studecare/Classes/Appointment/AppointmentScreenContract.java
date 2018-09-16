@@ -1,9 +1,19 @@
 package com.mad.studecare.Classes.Appointment;
 
+import com.mad.studecare.Models.Doctors.Doctors;
+import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import android.app.FragmentManager;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+import android.widget.Button;
+
+
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by trevorlao on 29/8/18.
@@ -12,27 +22,30 @@ import java.util.ArrayList;
 public interface AppointmentScreenContract {
     interface view {
 
-        void scheduleSuccessfullyCreated();
+        void setDateText(Button date, String fmtOut);
 
-        void emptyDetails();
+        void setDateDialog(DatePickerDialog dialog);
 
-        void error(String error);
+        void setTimeDialog(Calendar calendar);
+
+        void setTimeText(String text);
 
     }
 
     interface presenter {
 
-        void createSchedule(String name, String location, String date, String time);
+        void setDateButton(Button date);
 
-        void onEmptyDetails();
+        void setTimeButton(Button time);
 
-        void onSuccess();
+        void setTimeText(int hour, int minute, int second);
 
-        void onError(String error);
+        ArrayList<Doctors> doctorsList();
 
-        void passGroupUid(String uid);
+        void populateSample();
 
-        void populateSample(ArrayList timeslotList, TimeSlotsAdapter appointmentsAdapter);
+        void feedAdaptersList(TimeSlotsAdapter timeSlotsAdapter, DoctorsSlideAdapter doctorsSlideAdapter, ArrayList<TimeSlots> timeSlots);
 
+        void filterDoctor(Doctors doctor, boolean selected);
     }
 }

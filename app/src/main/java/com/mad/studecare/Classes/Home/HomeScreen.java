@@ -66,6 +66,8 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Welcome, PLACEHOLDER");
+
+        presenter.prepareMovieData(mAppointmentsList, mAppointmentsAdapter);
     }
 
     @Override
