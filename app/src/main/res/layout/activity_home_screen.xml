@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,44 +7,116 @@
     android:layout_height="match_parent"
     tools:context=".Classes.Home.HomeScreen">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/home_toolbar"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        app:titleTextColor="@android:color/white"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:id="@+id/home_linear_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
 
-    <!--<TextView-->
-        <!--android:id="@+id/home_my_appointments_title"-->
-        <!--android:layout_below="@id/home_toolbar"-->
-        <!--android:paddingLeft="10dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:background="@drawable/border_no_corners"-->
-        <!--android:textSize="20sp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:text="@string/home_my_appointments"-->
-        <!--android:layout_height="30dp" />-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/home_appointments"
-        android:layout_below="@id/home_toolbar"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/home"/>
+
+                <LinearLayout
+                    android:id="@+id/home_day_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/home_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:text="01"/>
+
+                    <TextView
+                        android:id="@+id/home_day_text"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:text="Monday"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/home_month"
+                    android:layout_below="@id/home_day_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:text="January"/>
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_linear_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_appointments"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/home_add"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:onClick="addAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_action_new"
-        android:layout_margin="16dp" />
+        app:layout_anchor="@id/home_linear_1"
+        app:layout_anchorGravity="bottom|right|end"/>
 
-</RelativeLayout>
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="4dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_settings"
+        android:layout_gravity="right" />
+
+
+</android.support.design.widget.CoordinatorLayout>

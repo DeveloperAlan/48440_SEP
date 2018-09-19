@@ -3,35 +3,26 @@ package com.mad.studecare.Classes.Appointment;
 import android.app.*;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.mad.studecare.Classes.Home.HomeScreenContract;
-import com.mad.studecare.Models.Doctors.DoctorsList;
 import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
+import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.R;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.OnItemClickListener;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +39,6 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     Button mTimeButton;
 
     private ProgressDialog mProgressDialog;
-    private ArrayList<TimeSlots> mTimeSlotsList = new ArrayList<>();
     private DoctorsSlideAdapter mDoctorsSlideAdapter;
 
     AppointmentScreenContract.presenter presenter;
@@ -64,7 +54,7 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
         mProgressDialog = new ProgressDialog(this);
 
         // RecyclerView
-        mTimeSlotsAdapter = new TimeSlotsAdapter(mTimeSlotsList, this, presenter);
+        mTimeSlotsAdapter = new TimeSlotsAdapter(TimeSlotsList.getInstance().getList(), this, presenter);
         RecyclerView.LayoutManager timeslotsLayoutManager = new LinearLayoutManager(getApplicationContext());
         mTimeSlots.setLayoutManager(timeslotsLayoutManager);
         mTimeSlots.setItemAnimator(new DefaultItemAnimator());
@@ -79,8 +69,7 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
         presenter.setDateButton(mDateButton);
         presenter.setTimeButton(mTimeButton);
-        presenter.feedAdaptersList(mTimeSlotsAdapter, mDoctorsSlideAdapter, mTimeSlotsList);
-        presenter.populateSample();
+        presenter.feedAdaptersList(mTimeSlotsAdapter, mDoctorsSlideAdapter);
     }
 
     @Override
@@ -114,5 +103,18 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
         mTimeButton.setText(text);
     }
 
+    @Override
+    public void showConfirmDialog(TimeSlots timeSlots) {
+        DialogPlus dialog = DialogPlus.newDialog(this)
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
+
+                    }
+                })
+                .setExpanded(true)
+                .create();
+        dialog.show();
+    }
 }
 

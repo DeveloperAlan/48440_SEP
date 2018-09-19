@@ -1,53 +1,25 @@
 package com.mad.studecare.Models.Appointments;
 
+import com.mad.studecare.Models.Doctors.Doctors;
+import com.mad.studecare.Models.TimeSlots.TimeSlots;
+
 /**
  * Created by trevorlao on 22/8/18.
  */
 
 public class Appointments {
 
-    private String doctor;
-    private String timeDate;
-    private String description;
-    private int status;
+    private TimeSlots timeslot;
 
-    public Appointments(String doctor, String timeDate, String description, int status) {
-        this.doctor = doctor;
-        this.timeDate = timeDate;
-        this.description = description;
-        this.status = status;
+    public Appointments(TimeSlots timeslot) {
+        this.timeslot = timeslot;
     }
 
-    public int getStatus() {
-        return status;
+    public TimeSlots getTimeslot() {
+        return timeslot;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setTimeslot(TimeSlots timeslot) {
+        this.timeslot = timeslot;
     }
-
-    public String getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getTimeDate() {
-        return timeDate;
-    }
-
-    public void setTimeDate(String timeDate) {
-        this.timeDate = timeDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 }

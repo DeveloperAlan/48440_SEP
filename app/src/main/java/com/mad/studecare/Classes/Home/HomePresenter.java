@@ -1,6 +1,7 @@
 package com.mad.studecare.Classes.Home;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
@@ -8,7 +9,12 @@ import com.mad.studecare.Models.Doctors.Doctors;
 import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.R;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by trevorlao on 22/8/18.
@@ -23,36 +29,12 @@ public class HomePresenter implements HomeScreenContract.presenter {
     }
 
     @Override
-    public void addAppointment() {
-        mView.addAppointment();
-    }
+    public void populateDate() {
+        Date calendar = Calendar.getInstance().getTime();
+        SimpleDateFormat day = new SimpleDateFormat("dd", Locale.US);
+        SimpleDateFormat day_text = new SimpleDateFormat("EEEE", Locale.US);
+        SimpleDateFormat month = new SimpleDateFormat("MMMM", Locale.US);
 
-    @Override
-    public void prepareMovieData(ArrayList appointmentsList, AppointmentsAdapter adapter) {
-        Appointments appointments = new Appointments("Dr. Adrian Pham",
-                "3:53pm 09/04/18",
-                "Colonoscopy, checking of the lower bowel system for any inconsistencies. Bladder feels heavy at times",
-                0);
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("Dr. Sarah Cheung",
-                "6:30pm 12/06/19",
-                "Regular checkup. I think i have the flu, but symptons seem to be a bit more severe. I am very worried",
-                1);
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("Dr. Sarah Cheung",
-                "9:30pm 12/06/19",
-                "Regular checkup. I think i have the flu, but symptons seem to be a bit more severe. I am very worried",
-                2);
-        appointmentsList.add(appointments);
-
-        appointments = new Appointments("Dr. Geoffrey Kostanidos",
-                "6:30pm 18/06/19",
-                "Lump in throat, worried about what it could mean",
-                1);
-        appointmentsList.add(appointments);
-
-        adapter.notifyDataSetChanged();
+        mView.setDates(day.format(calendar), day_text.format(calendar), month.format(calendar));
     }
 }

@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +31,8 @@ public interface AppointmentScreenContract {
 
         void setTimeText(String text);
 
+        void showConfirmDialog(TimeSlots timeSlots);
+
     }
 
     interface presenter {
@@ -44,8 +47,10 @@ public interface AppointmentScreenContract {
 
         void populateSample();
 
-        void feedAdaptersList(TimeSlotsAdapter timeSlotsAdapter, DoctorsSlideAdapter doctorsSlideAdapter, ArrayList<TimeSlots> timeSlots);
+        void feedAdaptersList(TimeSlotsAdapter timeSlotsAdapter, DoctorsSlideAdapter doctorsSlideAdapter);
 
         void filterDoctor(Doctors doctor, boolean selected);
+
+        void confirmTime(TimeSlots timeSlot);
     }
 }

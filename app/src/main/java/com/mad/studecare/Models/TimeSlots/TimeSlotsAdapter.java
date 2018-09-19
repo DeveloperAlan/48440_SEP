@@ -78,6 +78,13 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
         holder.date.setText(timeslot.getDate());
         holder.doctor.setText(timeslot.getDoctor().getName());
         holder.qualifications.setText(timeslot.getDoctor().getSpecialties());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.confirmTime(timeslot);
+            }
+        });
     }
 
     @Override

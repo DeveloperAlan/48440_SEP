@@ -12,6 +12,7 @@ import com.mad.studecare.Models.Doctors.DoctorsList;
 import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
+import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.R;
 import com.mad.studecare.Utils.CreateAppointmentInteractor;
 import com.mad.studecare.Utils.OnCreateAppointmentFinishedListener;
@@ -51,7 +52,7 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     // Lists for the filter function
     private ArrayList<TimeSlots> mRemovedTimeSlotsTime = new ArrayList<>();
     private ArrayList<TimeSlots> mRemovedTimeSlotsDate = new ArrayList<>();
-    private ArrayList<TimeSlots> mRemovedTimeSlotsDoctor = new ArrayList<>();
+    private ArrayList<Doctors> mActiveDoctors = new ArrayList<>();
 
     public AppointmentScreenPresenter(AppointmentScreenContract.view view, Context context) {
         this.mView = view;
@@ -60,11 +61,10 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
 
     @Override
     public void feedAdaptersList(TimeSlotsAdapter timeSlotsAdapter,
-                                 DoctorsSlideAdapter doctorsSlideAdapter,
-                                 ArrayList<TimeSlots> timeSlotsList) {
+                                 DoctorsSlideAdapter doctorsSlideAdapter) {
         this.mTimeSlotsAdapter = timeSlotsAdapter;
         this.mDoctorsSlideAdapter = doctorsSlideAdapter;
-        this.mTimeSlotsList = timeSlotsList;
+        this.mTimeSlotsList = TimeSlotsList.getInstance().getList();
     }
 
     /* Grabs list from Singleton instance. */
@@ -175,67 +175,61 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
         sortChange();
     }
 
+    /* Each Doctor has a persistent list of which slots to remove & add back. */
     @Override
     public void filterDoctor(Doctors doctor, boolean status) {
-        // Adding all removed TimeSlots for a new filter
-        mTimeSlotsList.addAll(mRemovedTimeSlotsDoctor);
-        // Remove all removed Time Slots
-        mRemovedTimeSlotsDoctor.clear();
-
         if (!status) {
+            // Adding all removed TimeSlots for a new filter
+            mTimeSlotsList.addAll(doctor.getRemovedSlots());
+            // Remove all removed Time Slots
+            doctor.getRemovedSlots().clear();
+
+
             Iterator<TimeSlots> i = mTimeSlotsList.iterator();
             while (i.hasNext()) {
                 TimeSlots timeSlot = i.next();
-                if (timeSlot.getDoctor() != doctor) {
-                    mRemovedTimeSlotsDoctor.add(timeSlot);
+                if (doctor != timeSlot.getDoctor()) {
+                    doctor.getRemovedSlots().add(timeSlot);
                     i.remove();
                 }
             }
+        } else {
+            // Adding all removed TimeSlots for a new filter
+            mTimeSlotsList.addAll(doctor.getRemovedSlots());
+            // Remove all removed Time Slots
+            doctor.getRemovedSlots().clear();
         }
-
-        Log.d("GG", "filterDoctor: " + mRemovedTimeSlotsDoctor.size());
 
         // Sort & Change
         sortChange();
     }
 
+//    @Override
+//    public void setDoctorRemovableTimeSlots() {
+//        // Populating the doctors list of removable TimeSlots based off loaded TimeSlots
+//        for (TimeSlots timeSlot : mTimeSlotsList) {
+//            for (int i = 0; i < mDoctorsList.size(); i++) {
+//                if (timeSlot.getDoctor() == mDoctorsList.get(i)) {
+//                    mDoctorsList.get(i).getRemovedSlots().add(timeSlot);
+//                }
+//            }
+//        }
+//    }
+
+    /* Method to order the list before updating the adapter */
     private void sortChange(){
 
         mTimeSlotsAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void confirmTime(TimeSlots timeSlot) {
+        mView.showConfirmDialog(timeSlot);
+    }
+
     /* Should migrate to JODA time instead of Java API DateTime. Right now all months will be (-1) */
     @Override
     public void populateSample() {
-        TimeSlots timeslot = new TimeSlots(mDoctorsList.get(1),
-                "12:30",
-                "12/09/2018");
-        mTimeSlotsList.add(timeslot);
-
-        timeslot = new TimeSlots(mDoctorsList.get(2),
-        "14:30",
-                "13/09/2018");
-        mTimeSlotsList.add(timeslot);
-
-        timeslot = new TimeSlots(mDoctorsList.get(2),
-                "16:30",
-                "14/09/2018");
-        mTimeSlotsList.add(timeslot);
-
-        timeslot = new TimeSlots(mDoctorsList.get(4),
-                "18:30",
-                "15/09/2018");
-        mTimeSlotsList.add(timeslot);
-
-        timeslot = new TimeSlots(mDoctorsList.get(1),
-                "20:30",
-                "16/09/2018");
-        mTimeSlotsList.add(timeslot);
-
-        timeslot = new TimeSlots(mDoctorsList.get(4),
-                "22:30",
-                "17/09/2018");
-        mTimeSlotsList.add(timeslot);
 
     }
 }

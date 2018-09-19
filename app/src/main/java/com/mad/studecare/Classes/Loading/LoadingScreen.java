@@ -7,12 +7,7 @@ import android.widget.TextView;
 
 import com.github.glomadrian.grav.GravView;
 import com.mad.studecare.Classes.Login.LoginScreen;
-import com.mad.studecare.Models.Doctors.Doctors;
-import com.mad.studecare.Models.Doctors.DoctorsList;
-import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.R;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +24,7 @@ public class LoadingScreen extends AppCompatActivity implements LoadingScreenCon
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loading_screen);
+        setContentView(R.layout.activity_loading_screen);
         ButterKnife.bind(this);
 
         presenter = new LoadingPresenter(this);

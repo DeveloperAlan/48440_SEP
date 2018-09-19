@@ -2,9 +2,12 @@ package com.mad.studecare.Classes.Home;
 
 
 import android.content.Context;
+import android.widget.TextView;
 
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -14,14 +17,12 @@ import java.util.ArrayList;
 
 public interface HomeScreenContract {
     interface view {
-        void addAppointment();
 
+        void setDates(String day, String dayText, String month);
     }
 
     interface presenter {
-        void prepareMovieData(ArrayList appointmentsList, AppointmentsAdapter appointmentsAdapter);
 
-        void addAppointment();
-
+        void populateDate();
     }
 }

@@ -1,26 +1,19 @@
 package com.mad.studecare.Models.Doctors;
 
 import android.content.Context;
-import android.media.Rating;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mad.studecare.Classes.Appointment.AppointmentScreenContract;
-import com.mad.studecare.Models.Doctors.Doctors;
 import com.mad.studecare.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -70,7 +63,7 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
 
     @Override
     public DoctorsSlideAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_doctors_screen, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_doctors, parent, false);
 
         return new DoctorsSlideAdapter.ViewHolder(itemView);
     }

@@ -3,6 +3,10 @@ package com.mad.studecare.Models.Doctors;
 import android.media.Image;
 import android.widget.ImageView;
 
+import com.mad.studecare.Models.TimeSlots.TimeSlots;
+
+import java.util.ArrayList;
+
 /**
  * Created by trevorlao on 15/9/18.
  */
@@ -13,13 +17,16 @@ public class Doctors {
     private String qualifications;
     private int picture;
     private float rating;
+    private ArrayList<TimeSlots> removedSlots;
 
-    public Doctors(String name, String specialties, String qualifications, int picture, float rating) {
+    public Doctors(String name, String specialties, String qualifications, int picture, float rating, ArrayList<TimeSlots> removedSlots) {
         this.name = name;
         this.specialties = specialties;
         this.qualifications = qualifications;
         this.picture = picture;
         this.rating = rating;
+        this.removedSlots = removedSlots;
+//        this.checked = checked;
     }
 
     public String getName() {
@@ -61,4 +68,20 @@ public class Doctors {
     public void setRating(float rating) {
         this.rating = rating;
     }
+
+    public ArrayList<TimeSlots> getRemovedSlots() {
+        return removedSlots;
+    }
+
+    public void setRemovedSlots(ArrayList<TimeSlots> removedSlots) {
+        this.removedSlots = removedSlots;
+    }
+
+//    public boolean isChecked() {
+//        return checked;
+//    }
+//
+//    public void setChecked(boolean checked) {
+//        this.checked = checked;
+//    }
 }

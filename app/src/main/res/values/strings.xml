@@ -3,18 +3,21 @@
 
     <!--Home-->
     <string name="home_my_appointments"> My Appointments</string>
+    <string name="home_add_appointment">New Appointment</string>
 
     <!--Loading-->
     <string name="loading_percent">%</string>
     <string name="loading_format">%1$d%2$s</string>
 
     <!--Login-->
-    <string name="login_student_id">Email</string>
+    <string name="login_student_id">Email Address</string>
     <string name="login_password">Password</string>
-    <string name="login_login">Sign In</string>
-    <string name="login_register">Register</string>
+    <string name="login_login">SIGN IN</string>
+    <string name="login_register">REGISTER</string>
     <string name="login_error_response">Error connecting with the server.</string>
     <string name="login_error_incorrect_details">Invalid username or password.</string>
+    <string name="login_header_text">UTS:</string>
+    <string name="login_header_sub_text">Medical</string>
 
     <!--API-->
     <string name="api_email">"email"</string>

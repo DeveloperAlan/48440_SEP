@@ -1,67 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@mipmap/login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
     tools:context=".Classes.Login.LoginScreen">
 
     <RelativeLayout
-        android:id="@+id/login_area_main"
+        android:id="@+id/login_header"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <TextView
+            android:id="@+id/login_text_header"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shadowColor="@color/lightgrey"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="20"
+            android:gravity="center"
+            android:textSize="45sp"
+            android:textColor="@android:color/white"
+            android:text="@string/login_header_text"/>
+
+        <TextView
+            android:id="@+id/login_text_subtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_text_header"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="@string/login_header_sub_text"
+            android:textSize="20sp"/>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_body"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_below="@id/login_header"
         android:gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/login_user"
-            android:inputType="text"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/edittext"
+        <LinearLayout
+            android:id="@+id/login_section_email"
             android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:hint="@string/login_student_id"
-            android:layout_height="50dp" />
+            android:layout_height="35dp"
+            android:background="@drawable/edittext"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/login_password"
-            android:inputType="textPassword"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_below="@id/login_user"
-            android:background="@drawable/edittext"
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_email"
+                />
+
+            <EditText
+                android:id="@+id/login_user"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="italic"
+                android:inputType="text"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_student_id"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/login_section_password"
+            android:layout_below="@id/login_section_email"
             android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:hint="@string/login_password"
-            android:layout_height="50dp" />
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_password"
+                />
+
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="sans-serif"
+                android:hint="@string/login_password"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/login_login"
             android:onClick="login"
-            android:backgroundTint="@android:color/black"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:textColor="@android:color/white"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:layout_centerInParent="true"
-            android:layout_below="@id/login_password"
-            android:background="@drawable/edittext"
+            android:layout_below="@id/login_section_password"
+            android:background="@drawable/loginbutton"
             android:text="@string/login_login"
-            android:layout_width="100dp"
+            android:textSize="25sp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/login_login"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/login_area_lower"
+        android:id="@+id/login_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
-        android:layout_below="@id/login_area_main">
+        android:layout_below="@id/login_body">
 
         <Button
             android:id="@+id/login_register"
@@ -70,6 +145,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:layout_centerInParent="true"
+            android:textColor="@android:color/white"
             android:background="@drawable/edittext"
             android:text="@string/login_register"
             android:layout_width="100dp"

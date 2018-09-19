@@ -18,6 +18,8 @@
             android:id="@+id/slider_picture"
             android:background="@drawable/border_no_corners"
             android:layout_gravity="center"
+            android:cropToPadding="true"
+            android:padding="3dp"
             android:layout_width="150dp"
             android:layout_height="150dp" />
 
