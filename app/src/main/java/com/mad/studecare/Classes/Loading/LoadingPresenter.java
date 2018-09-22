@@ -55,7 +55,7 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
 
     private void prepareDoctorsData() {
         Doctors doctor = new Doctors("Dr. Sarah Cheung",
-                "Allergist/Immunologist",
+                "Immunologist",
                 "MD(Res), DM",
                 R.mipmap.doc4,
                 (float) 4.8,

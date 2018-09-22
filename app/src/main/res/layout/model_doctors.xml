@@ -3,91 +3,147 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/border_no_radius"
     android:orientation="horizontal"
     android:layout_margin="20dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/slider_picture"
-            android:background="@drawable/border_no_radius"
-            android:layout_gravity="center"
-            android:cropToPadding="true"
-            android:padding="3dp"
+        <FrameLayout
+            android:id="@+id/slider_picture_holder"
             android:layout_width="150dp"
-            android:layout_height="150dp" />
+            android:layout_height="150dp">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/slider_picture"
+                android:background="@drawable/border_no_corner_transparent"
+                android:layout_gravity="center"
+                android:cropToPadding="true"
+                android:padding="1dp"
+                android:scaleType="fitXY"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border_no_radius"
-        android:layout_weight="2"
-        android:orientation="vertical">
+            <View
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/gradient" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/slider_name"
-                android:textColor="@android:color/black"
-                android:gravity="center|bottom"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="40dp"
-                android:text="NAME"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/slider_specialties"
+                    android:textColor="@android:color/white"
+                    android:textStyle="normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textSize="12sp"
+                    android:text="Specialties"/>
+
+                <TextView
+                    android:id="@+id/slider_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textSize="14sp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/lightgrey"
+                    android:text="Name"/>
+
+            </LinearLayout>
 
             <CheckBox
                 android:id="@+id/slider_checkbox"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="top"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"/>
 
-        </LinearLayout>
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/slider_qualifications"
-            android:gravity="center"
-            android:textSize="14sp"
-            android:textStyle="italic"
+        <RelativeLayout
+            android:id="@+id/slider_rating_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="QUALIFICATIONS"/>
-
-        <TextView
-            android:id="@+id/slider_specialties"
-            android:padding="5dp"
-            android:background="@drawable/border_no_radius"
             android:gravity="center"
-            android:textColor="@android:color/black"
-            android:textStyle="normal"
-            android:textSize="14sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SPECIALTIES"/>
+            android:layout_below="@id/slider_picture_holder">
 
-        <RatingBar
-            android:id="@+id/slider_rating"
-            android:isIndicator="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <RatingBar
+                android:id="@+id/slider_rating"
+                android:layout_centerInParent="true"
+                android:layout_margin="3dp"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                style = "?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1">-->
+
+
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/border_no_radius"-->
+        <!--android:layout_weight="2"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:gravity="center|bottom"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="18sp"-->
+                <!--android:fontFamily="sans-serif"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:text="NAME"/>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/slider_qualifications"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="14sp"-->
+            <!--android:textStyle="italic"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="QUALIFICATIONS"/>-->
+
+
+    <!--</LinearLayout>-->
 
 
 </LinearLayout>

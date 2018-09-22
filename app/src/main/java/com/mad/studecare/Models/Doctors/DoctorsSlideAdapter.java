@@ -1,7 +1,10 @@
 package com.mad.studecare.Models.Doctors;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.opengl.Visibility;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mad.studecare.Classes.Appointment.AppointmentScreenContract;
 import com.mad.studecare.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -37,17 +43,17 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
         @BindView(R.id.slider_name)
         TextView name;
         @Nullable
-        @BindView(R.id.slider_qualifications)
-        TextView qualifications;
+        @BindView(R.id.slider_rating)
+        RatingBar rating;
         @Nullable
         @BindView(R.id.slider_specialties)
         TextView specialties;
         @Nullable
-        @BindView(R.id.slider_rating)
-        RatingBar rating;
-        @Nullable
         @BindView(R.id.slider_checkbox)
         CheckBox selected;
+        @Nullable
+        @BindView(R.id.slider_rating_holder)
+        RelativeLayout sliderHolder;
 
         public ViewHolder(View v) {
             super(v);
@@ -75,9 +81,8 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
 
         holder.image.setImageResource(doctor.getPicture());
         holder.name.setText(doctor.getName());
-        holder.qualifications.setText(doctor.getQualifications());
-        holder.specialties.setText(doctor.getSpecialties());
         holder.rating.setRating(doctor.getRating());
+        holder.specialties.setText(doctor.getSpecialties());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +90,12 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
                 mPresenter.filterDoctor(doctor, holder.selected.isChecked());
                 if (holder.selected.isChecked()) {
                     holder.selected.setChecked(false);
+                    holder.image.setColorFilter(Color.argb(0,0,0,0));
+//                    holder.sliderHolder.setVisibility(View.VISIBLE);
                 } else {
                     holder.selected.setChecked(true);
+                    holder.image.setColorFilter(Color.argb(50,50,205, 50));
+//                    holder.sliderHolder.setVisibility(View.GONE);
                 }
             }
         });
