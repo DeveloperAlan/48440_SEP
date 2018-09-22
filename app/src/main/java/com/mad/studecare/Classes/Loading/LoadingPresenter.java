@@ -126,6 +126,135 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
                 "17/09/2018");
         mTimeSlotsList.add(timeslot);
 
+        //5 new time slots for doctor1
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "14:30",
+                "10/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "17:00",
+                "15/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "8:30",
+                "17/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "10:30",
+                "19/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "20:00",
+                "02/11/2018");
+        mTimeSlotsList.add(timeslot);
+
+        //5 new time slots for doctor2
+        timeslot = new TimeSlots(mDoctorsList.get(1),
+                "21:30",
+                "22/09/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(1),
+                "9:30",
+                "24/09/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(1),
+                "10:00",
+                "01/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(1),
+                "11:30",
+                "3/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(1),
+                "12:30",
+                "7/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        //5 new time slots for doctor3
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "12:30",
+                "10/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "12:30",
+                "15/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "16:30",
+                "17/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "18:30",
+                "19/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(2),
+                "20:00",
+                "02/11/2018");
+        mTimeSlotsList.add(timeslot);
+
+        //5 new time slots for doctor4
+        timeslot = new TimeSlots(mDoctorsList.get(3),
+                "21:30",
+                "20/09/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(3),
+                "9:30",
+                "21/09/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(3),
+                "10:00",
+                "03/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(3),
+                "11:30",
+                "10/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(3),
+                "12:30",
+                "14/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        //5 new time slots for doctor5
+        timeslot = new TimeSlots(mDoctorsList.get(4),
+                "9:00",
+                "20/09/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(4),
+                "10:30",
+                "21/09/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(4),
+                "12:00",
+                "03/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(4),
+                "15:30",
+                "10/10/2018");
+        mTimeSlotsList.add(timeslot);
+
+        timeslot = new TimeSlots(mDoctorsList.get(4),
+                "21:00",
+                "14/10/2018");
+        mTimeSlotsList.add(timeslot);
     }
 
     private void prepareAppointmentsData() {
