@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/border_no_corners"
+    android:background="@drawable/border_no_radius"
     android:orientation="horizontal"
     android:layout_margin="20dp"
     android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/slider_picture"
-            android:background="@drawable/border_no_corners"
+            android:background="@drawable/border_no_radius"
             android:layout_gravity="center"
             android:cropToPadding="true"
             android:padding="3dp"
@@ -26,9 +26,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_no_corners"
+        android:background="@drawable/border_no_radius"
         android:layout_weight="2"
         android:orientation="vertical">
 
@@ -72,7 +72,7 @@
         <TextView
             android:id="@+id/slider_specialties"
             android:padding="5dp"
-            android:background="@drawable/border_no_corners"
+            android:background="@drawable/border_no_radius"
             android:gravity="center"
             android:textColor="@android:color/black"
             android:textStyle="normal"

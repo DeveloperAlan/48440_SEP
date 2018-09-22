@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/appointments_background"
     tools:context="com.mad.studecare.Classes.Appointment.AppointmentScreen">
 
     <RelativeLayout
         android:id="@+id/appointments_header"
+        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/appointments_doctors"
-            android:background="@drawable/border_no_corners"
+            android:background="@null"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +27,7 @@
     <RelativeLayout
         android:id="@+id/appointments_body"
         android:layout_below="@id/appointments_header"
-        android:background="@drawable/border_no_corners"
+        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -40,7 +42,7 @@
                 android:id="@+id/appointments_time"
                 android:layout_marginRight="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/buttons_black"
+                android:background="@drawable/border_transparent"
                 android:textColor="@android:color/white"
                 android:text="@string/appointments_time"
                 android:layout_width="150dp"
@@ -48,7 +50,7 @@
 
             <Button
                 android:id="@+id/appointments_date"
-                android:background="@drawable/buttons_black"
+                android:background="@drawable/border_transparent"
                 android:textColor="@android:color/white"
                 android:layout_toRightOf="@id/appointments_time"
                 android:layout_toEndOf="@+id/appointments_time"
@@ -63,15 +65,17 @@
     <RelativeLayout
         android:id="@+id/appointments_footer"
         android:layout_below="@id/appointments_body"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_no_corners"
         android:layout_alignParentBottom="true">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/appointments_timeslots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:background="@android:drawable/screen_background_dark_transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>

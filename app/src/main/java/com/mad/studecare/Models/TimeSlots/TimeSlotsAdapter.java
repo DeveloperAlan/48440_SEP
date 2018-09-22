@@ -74,8 +74,8 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final TimeSlots timeslot = mTimeSlotsList.get(position);
 
-        holder.time.setText(timeslot.getTime());
         holder.date.setText(timeslot.getDate());
+        holder.time.setText(timeslot.getTime());
         holder.doctor.setText(timeslot.getDoctor().getName());
         holder.qualifications.setText(timeslot.getDoctor().getSpecialties());
 

@@ -47,6 +47,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         @Nullable
         @BindView(R.id.appointments_timeline)
         TimelineView timeline;
+        @Nullable
+        @BindView(R.id.appointments_doctor_name)
+        TextView name;
 
         public MyViewHolder(View view, int viewType) {
             super(view);
@@ -80,6 +83,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         holder.picture.setImageResource(appointment.getTimeslot().getDoctor().getPicture());
         holder.time.setText(appointment.getTimeslot().getTime());
         holder.date.setText(appointment.getTimeslot().getDate());
+        holder.name.setText(appointment.getTimeslot().getDoctor().getName());
 
         YoYo.with(Techniques.FadeInUp).duration(700).playOn(holder.itemView);
     }
