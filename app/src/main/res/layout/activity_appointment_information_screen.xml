@@ -188,6 +188,7 @@
 
                 <Button
                     android:id="@+id/information_save"
+                    android:onClick="save"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@android:color/holo_green_dark"
@@ -200,6 +201,7 @@
 
                 <Button
                     android:id="@+id/information_edit"
+                    android:onClick="edit"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="@color/colorAccent"

@@ -259,23 +259,23 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
 
     private void prepareAppointmentsData() {
         Appointments appointments = new Appointments(
-                mTimeSlotsList.get(2));
+                mTimeSlotsList.get(2),  "Testy McTestFace");
         mAppointmentsList.add(appointments);
 
         appointments = new Appointments(
-                mTimeSlotsList.get(1));
+                mTimeSlotsList.get(1), "");
         mAppointmentsList.add(appointments);
 
-        appointments = new Appointments(mTimeSlotsList.get(3));
+        appointments = new Appointments(mTimeSlotsList.get(3), "");
         mAppointmentsList.add(appointments);
 
-        appointments = new Appointments(mTimeSlotsList.get(4));
+        appointments = new Appointments(mTimeSlotsList.get(4), "");
         mAppointmentsList.add(appointments);
 
-        appointments = new Appointments(mTimeSlotsList.get(5));
+        appointments = new Appointments(mTimeSlotsList.get(5), "");
         mAppointmentsList.add(appointments);
 
-        appointments = new Appointments(mTimeSlotsList.get(0));
+        appointments = new Appointments(mTimeSlotsList.get(0), "");
         mAppointmentsList.add(appointments);
     }
 }

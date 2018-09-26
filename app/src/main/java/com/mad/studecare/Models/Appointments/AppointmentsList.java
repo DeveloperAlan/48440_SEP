@@ -31,4 +31,6 @@ public class AppointmentsList {
     public void setList(ArrayList<Appointments> list) {
         mAppointmentsList = list;
     }
+
+    public void addToList(Appointments appointment) { mAppointmentsList.add(appointment); }
 }
