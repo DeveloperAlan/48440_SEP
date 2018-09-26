@@ -1,6 +1,7 @@
 package com.mad.studecare.Classes.Appointment;
 
 import android.app.*;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
@@ -105,16 +108,23 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
     @Override
     public void showConfirmDialog(TimeSlots timeSlots) {
-        DialogPlus dialog = DialogPlus.newDialog(this)
-                .setOnItemClickListener(new OnItemClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_confirm_timeslot, null))
+                .setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 })
-                .setExpanded(true)
-                .create();
-        dialog.show();
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        builder.create();
     }
 }
 

@@ -1,58 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mad.studecare.Classes.Appointment.Information.AppointmentInformationScreen">
+    tools:context=".Classes.Appointment.Information.AppointmentInformationScreen">
 
-    <RelativeLayout
-        android:id="@+id/appointments_information_header"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_height="25dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="My Information"/>
+        <LinearLayout
+            android:id="@+id/information_linear_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/appointments_information_body"
-        android:layout_below="@id/appointments_information_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/information"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_height="25dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="My Appointment"/>
+                <LinearLayout
+                    android:id="@+id/information_day_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
 
-    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/information_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:text="01"/>
 
-    <RelativeLayout
-        android:id="@+id/appointments_information_footer"
-        android:layout_below="@id/appointments_information_body"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/information_day_text"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:text="Monday"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_height="25dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="My Doctor"/>
+                </LinearLayout>
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/information_month"
+                    android:layout_below="@id/information_day_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:text="January"/>
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/information_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@android:color/white"
+                    android:text="12:30 PM"/>
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/information_linear_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/information_picture_holder"
+                    android:layout_margin="15dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/information_picture"
+                    android:background="@drawable/border_no_corner_transparent"
+                    android:layout_gravity="center"
+                    android:cropToPadding="true"
+                    android:padding="1dp"
+                    android:scaleType="fitXY"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
+
+                <View
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/gradient" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/information_picture_holder">
+
+                    <TextView
+                        android:id="@+id/information_doctor_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:text="Doctor Name"/>
+
+                    <TextView
+                        android:id="@+id/information_doctor_qualifications"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="Qualifications"/>
+
+                    <TextView
+                        android:id="@+id/information_doctor_specialties"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:text="Specialties"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/information_title_notes"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/information_picture_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/black"
+                    android:text="@string/information_notes"/>
+
+                <EditText
+                    android:id="@+id/information_notes_edit"
+                    android:background="@drawable/border"
+                    android:layout_below="@id/information_title_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/information_notes_read"
+                    android:background="@drawable/border"
+                    android:layout_below="@id/information_title_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+                <Button
+                    android:id="@+id/information_save"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/holo_green_dark"
+                    android:layout_below="@id/information_notes_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/information_save"/>
+
+                <Button
+                    android:id="@+id/information_edit"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/colorAccent"
+                    android:layout_below="@id/information_notes_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/information_edit"/>
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/information_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_action_cancel"
+        app:layout_anchor="@id/information_linear_1"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+
+</android.support.design.widget.CoordinatorLayout>
