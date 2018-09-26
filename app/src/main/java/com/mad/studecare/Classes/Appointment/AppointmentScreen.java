@@ -40,12 +40,10 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     Button mDateButton;
     @BindView(R.id.appointments_time)
     Button mTimeButton;
-
-    private ProgressDialog mProgressDialog;
-    private DoctorsSlideAdapter mDoctorsSlideAdapter;
-
     AppointmentScreenContract.presenter presenter;
     TimeSlotsAdapter mTimeSlotsAdapter;
+    private ProgressDialog mProgressDialog;
+    private DoctorsSlideAdapter mDoctorsSlideAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,23 +106,11 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
     @Override
     public void showConfirmDialog(TimeSlots timeSlots) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        System.out.println(timeSlots.getTime() + " " + timeSlots.getDate());
 
-        LayoutInflater inflater = this.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_confirm_timeslot, null))
-                .setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        AppointmentDialog appointmentDialog = new AppointmentDialog();
+        appointmentDialog.show(getFragmentManager(),"appointment dialog");
 
-                    }
-                })
-                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-        builder.create();
     }
 }
 
