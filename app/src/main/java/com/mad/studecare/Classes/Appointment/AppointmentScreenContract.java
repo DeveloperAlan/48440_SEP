@@ -33,6 +33,7 @@ public interface AppointmentScreenContract {
 
         void showConfirmDialog(TimeSlots timeSlots);
 
+        void updateList(ArrayList<TimeSlots> testList);
     }
 
     interface presenter {
@@ -49,8 +50,10 @@ public interface AppointmentScreenContract {
 
         void feedAdaptersList(TimeSlotsAdapter timeSlotsAdapter, DoctorsSlideAdapter doctorsSlideAdapter);
 
-        void filterDoctor(Doctors doctor, boolean selected);
+        void filterDoctor();
 
         void confirmTime(TimeSlots timeSlot);
+
+        void selectDoctor(Doctors doctor, boolean b);
     }
 }

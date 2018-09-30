@@ -87,12 +87,13 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.filterDoctor(doctor, holder.selected.isChecked());
                 if (holder.selected.isChecked()) {
+                    mPresenter.selectDoctor(doctor, false);
                     holder.selected.setChecked(false);
                     holder.image.setColorFilter(Color.argb(0,0,0,0));
 //                    holder.sliderHolder.setVisibility(View.VISIBLE);
                 } else {
+                    mPresenter.selectDoctor(doctor, true);
                     holder.selected.setChecked(true);
                     holder.image.setColorFilter(Color.argb(50,50,205, 50));
 //                    holder.sliderHolder.setVisibility(View.GONE);

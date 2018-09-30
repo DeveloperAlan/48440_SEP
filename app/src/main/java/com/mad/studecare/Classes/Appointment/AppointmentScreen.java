@@ -44,6 +44,7 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     TimeSlotsAdapter mTimeSlotsAdapter;
     private ProgressDialog mProgressDialog;
     private DoctorsSlideAdapter mDoctorsSlideAdapter;
+    private ArrayList<TimeSlots> mTimeList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
         mProgressDialog = new ProgressDialog(this);
 
         // RecyclerView
-        mTimeSlotsAdapter = new TimeSlotsAdapter(TimeSlotsList.getInstance().getList(), this, presenter);
+        mTimeSlotsAdapter = new TimeSlotsAdapter(mTimeList, this, presenter);
         RecyclerView.LayoutManager timeslotsLayoutManager = new LinearLayoutManager(getApplicationContext());
         mTimeSlots.setLayoutManager(timeslotsLayoutManager);
         mTimeSlots.setItemAnimator(new DefaultItemAnimator());
@@ -111,6 +112,14 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
         AppointmentDialog appointmentDialog = new AppointmentDialog();
         appointmentDialog.show(getFragmentManager(),"appointment dialog");
 
+    }
+
+    @Override
+    public void updateList(ArrayList<TimeSlots> testList) {
+        mTimeList.clear();
+        for(TimeSlots slot : testList) {
+            mTimeList.add(slot);
+        }
     }
 }
 

@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 
@@ -45,6 +46,8 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     private int mDay = mCalendar.get(Calendar.DAY_OF_MONTH);
     private int mMonth = mCalendar.get(Calendar.MONTH);
     private int mYear = mCalendar.get(Calendar.YEAR);
+    private Date mTime = null;
+    private Date mDate = null;
 
     private ArrayList<TimeSlots> mTimeSlotsList = new ArrayList<>();
     private ArrayList<Doctors> mDoctorsList = new ArrayList<>();
@@ -52,7 +55,9 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     // Lists for the filter function
     private ArrayList<TimeSlots> mRemovedTimeSlotsTime = new ArrayList<>();
     private ArrayList<TimeSlots> mRemovedTimeSlotsDate = new ArrayList<>();
-    private ArrayList<Doctors> mActiveDoctors = new ArrayList<>();
+    private ArrayList<TimeSlots> mRemovedDoctors = new ArrayList<>();
+    private HashSet<Doctors> mChosenDoctors= new HashSet<>();
+    private ArrayList<TimeSlots> mFilterList = new ArrayList<>();
 
     public AppointmentScreenPresenter(AppointmentScreenContract.view view, Context context) {
         this.mView = view;
@@ -64,7 +69,7 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
                                  DoctorsSlideAdapter doctorsSlideAdapter) {
         this.mTimeSlotsAdapter = timeSlotsAdapter;
         this.mDoctorsSlideAdapter = doctorsSlideAdapter;
-        this.mTimeSlotsList = TimeSlotsList.getInstance().getList();
+        this.mFilterList= TimeSlotsList.getInstance().getList();
     }
 
     /* Grabs list from Singleton instance. */
@@ -96,6 +101,7 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
 
                             // Filter Method for Date
                             filterDate(date);
+                            mDate = date;
 
                             mView.setDateText(dateButton, fmtOut.format(date));
                         } catch (ParseException e) {
@@ -129,6 +135,7 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
 
             // Filter method for Time
             filterTime(date);
+            mTime = date;
 
             mView.setTimeText(fmtOut.format(date));
 
@@ -139,37 +146,38 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
 
     private void filterTime(Date time) {
         // Adding all the removed TimeSlots for a new filter
-        mTimeSlotsList.addAll(mRemovedTimeSlotsTime);
+        mFilterList.addAll(mRemovedTimeSlotsTime);
         // Remove all removed TimeSlots
         mRemovedTimeSlotsTime.clear();
 
-        Iterator<TimeSlots> i = mTimeSlotsList.iterator();
-        while (i.hasNext()) {
-            TimeSlots timeSlot = i.next();
-            if (time.after(timeSlot.getDateTime())) {
-                mRemovedTimeSlotsTime.add(timeSlot);
-                i.remove();
+        for(TimeSlots slot : mFilterList) {
+            if (time.after(slot.getDateTime())) {
+                mRemovedTimeSlotsTime.add(slot);
             }
         }
 
+        mFilterList.removeAll(mRemovedTimeSlotsTime);
+
+        mView.updateList(mFilterList);
         // Sort & Change
         sortChange();
     }
 
     private void filterDate(Date date) {
-        // Adding all removed TimeSlots for a new filter
-        mTimeSlotsList.addAll(mRemovedTimeSlotsDate);
-        // Remove all removed Time Slots
+        // Adding all the removed TimeSlots for a new filter
+        mFilterList.addAll(mRemovedTimeSlotsDate);
+        // Remove all removed TimeSlots
         mRemovedTimeSlotsDate.clear();
 
-        Iterator<TimeSlots> i = mTimeSlotsList.iterator();
-        while (i.hasNext()) {
-            TimeSlots timeSlot = i.next();
-            if (date.after(timeSlot.getDateDate())) {
-                mRemovedTimeSlotsDate.add(timeSlot);
-                i.remove();
+        for (TimeSlots slot : mFilterList) {
+            if (date.after(slot.getDateDate())) {
+                mRemovedTimeSlotsDate.add(slot);
             }
         }
+
+        mFilterList.removeAll(mRemovedTimeSlotsDate);
+
+        mView.updateList(mFilterList);
 
         // Sort & Change
         sortChange();
@@ -177,31 +185,34 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
 
     /* Each Doctor has a persistent list of which slots to remove & add back. */
     @Override
-    public void filterDoctor(Doctors doctor, boolean status) {
-        if (!status) {
-            // Adding all removed TimeSlots for a new filter
-            mTimeSlotsList.addAll(doctor.getRemovedSlots());
-            // Remove all removed Time Slots
-            doctor.getRemovedSlots().clear();
+    public void filterDoctor() {
+        ArrayList<TimeSlots> testList = new ArrayList<>();
+        // Adding all the removed TimeSlots for a new filter
+        mFilterList.addAll(mRemovedDoctors);
+        // Remove all removed TimeSlots
+        mRemovedDoctors.clear();
 
+        if(mChosenDoctors.isEmpty()) {
+            mView.updateList(mFilterList);
+        } else {
 
-            Iterator<TimeSlots> i = mTimeSlotsList.iterator();
-            while (i.hasNext()) {
-                TimeSlots timeSlot = i.next();
-                if (doctor != timeSlot.getDoctor()) {
-                    doctor.getRemovedSlots().add(timeSlot);
-                    i.remove();
+            for(TimeSlots slot : mFilterList) {
+                for(Doctors d : mChosenDoctors) {
+                    if(slot.getDoctor() == d) {
+                        testList.add(slot);
+                        mRemovedDoctors.add(slot);
+                    }
                 }
             }
-        } else {
-            // Adding all removed TimeSlots for a new filter
-            mTimeSlotsList.addAll(doctor.getRemovedSlots());
-            // Remove all removed Time Slots
-            doctor.getRemovedSlots().clear();
+
+            mFilterList.removeAll(mRemovedDoctors);
+
+            mView.updateList(testList);
+            // Sort & Change
         }
 
-        // Sort & Change
         sortChange();
+
     }
 
 //    @Override
@@ -225,6 +236,18 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     @Override
     public void confirmTime(TimeSlots timeSlot) {
         mView.showConfirmDialog(timeSlot);
+    }
+
+    @Override
+    public void selectDoctor(Doctors doctor, boolean b) {
+        if(!b) {
+            if(mChosenDoctors.contains(doctor)) {
+                mChosenDoctors.remove(doctor);
+            }
+        } else {
+            mChosenDoctors.add(doctor);
+        }
+        filterDoctor();
     }
 
     /* Should migrate to JODA time instead of Java API DateTime. Right now all months will be (-1) */
