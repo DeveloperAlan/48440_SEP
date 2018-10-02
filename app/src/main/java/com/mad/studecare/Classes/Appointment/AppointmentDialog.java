@@ -18,7 +18,7 @@ public class AppointmentDialog extends DialogFragment {
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //startActivity(new Intent(this, AppointmentInformationScreen.class));
+                startActivity(new Intent(getActivity(), AppointmentInformationScreen.class));
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

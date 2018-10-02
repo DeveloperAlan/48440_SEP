@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import com.mad.studecare.Classes.Appointment.Information.AppointmentInformationScreen;
+import com.mad.studecare.Classes.Home.HomeScreen;
 import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
@@ -109,9 +111,31 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     public void showConfirmDialog(TimeSlots timeSlots) {
         System.out.println(timeSlots.getTime() + " " + timeSlots.getDate());
 
-        AppointmentDialog appointmentDialog = new AppointmentDialog();
-        appointmentDialog.show(getFragmentManager(),"appointment dialog");
+        //AppointmentDialog appointmentDialog = new AppointmentDialog();
+        //appointmentDialog.show(getFragmentManager(),"appointment dialog");
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm appointment")
+                .setMessage("")
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startConfirmationScreen();
+                        finish();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .create()
+                .show();
+
+    }
+
+    public void startConfirmationScreen() {
+        startActivity(new Intent(this, HomeScreen.class));
     }
 
     @Override
