@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/appointments_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -92,6 +94,7 @@
                 android:paddingLeft="5dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
+                android:ellipsize="end"
                 android:textSize="15sp"
                 android:fontFamily="sans-serif"
                 android:textColor="@android:color/white"

@@ -10,4 +10,8 @@ public class Constants {
     public static final String TIMESLOT_DATE = "date";
 
     public static final String DOCTOR_NAME = "doctor";
+
+    public static final String FROM_HOME = "from_home";
+
+    public static final String APPOINTMENT_NOTE = "appointment_note";
 }

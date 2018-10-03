@@ -31,8 +31,8 @@ import butterknife.ButterKnife;
 public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyViewHolder> {
 
     private List<TimeSlots> mTimeSlotsList;
-    private Context mContext;
     private AppointmentScreenContract.presenter mPresenter;
+    private Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -56,7 +56,9 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.MyVi
     }
 
 
-    public TimeSlotsAdapter(List<TimeSlots> timeSlotsList, Context context, AppointmentScreenContract.presenter presenter) {
+    public TimeSlotsAdapter(List<TimeSlots> timeSlotsList,
+                            Context context,
+                            AppointmentScreenContract.presenter presenter) {
         this.mTimeSlotsList =  timeSlotsList;
         this.mContext = context;
         this.mPresenter = presenter;

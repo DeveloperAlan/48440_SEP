@@ -141,15 +141,14 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
         intent.putExtra(Constants.DOCTOR_NAME, timeSlot.getDoctor().getName());
         intent.putExtra(Constants.TIMESLOT_TIME, timeSlot.getTime());
         intent.putExtra(Constants.TIMESLOT_DATE, timeSlot.getDate());
+        intent.putExtra(Constants.FROM_HOME, false);
         startActivity(intent);
     }
 
     @Override
     public void updateList(ArrayList<TimeSlots> testList) {
         mTimeList.clear();
-        for(TimeSlots slot : testList) {
-            mTimeList.add(slot);
-        }
+        mTimeList.addAll(testList);
     }
 }
 

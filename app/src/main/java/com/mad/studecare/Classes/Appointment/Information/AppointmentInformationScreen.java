@@ -27,10 +27,15 @@ import butterknife.ButterKnife;
 
 public class AppointmentInformationScreen extends AppCompatActivity implements AppointmentInformationContract.view {
 
-    private TimeSlots mTimeSlots;
-    private Appointments mHomeNavigated;
-    private AppointmentsAdapter mAppointmentsAdapter;
+    private Boolean mFromHome;
+    private String IntDate;
+    private String IntDoctor;
+    private String IntTime;
+    private String IntNotes;
     private ArrayList<TimeSlots> mTimeSlotsList = TimeSlotsList.getInstance().getList();
+    private ArrayList<Appointments> mAppointments = AppointmentsList.getInstance().getList();
+    private TimeSlots mTimeSlot;
+    private Appointments mAppointment;
 
     @BindView(R.id.information_day)
     TextView mDay;
@@ -50,12 +55,8 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     TextView mSpecialties;
     @BindView(R.id.information_notes_edit)
     EditText mNotesEdit;
-    @BindView(R.id.information_notes_read)
-    TextView mNotesRead;
     @BindView(R.id.information_save)
     Button mSave;
-    @BindView(R.id.information_edit)
-    Button mEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,89 +64,66 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         setContentView(R.layout.activity_appointment_information_screen);
         ButterKnife.bind(this);
 
-        String doctorName = getIntent().getStringExtra(Constants.DOCTOR_NAME);
-        String time = getIntent().getStringExtra(Constants.TIMESLOT_TIME);
-        String date = getIntent().getStringExtra(Constants.TIMESLOT_DATE);
+        IntDoctor = getIntent().getStringExtra(Constants.DOCTOR_NAME);
+        IntTime = getIntent().getStringExtra(Constants.TIMESLOT_TIME);
+        IntDate = getIntent().getStringExtra(Constants.TIMESLOT_DATE);
+        IntNotes = getIntent().getStringExtra(Constants.APPOINTMENT_NOTE);
+        mFromHome = getIntent().getExtras().getBoolean(Constants.FROM_HOME);
 
         // Grab the Timeslot with intent details.
-        for(TimeSlots timeSlot : mTimeSlotsList) {
-            if(timeSlot.getDoctor().getName().equals(doctorName) && timeSlot.getTime().equals(time) && timeSlot.getDate().equals(date)) {
-                mTimeSlots = timeSlot;
+        for (TimeSlots timeSlot : mTimeSlotsList) {
+            if(timeSlot.getDoctor().getName().equals(IntDoctor)
+                    && timeSlot.getTime().equals(IntTime)
+                    && timeSlot.getDate().equals(IntDate)) {
+                mTimeSlot = timeSlot;
             }
         }
 
-        setVisibilities();
+        // Grab the appointment, if there is one.
+        for (Appointments appointment : mAppointments) {
+            if (appointment.getTimeslot().equals(mTimeSlot)) {
+                mAppointment = appointment;
+            }
+        }
+
         setLabels();
     }
 
-    public AppointmentInformationScreen(TimeSlots timeslot, Appointments homeNavigated, AppointmentsAdapter adapter) {
-        this.mTimeSlots = timeslot;
-        this.mHomeNavigated = homeNavigated;
-        this.mAppointmentsAdapter = adapter;
-    }
-
     public AppointmentInformationScreen() {
-
     }
 
     private void setLabels() {
-        Date calendar = mTimeSlots.getDateTime();
+        Date calendar = mTimeSlot.getDateTime();
         SimpleDateFormat day = new SimpleDateFormat("dd", Locale.US);
         SimpleDateFormat day_text = new SimpleDateFormat("EEEE", Locale.US);
         SimpleDateFormat month = new SimpleDateFormat("MMMM", Locale.US);
 
+        mNotesEdit.setText(IntNotes);
         mDay.setText(day.format(calendar));
         mMonth.setText(month.format(calendar));
         mDayText.setText(day_text.format(calendar));
-        mTime.setText(mTimeSlots.getTime());
-        mPicture.setImageResource(mTimeSlots.getDoctor().getPicture());
-        mName.setText(mTimeSlots.getDoctor().getName());
-        mQualifications.setText(mTimeSlots.getDoctor().getQualifications());
-        mSpecialties.setText(mTimeSlots.getDoctor().getSpecialties());
-    }
-
-    private void setVisibilities() {
-        // Navigated from TimeSlots.
-        if (mHomeNavigated == null) {
-            TimeSlotsVisibility();
-        }
-        // Navigated from HOME.
-        else {
-            HomeVisibility();
-        }
-    }
-
-    private void TimeSlotsVisibility() {
-        mEdit.setVisibility(View.INVISIBLE);
-        mSave.setVisibility(View.VISIBLE);
-
-        mNotesRead.setVisibility(View.INVISIBLE);
-        mNotesEdit.setVisibility(View.VISIBLE);
-    }
-
-    private void HomeVisibility() {
-        mEdit.setVisibility(View.VISIBLE);
-        mSave.setVisibility(View.INVISIBLE);
-
-        mNotesRead.setVisibility(View.VISIBLE);
-        mNotesEdit.setVisibility(View.INVISIBLE);
+        mTime.setText(mTimeSlot.getTime());
+        mPicture.setImageResource(mTimeSlot.getDoctor().getPicture());
+        mName.setText(mTimeSlot.getDoctor().getName());
+        mQualifications.setText(mTimeSlot.getDoctor().getQualifications());
+        mSpecialties.setText(mTimeSlot.getDoctor().getSpecialties());
     }
 
     public void save(View v) {
         // Navigated from TimeSlots. Create a new Appointment.
-        if (mHomeNavigated == null) {
-            Appointments newAppointments = new Appointments(mTimeSlots, mEdit.getText().toString());
-            AppointmentsList.getInstance().addToList(newAppointments);
+        if (mFromHome) {
+            mAppointment.setNotes(mNotesEdit.getText().toString());
             finish();
         }
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
-
+            Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString());
+            AppointmentsList.getInstance().addToList(newAppointments);
+            finish();
         }
-
     }
 
-    public void edit(View v) {
-        TimeSlotsVisibility();
+    public void delete(View v) {
+
     }
 }

@@ -20,6 +20,9 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.github.vipulasri.timelineview.TimelineView;
+import com.mad.studecare.Classes.Home.HomePresenter;
+import com.mad.studecare.Classes.Home.HomeScreen;
+import com.mad.studecare.Classes.Home.HomeScreenContract;
 import com.mad.studecare.R;
 import com.mad.studecare.Utils.MenuItemClickListener;
 
@@ -31,6 +34,7 @@ import butterknife.ButterKnife;
 public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapter.MyViewHolder> {
 
     private List<Appointments> mAppointmentsList;
+    private HomeScreenContract.presenter mPresenter;
     private Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -64,9 +68,12 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         return TimelineView.getTimeLineViewType(position, getItemCount());
     }
 
-    public AppointmentsAdapter(List<Appointments> appointmentsList, Context context) {
+    public AppointmentsAdapter(List<Appointments> appointmentsList,
+                               Context context,
+                               HomeScreenContract.presenter presenter) {
         this.mAppointmentsList =  appointmentsList;
         this.mContext = context;
+        this.mPresenter = presenter;
     }
 
     @Override
@@ -79,11 +86,20 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Appointments appointment = mAppointmentsList.get(position);
+        final Appointments appointment = mAppointmentsList.get(position);
         holder.picture.setImageResource(appointment.getTimeslot().getDoctor().getPicture());
         holder.time.setText(appointment.getTimeslot().getTime());
         holder.date.setText(appointment.getTimeslot().getDate());
         holder.name.setText(appointment.getTimeslot().getDoctor().getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.editAppointment(appointment);
+            }
+        });
+
+
 
         YoYo.with(Techniques.FadeInUp).duration(700).playOn(holder.itemView);
     }

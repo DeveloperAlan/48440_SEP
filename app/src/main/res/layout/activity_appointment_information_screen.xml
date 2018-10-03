@@ -74,28 +74,14 @@
                     android:textColor="@android:color/white"
                     android:text="January"/>
 
-                <TextView
-                    android:id="@+id/information_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="5dp"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentBottom="true"
-                    android:textColor="@android:color/white"
-                    android:text="12:30 PM"/>
-
             </RelativeLayout>
-
 
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/information_linear_2"
+            android:background="@drawable/border_no_radius"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
@@ -133,7 +119,7 @@
                     android:layout_height="150dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="25dp"
                     android:orientation="vertical"
                     android:layout_toRightOf="@id/information_picture_holder">
 
@@ -160,6 +146,18 @@
                         android:fontFamily="sans-serif"
                         android:textColor="@android:color/black"
                         android:text="Specialties"/>
+
+                    <TextView
+                        android:id="@+id/information_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="30sp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="bottom|center"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:text="12:30 PM"/>
                 </LinearLayout>
 
                 <TextView
@@ -174,13 +172,10 @@
 
                 <EditText
                     android:id="@+id/information_notes_edit"
-                    android:background="@drawable/border"
-                    android:layout_below="@id/information_title_notes"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp" />
-
-                <TextView
-                    android:id="@+id/information_notes_read"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
+                    android:padding="5dp"
                     android:background="@drawable/border"
                     android:layout_below="@id/information_title_notes"
                     android:layout_width="match_parent"
@@ -191,26 +186,13 @@
                     android:onClick="save"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@android:color/holo_green_dark"
-                    android:layout_below="@id/information_notes_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/information_save"/>
-
-                <Button
-                    android:id="@+id/information_edit"
-                    android:onClick="edit"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:background="@color/colorAccent"
                     android:layout_below="@id/information_notes_edit"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textSize="20sp"
                     android:textColor="@android:color/white"
-                    android:text="@string/information_edit"/>
+                    android:text="@string/information_save"/>
 
             </RelativeLayout>
 
@@ -224,6 +206,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/information_delete"
+        android:onClick="delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"

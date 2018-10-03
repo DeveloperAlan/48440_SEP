@@ -11,8 +11,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mad.studecare.Classes.Appointment.AppointmentScreen;
+import com.mad.studecare.Classes.Appointment.Information.AppointmentInformationScreen;
+import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
+import com.mad.studecare.Models.Constants;
 import com.mad.studecare.R;
 
 import butterknife.BindView;
@@ -47,7 +50,7 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
         presenter.populateDate();
 
         // Setting RecyclerView adapter
-        mAppointmentsAdapter = new AppointmentsAdapter(AppointmentsList.getInstance().getList(), this);
+        mAppointmentsAdapter = new AppointmentsAdapter(AppointmentsList.getInstance().getList(), this, presenter);
 //        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mAppointments.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mAppointments.setItemAnimator(new DefaultItemAnimator());
@@ -65,5 +68,16 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
         dayTv.setText(day);
         dayTextTv.setText(dayText);
         monthTv.setText(month);
+    }
+
+    @Override
+    public void editAppointment(Appointments appointment) {
+        Intent intent = new Intent(this, AppointmentInformationScreen.class);
+        intent.putExtra(Constants.DOCTOR_NAME, appointment.getTimeslot().getDoctor().getName());
+        intent.putExtra(Constants.TIMESLOT_TIME, appointment.getTimeslot().getTime());
+        intent.putExtra(Constants.TIMESLOT_DATE, appointment.getTimeslot().getDate());
+        intent.putExtra(Constants.FROM_HOME, true);
+        intent.putExtra(Constants.APPOINTMENT_NOTE, appointment.getNotes());
+        startActivity(intent);
     }
 }
