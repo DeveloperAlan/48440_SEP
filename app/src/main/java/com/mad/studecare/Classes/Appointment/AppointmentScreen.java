@@ -3,6 +3,7 @@ package com.mad.studecare.Classes.Appointment;
 import android.app.*;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.orhanobut.dialogplus.OnItemClickListener;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -47,6 +49,9 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     private ProgressDialog mProgressDialog;
     private DoctorsSlideAdapter mDoctorsSlideAdapter;
     private ArrayList<TimeSlots> mTimeList = new ArrayList<>();
+    public static final String TIMESLOT_TIME = "time";
+    public static final String TIMESLOT_DATE = "date";
+    public static final String DOCTOR_NAME = "doctor";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,32 +115,35 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     @Override
     public void showConfirmDialog(TimeSlots timeSlots) {
         System.out.println(timeSlots.getTime() + " " + timeSlots.getDate());
+        final TimeSlots timeSlot = timeSlots;
 
         //AppointmentDialog appointmentDialog = new AppointmentDialog();
         //appointmentDialog.show(getFragmentManager(),"appointment dialog");
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm appointment")
+        builder.setTitle("Confirm Appointment")
                 .setMessage("")
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        startConfirmationScreen();
+                        startConfirmationScreen(timeSlot);
                         finish();
                     }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        public void onClick(DialogInterface dialog, int which) {
+
                     }
                 })
                 .create()
                 .show();
-
     }
 
-    public void startConfirmationScreen() {
-        startActivity(new Intent(this, HomeScreen.class));
+    public void startConfirmationScreen(TimeSlots timeSlot) {
+        Intent intent = new Intent(this, AppointmentInformationScreen.class);
+        intent.putExtra(DOCTOR_NAME, timeSlot.getDoctor().getName());
+        intent.putExtra(TIMESLOT_TIME, timeSlot.getTime());
+        intent.putExtra(TIMESLOT_DATE, timeSlot.getDate());
+        startActivity(new Intent(this, AppointmentInformationScreen.class));
     }
 
     @Override

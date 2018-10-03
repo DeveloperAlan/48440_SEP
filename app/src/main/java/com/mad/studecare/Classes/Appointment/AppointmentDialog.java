@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mad.studecare.Classes.Appointment.Information.AppointmentInformationScreen;
+import com.mad.studecare.Classes.Home.HomeScreen;
 
 public class AppointmentDialog extends DialogFragment {
     @Override
@@ -18,7 +19,7 @@ public class AppointmentDialog extends DialogFragment {
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getActivity(), AppointmentInformationScreen.class));
+                startActivity(new Intent(getActivity(), HomeScreen.class));
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

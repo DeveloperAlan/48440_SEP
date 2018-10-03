@@ -8,13 +8,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mad.studecare.Classes.Appointment.AppointmentScreen;
 import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
+import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -26,6 +29,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     private TimeSlots mTimeSlots;
     private Appointments mHomeNavigated;
     private AppointmentsAdapter mAppointmentsAdapter;
+    private ArrayList<TimeSlots> mTimeSlotsList = TimeSlotsList.getInstance().getList();
 
     @BindView(R.id.information_day)
     TextView mDay;
@@ -57,6 +61,16 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment_information_screen);
         ButterKnife.bind(this);
+
+        String doctorName = (String) getIntent().getStringExtra(AppointmentScreen.DOCTOR_NAME);
+        String time = (String) getIntent().getStringExtra(AppointmentScreen.TIMESLOT_TIME);
+        String date = (String) getIntent().getStringExtra(AppointmentScreen.TIMESLOT_DATE);
+
+        for(TimeSlots timeSlot : mTimeSlotsList) {
+            if(timeSlot.getDoctor().getName().equals(doctorName) && timeSlot.getTime().equals(time) && timeSlot.getDate().equals(date)) {
+                mTimeSlots = timeSlot;
+            }
+        }
 
         setVisibilities();
         setLabels();
