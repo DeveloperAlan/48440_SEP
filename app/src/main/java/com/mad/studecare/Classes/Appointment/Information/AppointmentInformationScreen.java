@@ -12,6 +12,7 @@ import com.mad.studecare.Classes.Appointment.AppointmentScreen;
 import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
+import com.mad.studecare.Models.Constants;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.R;
@@ -62,10 +63,11 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         setContentView(R.layout.activity_appointment_information_screen);
         ButterKnife.bind(this);
 
-        String doctorName = (String) getIntent().getStringExtra(AppointmentScreen.DOCTOR_NAME);
-        String time = (String) getIntent().getStringExtra(AppointmentScreen.TIMESLOT_TIME);
-        String date = (String) getIntent().getStringExtra(AppointmentScreen.TIMESLOT_DATE);
+        String doctorName = getIntent().getStringExtra(Constants.DOCTOR_NAME);
+        String time = getIntent().getStringExtra(Constants.TIMESLOT_TIME);
+        String date = getIntent().getStringExtra(Constants.TIMESLOT_DATE);
 
+        // Grab the Timeslot with intent details.
         for(TimeSlots timeSlot : mTimeSlotsList) {
             if(timeSlot.getDoctor().getName().equals(doctorName) && timeSlot.getTime().equals(time) && timeSlot.getDate().equals(date)) {
                 mTimeSlots = timeSlot;
@@ -80,6 +82,10 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         this.mTimeSlots = timeslot;
         this.mHomeNavigated = homeNavigated;
         this.mAppointmentsAdapter = adapter;
+    }
+
+    public AppointmentInformationScreen() {
+
     }
 
     private void setLabels() {

@@ -17,6 +17,7 @@ import android.widget.Button;
 
 import com.mad.studecare.Classes.Appointment.Information.AppointmentInformationScreen;
 import com.mad.studecare.Classes.Home.HomeScreen;
+import com.mad.studecare.Models.Constants;
 import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
@@ -49,9 +50,6 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
     private ProgressDialog mProgressDialog;
     private DoctorsSlideAdapter mDoctorsSlideAdapter;
     private ArrayList<TimeSlots> mTimeList = new ArrayList<>();
-    public static final String TIMESLOT_TIME = "time";
-    public static final String TIMESLOT_DATE = "date";
-    public static final String DOCTOR_NAME = "doctor";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -140,10 +138,10 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
 
     public void startConfirmationScreen(TimeSlots timeSlot) {
         Intent intent = new Intent(this, AppointmentInformationScreen.class);
-        intent.putExtra(DOCTOR_NAME, timeSlot.getDoctor().getName());
-        intent.putExtra(TIMESLOT_TIME, timeSlot.getTime());
-        intent.putExtra(TIMESLOT_DATE, timeSlot.getDate());
-        startActivity(new Intent(this, AppointmentInformationScreen.class));
+        intent.putExtra(Constants.DOCTOR_NAME, timeSlot.getDoctor().getName());
+        intent.putExtra(Constants.TIMESLOT_TIME, timeSlot.getTime());
+        intent.putExtra(Constants.TIMESLOT_DATE, timeSlot.getDate());
+        startActivity(intent);
     }
 
     @Override

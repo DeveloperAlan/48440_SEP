@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://E:/Android Studio Projects/48440_SEP_mobile_app-master/48440_SEP_mobile_app-master/48440_SEP_mobile_app.iml" filepath="E:/Android Studio Projects/48440_SEP_mobile_app-master/48440_SEP_mobile_app-master/48440_SEP_mobile_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/48440_SEP_mobile_app-master.iml" filepath="$PROJECT_DIR$/48440_SEP_mobile_app-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StudeCare.iml" filepath="$PROJECT_DIR$/StudeCare.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
