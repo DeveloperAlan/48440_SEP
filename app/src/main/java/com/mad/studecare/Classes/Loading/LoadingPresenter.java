@@ -126,7 +126,7 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
                 "17/09/2018");
         mTimeSlotsList.add(timeslot);
 
-        //5 new time slots for doctor1
+        //5 new time slots for doctor3
         timeslot = new TimeSlots(mDoctorsList.get(2),
                 "14:30",
                 "10/10/2018");
@@ -173,28 +173,28 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
                 "7/10/2018");
         mTimeSlotsList.add(timeslot);
 
-        //5 new time slots for doctor3
-        timeslot = new TimeSlots(mDoctorsList.get(2),
+        //5 new time slots for doctor1
+        timeslot = new TimeSlots(mDoctorsList.get(0),
                 "12:30",
                 "10/10/2018");
         mTimeSlotsList.add(timeslot);
 
-        timeslot = new TimeSlots(mDoctorsList.get(2),
+        timeslot = new TimeSlots(mDoctorsList.get(0),
                 "12:30",
                 "15/10/2018");
         mTimeSlotsList.add(timeslot);
 
-        timeslot = new TimeSlots(mDoctorsList.get(2),
+        timeslot = new TimeSlots(mDoctorsList.get(0),
                 "16:30",
                 "17/10/2018");
         mTimeSlotsList.add(timeslot);
 
-        timeslot = new TimeSlots(mDoctorsList.get(2),
+        timeslot = new TimeSlots(mDoctorsList.get(0),
                 "18:30",
                 "19/10/2018");
         mTimeSlotsList.add(timeslot);
 
-        timeslot = new TimeSlots(mDoctorsList.get(2),
+        timeslot = new TimeSlots(mDoctorsList.get(0),
                 "20:00",
                 "02/11/2018");
         mTimeSlotsList.add(timeslot);
