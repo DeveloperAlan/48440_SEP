@@ -147,11 +147,6 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
                 "19/10/2018");
         mTimeSlotsList.add(timeslot);
 
-        timeslot = new TimeSlots(mDoctorsList.get(2),
-                "20:00",
-                "02/11/2018");
-        mTimeSlotsList.add(timeslot);
-
         //5 new time slots for doctor2
         timeslot = new TimeSlots(mDoctorsList.get(1),
                 "21:30",

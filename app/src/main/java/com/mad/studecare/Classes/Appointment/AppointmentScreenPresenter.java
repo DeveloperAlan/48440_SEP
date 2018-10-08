@@ -16,6 +16,7 @@ import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.R;
 import com.mad.studecare.Utils.CreateAppointmentInteractor;
 import com.mad.studecare.Utils.OnCreateAppointmentFinishedListener;
+import com.mad.studecare.Utils.SortList;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -25,6 +26,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -187,6 +190,9 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     @Override
     public void filterDoctor() {
         ArrayList<TimeSlots> testList = new ArrayList<>();
+
+        SortList sort = new SortList();
+
         // Adding all the removed TimeSlots for a new filter
         mFilterList.addAll(mRemovedDoctors);
         // Remove all removed TimeSlots
@@ -206,6 +212,12 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
             }
 
             mFilterList.removeAll(mRemovedDoctors);
+
+            Collections.sort(testList, sort);
+            Iterator<TimeSlots> timeSlotsIterator = testList.iterator();
+            while(timeSlotsIterator.hasNext()){
+                Log.d("order", timeSlotsIterator.next().getTime());
+            }
 
             mView.updateList(testList);
             // Sort & Change
