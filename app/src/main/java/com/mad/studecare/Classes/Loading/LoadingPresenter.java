@@ -253,6 +253,7 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
     }
 
     private void prepareAppointmentsData() {
+        /*
         Appointments appointments = new Appointments(
                 mTimeSlotsList.get(2),  "Testy McTestFace");
         mAppointmentsList.add(appointments);
@@ -271,6 +272,6 @@ public class LoadingPresenter implements LoadingScreenContract.presenter {
         mAppointmentsList.add(appointments);
 
         appointments = new Appointments(mTimeSlotsList.get(0), "");
-        mAppointmentsList.add(appointments);
+        mAppointmentsList.add(appointments);*/
     }
 }

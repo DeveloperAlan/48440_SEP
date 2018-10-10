@@ -189,6 +189,7 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     /* Each Doctor has a persistent list of which slots to remove & add back. */
     @Override
     public void filterDoctor() {
+
         ArrayList<TimeSlots> testList = new ArrayList<>();
 
         SortList sort = new SortList();
@@ -201,7 +202,6 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
         if(mChosenDoctors.isEmpty()) {
             mView.updateList(mFilterList);
         } else {
-
             for(TimeSlots slot : mFilterList) {
                 for(Doctors d : mChosenDoctors) {
                     if(slot.getDoctor() == d) {
@@ -211,20 +211,12 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
                 }
             }
 
-            mFilterList.removeAll(mRemovedDoctors);
-
-            Collections.sort(testList, sort);
-            Iterator<TimeSlots> timeSlotsIterator = testList.iterator();
-            while(timeSlotsIterator.hasNext()){
-                Log.d("order", timeSlotsIterator.next().getTime());
-            }
+            //Collections.sort(mFilterList, sort);
 
             mView.updateList(testList);
             // Sort & Change
         }
-
         sortChange();
-
     }
 
 //    @Override
