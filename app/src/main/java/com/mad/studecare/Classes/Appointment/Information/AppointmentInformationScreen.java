@@ -1,5 +1,6 @@
 package com.mad.studecare.Classes.Appointment.Information;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mad.studecare.Classes.Appointment.AppointmentScreen;
+import com.mad.studecare.Classes.Home.HomeScreen;
 import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
@@ -113,14 +115,17 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         // Navigated from TimeSlots. Create a new Appointment.
         if (mFromHome) {
             mAppointment.setNotes(mNotesEdit.getText().toString());
-            finish();
         }
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
             Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString());
             AppointmentsList.getInstance().addToList(newAppointments);
-            finish();
         }
+
+        finish();
+        Intent intent = new Intent(this, HomeScreen.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void delete(View v) {
