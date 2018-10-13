@@ -10,8 +10,14 @@ import android.view.View;
 public interface LoginScreenContract {
     interface view {
         void login(View v);
+
         void loginAuthenticated();
+
         void register(View v);
+
+        void showProgress();
+
+        void hideProgress();
 
     }
 

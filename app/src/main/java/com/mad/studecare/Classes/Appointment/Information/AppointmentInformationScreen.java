@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mad.studecare.Classes.Appointment.AppointmentScreen;
 import com.mad.studecare.Classes.Home.HomeScreen;
 import com.mad.studecare.Models.Appointments.Appointments;
-import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
 import com.mad.studecare.Models.Constants;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
@@ -34,8 +32,8 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     private String IntDoctor;
     private String IntTime;
     private String IntNotes;
-    private ArrayList<TimeSlots> mTimeSlotsList = TimeSlotsList.getInstance().getList();
-    private ArrayList<Appointments> mAppointments = AppointmentsList.getInstance().getList();
+    private ArrayList<TimeSlots> mTimeSlotsList = TimeSlotsList.GetInstance().GetList();
+    private ArrayList<Appointments> mAppointments = AppointmentsList.GetInstance().GetList();
     private TimeSlots mTimeSlot;
     private Appointments mAppointment;
 
@@ -119,7 +117,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
             Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString());
-            AppointmentsList.getInstance().addToList(newAppointments);
+            AppointmentsList.GetInstance().AddToList(newAppointments);
         }
 
         finish();

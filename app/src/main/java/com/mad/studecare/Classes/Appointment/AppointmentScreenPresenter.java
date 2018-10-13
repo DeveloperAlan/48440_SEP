@@ -1,12 +1,9 @@
 package com.mad.studecare.Classes.Appointment;
 
-import android.app.FragmentManager;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.mad.studecare.Classes.Home.HomeScreenContract;
 import com.mad.studecare.Models.Doctors.Doctors;
 import com.mad.studecare.Models.Doctors.DoctorsList;
 import com.mad.studecare.Models.Doctors.DoctorsSlideAdapter;
@@ -14,23 +11,15 @@ import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsAdapter;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.R;
-import com.mad.studecare.Utils.CreateAppointmentInteractor;
-import com.mad.studecare.Utils.OnCreateAppointmentFinishedListener;
 import com.mad.studecare.Utils.SortList;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.lang.reflect.Array;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Locale;
 
 /**
@@ -72,13 +61,13 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
                                  DoctorsSlideAdapter doctorsSlideAdapter) {
         this.mTimeSlotsAdapter = timeSlotsAdapter;
         this.mDoctorsSlideAdapter = doctorsSlideAdapter;
-        this.mFilterList= TimeSlotsList.getInstance().getList();
+        this.mFilterList= TimeSlotsList.GetInstance().GetList();
     }
 
     /* Grabs list from Singleton instance. */
     @Override
     public ArrayList<Doctors> doctorsList() {
-        ArrayList<Doctors> list = DoctorsList.getInstance().getList();
+        ArrayList<Doctors> list = DoctorsList.GetInstance().getList();
         // Passes it into local private variable
         this.mDoctorsList = list;
         return mDoctorsList;

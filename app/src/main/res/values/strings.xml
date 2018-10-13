@@ -5,6 +5,10 @@
     <string name="home_my_appointments"> My Appointments</string>
     <string name="home_add_appointment">New Appointment</string>
 
+    <!--Register-->
+    <string name="register_register">Register</string>
+    <string name="register_fullname">Full Name</string>
+
     <!--Loading-->
     <string name="loading_percent">%</string>
     <string name="loading_format">%1$d%2$s</string>

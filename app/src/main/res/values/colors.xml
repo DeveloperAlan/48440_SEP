@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#21618C</color>
     <color name="lightgrey">#dbdbdb</color>
+    <color name="white">#FFFFFF</color>
 
     <string-array name="loadingColors">
         <item>#FF6347</item>

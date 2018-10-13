@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.mad.studecare.Classes.Home.HomeScreen;
 import com.mad.studecare.Classes.Register.RegisterScreen;
@@ -24,6 +25,8 @@ public class LoginScreen extends AppCompatActivity implements LoginScreenContrac
     Button loginButton;
     @BindView(R.id.login_register)
     Button registerButton;
+    @BindView(R.id.login_progress)
+    ProgressBar progressBar;
 
     LoginScreenContract.presenter presenter;
 
@@ -34,6 +37,17 @@ public class LoginScreen extends AppCompatActivity implements LoginScreenContrac
 
         presenter = new LoginScreenPresenter(this);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.getIndeterminateDrawable().setColorFilter(0xFFFFFFFF , android.graphics.PorterDuff.Mode.MULTIPLY);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

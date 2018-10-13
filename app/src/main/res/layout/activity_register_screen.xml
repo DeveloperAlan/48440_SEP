@@ -4,53 +4,151 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/login"
     android:gravity="center"
     tools:context="com.mad.studecare.Classes.Register.RegisterScreen">
 
     <RelativeLayout
-        android:id="@+id/login_area_main"
+        android:id="@+id/register_header"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp">
+
+        <TextView
+            android:id="@+id/login_text_header"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shadowColor="@color/lightgrey"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="20"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/white"
+            android:text="@string/register_register"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/register_area_main"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/register_header"
         android:gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/register_email"
-        android:inputType="text"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:background="@drawable/edittext"
-        android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:hint="@string/login_student_id"
-        android:layout_height="50dp" />
+        <LinearLayout
+            android:id="@+id/register_section_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/edittext"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/register_password"
-        android:inputType="textPassword"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_below="@id/register_email"
-        android:background="@drawable/edittext"
-        android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:hint="@string/login_password"
-        android:layout_height="50dp" />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_person"
+                />
 
-    <Button
-        android:id="@+id/register_register"
-        android:onClick="register"
-        android:layout_below="@id/register_password"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/edittext"
-        android:text="@string/login_register"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:hint="@string/login_register"/>
+            <EditText
+                android:id="@+id/register_name"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="italic"
+                android:inputType="text"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/register_fullname"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/register_section_email"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/register_section_name"
+            android:background="@drawable/edittext"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_email"
+                />
+
+            <EditText
+                android:id="@+id/register_email"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="italic"
+                android:inputType="textEmailAddress"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_student_id"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/register_section_password"
+            android:layout_below="@id/register_section_email"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_password"
+                />
+
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="sans-serif"
+                android:hint="@string/login_password"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_register"
+            android:onClick="register"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="@android:color/white"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/register_section_password"
+            android:background="@drawable/border_transparent"
+            android:text="@string/register_register"
+            android:textSize="25sp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/register_register"/>
 
     </RelativeLayout>
 

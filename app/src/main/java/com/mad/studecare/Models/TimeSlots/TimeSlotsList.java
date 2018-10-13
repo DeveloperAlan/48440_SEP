@@ -11,24 +11,27 @@ public class TimeSlotsList {
     private ArrayList<TimeSlots> mTimeSlotsList;
 
     // Initialize singleton, if null, create a new instance.
-    public static void initInstance() {
+    public static void InitInstance() {
         if (singleton == null) {
             singleton = new TimeSlotsList();
         }
     }
 
-    public static TimeSlotsList getInstance() {
+    public static TimeSlotsList GetInstance() {
         return singleton;
     }
 
     private TimeSlotsList() {
     }
 
-    public ArrayList<TimeSlots> getList() {
+    public ArrayList<TimeSlots> GetList() {
         return mTimeSlotsList;
     }
 
-    public void setList(ArrayList<TimeSlots> list) {
+
+    public void ClearList() { mTimeSlotsList.clear(); }
+
+    public void SetList(ArrayList<TimeSlots> list) {
         mTimeSlotsList = list;
     }
 }

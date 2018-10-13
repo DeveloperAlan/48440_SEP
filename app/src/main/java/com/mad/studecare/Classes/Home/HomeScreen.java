@@ -18,6 +18,8 @@ import com.mad.studecare.Models.Appointments.AppointmentsList;
 import com.mad.studecare.Models.Constants;
 import com.mad.studecare.R;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +38,7 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
     @BindView(R.id.home_month)
     TextView monthTv;
 
+    private ArrayList<Appointments> test = new ArrayList<>();
     private AppointmentsAdapter mAppointmentsAdapter;
 
     @Override
@@ -49,8 +52,9 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
         // Populate Date data
         presenter.populateDate();
 
+
         // Setting RecyclerView adapter
-        mAppointmentsAdapter = new AppointmentsAdapter(AppointmentsList.getInstance().getList(), this, presenter);
+        mAppointmentsAdapter = new AppointmentsAdapter(test, this, presenter);
 //        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mAppointments.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mAppointments.setItemAnimator(new DefaultItemAnimator());

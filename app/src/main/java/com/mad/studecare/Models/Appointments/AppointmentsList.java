@@ -11,26 +11,30 @@ public class AppointmentsList {
     private ArrayList<Appointments> mAppointmentsList;
 
     // Initialize singleton, if null, create a new instance.
-    public static void initInstance() {
+    public static void InitInstance() {
         if (singleton == null) {
             singleton = new AppointmentsList();
         }
     }
 
-    public static AppointmentsList getInstance() {
+    public static AppointmentsList GetInstance() {
         return singleton;
     }
 
     private AppointmentsList() {
     }
 
-    public ArrayList<Appointments> getList() {
+    public ArrayList<Appointments> GetList() {
         return mAppointmentsList;
     }
 
-    public void setList(ArrayList<Appointments> list) {
+    public void SetList(ArrayList<Appointments> list) {
         mAppointmentsList = list;
     }
 
-    public void addToList(Appointments appointment) { mAppointmentsList.add(appointment); }
+    public void RemoveItem(Appointments appointment) { mAppointmentsList.remove(appointment); }
+
+    public void ClearList() { mAppointmentsList.clear(); }
+
+    public void AddToList(Appointments appointment) { mAppointmentsList.add(appointment); }
 }

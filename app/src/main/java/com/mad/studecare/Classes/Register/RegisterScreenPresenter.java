@@ -36,7 +36,7 @@ public class RegisterScreenPresenter implements RegisterScreenContract.presenter
         this.mPassword = password;
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL, new Response.Listener<String>() {
+        final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_REGISTER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.

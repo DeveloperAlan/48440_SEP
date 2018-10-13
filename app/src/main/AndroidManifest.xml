@@ -24,7 +24,8 @@
         <activity android:name=".Classes.Settings.SettingsScreen" />
         <activity android:name=".Classes.Register.RegisterScreen" />
         <activity android:name=".Classes.Appointment.Information.AppointmentInformationScreen" />
-        <activity android:name=".Classes.Profile.Student.ProfileStudentScreen"> </activity>
+        <activity android:name=".Classes.Profile.Student.ProfileStudentScreen"></activity>
+        <activity android:name=".Classes.Home.DoctorsHome.DoctorsHomeScreen"></activity>
     </application>
 
 </manifest>

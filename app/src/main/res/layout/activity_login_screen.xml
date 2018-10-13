@@ -73,9 +73,18 @@
                 android:textStyle="italic"
                 android:inputType="text"
                 android:background="@null"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_student_id"/>
+
+            <ProgressBar
+                android:id="@+id/login_progress"
+                android:visibility="gone"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginBottom="6dp"
+                android:layout_width="25dp"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
