@@ -54,7 +54,7 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
 
 
         // Setting RecyclerView adapter
-        mAppointmentsAdapter = new AppointmentsAdapter(test, this, presenter);
+        mAppointmentsAdapter = new AppointmentsAdapter(AppointmentsList.GetInstance().GetList(), this, presenter);
 //        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mAppointments.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mAppointments.setItemAnimator(new DefaultItemAnimator());

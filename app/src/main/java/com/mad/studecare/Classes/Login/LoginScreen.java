@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.mad.studecare.Classes.Home.HomeScreen;
+import com.mad.studecare.Classes.Loading.LoadingScreen;
 import com.mad.studecare.Classes.Register.RegisterScreen;
 import com.mad.studecare.R;
 
@@ -58,8 +60,9 @@ public class LoginScreen extends AppCompatActivity implements LoginScreenContrac
 
     @Override
     public void loginAuthenticated() {
-        Intent intent = new Intent(this, HomeScreen.class);
+        Intent intent = new Intent(this, LoadingScreen.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

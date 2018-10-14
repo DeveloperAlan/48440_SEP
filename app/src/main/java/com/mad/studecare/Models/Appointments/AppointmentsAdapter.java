@@ -87,7 +87,17 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Appointments appointment = mAppointmentsList.get(position);
-        holder.picture.setImageResource(R.mipmap.doc1);
+        if(appointment.getTimeslot().getDoctor().getPicture() == 4) {
+            holder.picture.setImageResource(R.mipmap.doc1);
+        } else if(appointment.getTimeslot().getDoctor().getPicture() == 1) {
+            holder.picture.setImageResource(R.mipmap.doc4);
+        } else if(appointment.getTimeslot().getDoctor().getPicture() == 5) {
+            holder.picture.setImageResource(R.mipmap.doc5);
+        } else if(appointment.getTimeslot().getDoctor().getPicture() == 3) {
+            holder.picture.setImageResource(R.mipmap.doc2);
+        } else {
+            holder.picture.setImageResource(R.mipmap.doc3);
+        }
         holder.time.setText(appointment.getTimeslot().getTime());
         holder.date.setText(appointment.getTimeslot().getDate());
         holder.name.setText(appointment.getTimeslot().getDoctor().getName());
@@ -98,7 +108,6 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                 mPresenter.editAppointment(appointment);
             }
         });
-
 
 
         YoYo.with(Techniques.FadeInUp).duration(700).playOn(holder.itemView);

@@ -3,6 +3,7 @@ package com.mad.studecare.Classes.Appointment.Information;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -105,8 +106,18 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         mMonth.setText(month.format(calendar));
         mDayText.setText(day_text.format(calendar));
         mTime.setText(mTimeSlot.getTime());
-        mPicture.setImageResource(R.mipmap.doc1);
-        //mPicture.setImageResource(mTimeSlot.getDoctor().getPicture());
+        Log.d("GETPIC", Integer.toString(mTimeSlot.getDoctor().getPicture()));
+        if(mTimeSlot.getDoctor().getPicture() == 4) {
+            mPicture.setImageResource(R.mipmap.doc1);
+        } else if(mTimeSlot.getDoctor().getPicture() == 1) {
+            mPicture.setImageResource(R.mipmap.doc4);
+        } else if(mTimeSlot.getDoctor().getPicture() == 5) {
+            mPicture.setImageResource(R.mipmap.doc5);
+        } else if(mTimeSlot.getDoctor().getPicture() == 3) {
+            mPicture.setImageResource(R.mipmap.doc2);
+        } else if(mTimeSlot.getDoctor().getPicture() == 2) {
+            mPicture.setImageResource(R.mipmap.doc3);
+        }
         mName.setText(mTimeSlot.getDoctor().getName());
         mQualifications.setText(mTimeSlot.getDoctor().getQualifications());
         mSpecialties.setText(mTimeSlot.getDoctor().getSpecialties());
@@ -121,12 +132,13 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         else {
             Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString(), "asd");
             AppointmentsList.GetInstance().AddToList(newAppointments);
+            Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
         }
 
-        finish();
         Intent intent = new Intent(this, HomeScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void delete(View v) {

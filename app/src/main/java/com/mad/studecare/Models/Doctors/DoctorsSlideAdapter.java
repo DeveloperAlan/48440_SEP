@@ -83,9 +83,9 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
         if(doctor.getPicture() == 4) {
             holder.image.setImageResource(R.mipmap.doc1);
         } else if(doctor.getPicture() == 1) {
-            holder.image.setImageResource(R.mipmap.doc5);
-        } else if(doctor.getPicture() == 5) {
             holder.image.setImageResource(R.mipmap.doc4);
+        } else if(doctor.getPicture() == 5) {
+            holder.image.setImageResource(R.mipmap.doc5);
         } else if(doctor.getPicture() == 3) {
             holder.image.setImageResource(R.mipmap.doc2);
         } else {

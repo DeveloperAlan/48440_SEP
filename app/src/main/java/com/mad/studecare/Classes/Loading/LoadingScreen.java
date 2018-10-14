@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.glomadrian.grav.GravView;
+import com.mad.studecare.Classes.Home.HomeScreen;
 import com.mad.studecare.Classes.Login.LoginScreen;
 import com.mad.studecare.R;
 
@@ -41,7 +42,7 @@ public class LoadingScreen extends AppCompatActivity implements LoadingScreenCon
 
     @Override
     public void startApp() {
-        Intent intent = new Intent(this, LoginScreen.class);
+        Intent intent = new Intent(this, HomeScreen.class);
 
         startActivity(intent);
         finish();
