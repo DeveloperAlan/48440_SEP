@@ -67,4 +67,16 @@ public class LoginScreen extends AppCompatActivity implements LoginScreenContrac
         Intent intent = new Intent(this, RegisterScreen.class);
         startActivity(intent);
     }
+
+    @Override
+    public void textFieldError(String error, String field){
+        switch (field){
+            case "email":
+                username.setError(error);
+                break;
+            case "password":
+                password.setError(error);
+                break;
+        }
+    }
 }

@@ -18,6 +18,8 @@ public class RegisterScreen extends AppCompatActivity implements RegisterScreenC
     EditText email;
     @BindView(R.id.register_password)
     EditText password;
+    @BindView(R.id.register_name)
+    EditText fullname;
 
     RegisterScreenContract.presenter presenter;
 
@@ -27,12 +29,28 @@ public class RegisterScreen extends AppCompatActivity implements RegisterScreenC
         setContentView(R.layout.activity_register_screen);
         ButterKnife.bind(this);
 
-        presenter = new RegisterScreenPresenter();
+        presenter = new RegisterScreenPresenter(this);
     }
 
     @Override
     public void register(View v) {
-        presenter.RegisterUser(email.getText().toString(), password.getText().toString(), this);
-        finish();
+        if(presenter.RegisterUser(email.getText().toString(), password.getText().toString(), fullname.getText().toString(), this)){
+            finish();
+        }
+    }
+
+    @Override
+    public void textFieldError(String error, String field){
+        switch (field){
+            case "email":
+                email.setError(error);
+                break;
+            case "password":
+                password.setError(error);
+                break;
+            case "fullname":
+                fullname.setError(error);
+                break;
+        }
     }
 }

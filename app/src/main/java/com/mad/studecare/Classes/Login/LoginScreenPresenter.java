@@ -2,6 +2,7 @@ package com.mad.studecare.Classes.Login;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
@@ -46,52 +47,55 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         this.mPassword = password;
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_SIGN_IN, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                //This code is executed if the server responds, whether or not the response contains data.
-                //The String 'response' contains the server's response.
-                Log.d("POST", "SUCCESS: " + response);
+        if(validEmail(email) && validPassword(password)){
 
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    Users newUser = new Users();
-                    newUser.setAccessToken(jsonObject.getString(context.getString(R.string.api_access_token)));
-                    newUser.setUserId(jsonObject.getString(context.getString(R.string.api_user)));
-                    Log.d("POST", newUser.getAccessToken() + " " + newUser.getUserId());
-                    Log.d("POST", "USER!: " + newUser.getAccessToken());
-                } catch (JSONException | NullPointerException e) {
-                    e.printStackTrace();
+            final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_SIGN_IN, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //This code is executed if the server responds, whether or not the response contains data.
+                    //The String 'response' contains the server's response.
+                    Log.d("POST", "SUCCESS: " + response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        Users newUser = new Users();
+                        newUser.setAccessToken(jsonObject.getString(context.getString(R.string.api_access_token)));
+                        newUser.setUserId(jsonObject.getString(context.getString(R.string.api_user)));
+                        Log.d("POST", newUser.getAccessToken() + " " + newUser.getUserId());
+                        Log.d("POST", "USER!: " + newUser.getAccessToken());
+                    } catch (JSONException | NullPointerException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //This code is executed if there is an error.
-                Log.d("POST", "ERROR: " + error.toString());
-            }
-        }) {
-            //This is for Headers If You Needed
-            @Override
-            public Map getHeaders() throws AuthFailureError {
-                Map headers = new HashMap<>();
-                String credentials = mUsername + ":" + mPassword;
-                String auth = "Basic "
-                        + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+            }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //This code is executed if there is an error.
+                    Log.d("POST", "ERROR: " + error.toString());
+                }
+            }) {
+                //This is for Headers If You Needed
+                @Override
+                public Map getHeaders() throws AuthFailureError {
+                    Map headers = new HashMap<>();
+                    String credentials = mUsername + ":" + mPassword;
+                    String auth = "Basic "
+                            + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 //                headers.put("Content-Type", "application/json");
-                headers.put("Authorization", auth);
-                return headers;
-            }
+                    headers.put("Authorization", auth);
+                    return headers;
+                }
 
-            protected Map<String, String> getParams() {
-                Map<String, String> user = new HashMap<>();
-                user.put("access_token", API.ACCESS_TOKEN);
-                return user;
-            }
-        };
-        queue.add(request);
+                protected Map<String, String> getParams() {
+                    Map<String, String> user = new HashMap<>();
+                    user.put("access_token", API.ACCESS_TOKEN);
+                    return user;
+                }
+            };
+            queue.add(request);
 
-        new DownloadData(context).execute();
+            new DownloadData(context).execute();
+        }
     }
 
     private static class DownloadData extends AsyncTask<String, Void, Void> {
@@ -252,5 +256,31 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
             mView.hideProgress();
             mView.loginAuthenticated();
         }
+    }
+
+    private boolean validEmail(String email){
+        boolean valid = false;
+        if (TextUtils.isEmpty(email)) { // empty
+            mView.textFieldError("Required","email");
+        } else if (!email.contains("@") || !email.contains(".")) { // invalid email format
+            mView.textFieldError("Please input a valid email address","email");
+        } else { // correct email format
+            mView.textFieldError(null, "email");
+            valid = true;
+        }
+        return valid;
+    }
+
+    private boolean validPassword(String password){
+        boolean valid = false;
+        if (TextUtils.isEmpty(password)) {
+            mView.textFieldError("Required","password");
+        } else if (password.length() < 6) {
+            mView.textFieldError("Password must be longer than six characters","password");
+        } else {
+            mView.textFieldError(null, "password");
+            valid = true;
+        }
+        return valid;
     }
 }

@@ -73,7 +73,7 @@
                 android:textStyle="italic"
                 android:inputType="text"
                 android:background="@null"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_student_id"/>
 

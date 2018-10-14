@@ -6,7 +6,6 @@
     <string name="home_add_appointment">New Appointment</string>
 
     <!--Register-->
-    <string name="register_register">Register</string>
     <string name="register_fullname">Full Name</string>
 
     <!--Loading-->
@@ -77,5 +76,10 @@ C68.5809,277.075,273.832,71.8233,527.023,71.8233 Z
     <string name="TimePicker">TimePicker</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="register">register</string>
+    <string name="register_new_user">Register new user</string>
+    <string name="full_name">Full Name</string>
+    <string name="register_register">Register</string>
+    <string name="title_register">Register</string>
 
 </resources>

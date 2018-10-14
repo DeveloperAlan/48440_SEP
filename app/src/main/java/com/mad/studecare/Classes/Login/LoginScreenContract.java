@@ -19,6 +19,8 @@ public interface LoginScreenContract {
 
         void hideProgress();
 
+        void textFieldError(String error, String field);
+
     }
 
     interface presenter {

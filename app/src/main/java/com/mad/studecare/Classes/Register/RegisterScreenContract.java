@@ -11,9 +11,10 @@ import android.widget.EditText;
 public interface RegisterScreenContract {
     interface view {
         void register(View v);
+        void textFieldError(String error, String field);
     }
 
     interface presenter {
-        void RegisterUser(String email, String password, Context context);
+        boolean RegisterUser(String email, String password, String fullname, Context context);
     }
 }
