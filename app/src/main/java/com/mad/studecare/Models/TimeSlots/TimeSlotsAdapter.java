@@ -17,8 +17,10 @@ import com.mad.studecare.Classes.Appointment.AppointmentScreen;
 import com.mad.studecare.Classes.Appointment.AppointmentScreenContract;
 import com.mad.studecare.R;
 import com.mad.studecare.Utils.MenuItemClickListener;
+import com.mad.studecare.Utils.SortList;
 
 import java.sql.Time;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;

@@ -368,27 +368,25 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         }
     }
 
-    private boolean validEmail(String email){
+    public static boolean validEmail(String email){
         boolean valid = false;
         if (TextUtils.isEmpty(email)) { // empty
             mView.textFieldError("Required","email");
         } else if (!email.contains("@") || !email.contains(".")) { // invalid email format
             mView.textFieldError("Please input a valid email address","email");
         } else { // correct email format
-            mView.textFieldError(null, "email");
             valid = true;
         }
         return valid;
     }
 
-    private boolean validPassword(String password){
+    public static boolean validPassword(String password){
         boolean valid = false;
         if (TextUtils.isEmpty(password)) {
             mView.textFieldError("Required","password");
         } else if (password.length() < 6) {
             mView.textFieldError("Password must be longer than six characters","password");
         } else {
-            mView.textFieldError(null, "password");
             valid = true;
         }
         return valid;
