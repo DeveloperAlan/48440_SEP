@@ -12,13 +12,15 @@ import java.util.ArrayList;
  */
 
 public class Doctors {
+    private String id;
     private String name;
     private String specialties;
     private String qualifications;
     private int picture;
     private float rating;
 
-    public Doctors(String name, String specialties, String qualifications, int picture, float rating, ArrayList<TimeSlots> removedSlots) {
+    public Doctors(String id, String name, String specialties, String qualifications, int picture, float rating) {
+        this.id = id;
         this.name = name;
         this.specialties = specialties;
         this.qualifications = qualifications;
@@ -62,9 +64,14 @@ public class Doctors {
         return rating;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void setRating(float rating) {
         this.rating = rating;
     }
+
 //    public boolean isChecked() {
 //        return checked;
 //    }

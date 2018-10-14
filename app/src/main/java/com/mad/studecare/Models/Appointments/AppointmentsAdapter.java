@@ -87,7 +87,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Appointments appointment = mAppointmentsList.get(position);
-        holder.picture.setImageResource(appointment.getTimeslot().getDoctor().getPicture());
+        holder.picture.setImageResource(R.mipmap.doc1);
         holder.time.setText(appointment.getTimeslot().getTime());
         holder.date.setText(appointment.getTimeslot().getDate());
         holder.name.setText(appointment.getTimeslot().getDoctor().getName());

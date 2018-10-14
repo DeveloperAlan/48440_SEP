@@ -1,5 +1,7 @@
 package com.mad.studecare.Models.Doctors;
 
+import com.mad.studecare.Models.Appointments.Appointments;
+
 import java.util.ArrayList;
 
 /**
@@ -8,17 +10,14 @@ import java.util.ArrayList;
 
 public class DoctorsList {
     private static DoctorsList singleton;
-    private ArrayList<Doctors> mDoctorsList;
+    private static ArrayList<Doctors> mDoctorsList;
 
     // Initialize singleton, if null, create a new instance.
-    public static void InitInstance() {
+    public static DoctorsList GetInstance() {
         if (singleton == null) {
             singleton = new DoctorsList();
-        }
-    }
-
-    public static DoctorsList GetInstance() {
-        return singleton;
+            mDoctorsList = new ArrayList<Doctors>();
+        } return singleton;
     }
 
     private DoctorsList() {
@@ -34,5 +33,7 @@ public class DoctorsList {
     public void SetList(ArrayList<Doctors> list) {
         mDoctorsList = list;
     }
+
+    public void AddToList(Doctors doctor) { mDoctorsList.add(doctor); }
 }
 

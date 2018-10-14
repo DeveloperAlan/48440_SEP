@@ -6,6 +6,7 @@ import android.opengl.Visibility;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,17 @@ public class DoctorsSlideAdapter extends RecyclerView.Adapter<DoctorsSlideAdapte
         // Getting specific doctor
         final Doctors doctor = mDoctorsList.get(position);
 
-        holder.image.setImageResource(doctor.getPicture());
+        if(doctor.getPicture() == 4) {
+            holder.image.setImageResource(R.mipmap.doc1);
+        } else if(doctor.getPicture() == 1) {
+            holder.image.setImageResource(R.mipmap.doc5);
+        } else if(doctor.getPicture() == 5) {
+            holder.image.setImageResource(R.mipmap.doc4);
+        } else if(doctor.getPicture() == 3) {
+            holder.image.setImageResource(R.mipmap.doc2);
+        } else {
+            holder.image.setImageResource(R.mipmap.doc3);
+        }
         holder.name.setText(doctor.getName());
         holder.rating.setRating(doctor.getRating());
         holder.specialties.setText(doctor.getSpecialties());

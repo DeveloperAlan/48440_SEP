@@ -11,10 +11,12 @@ public class Appointments {
 
     private TimeSlots timeslot;
     private String notes;
+    private String userEmail;
 
-    public Appointments(TimeSlots timeslot, String notes) {
+    public Appointments(TimeSlots timeslot, String notes, String userEmail) {
         this.timeslot = timeslot;
         this.notes = notes;
+        userEmail = userEmail;
     }
 
     public TimeSlots getTimeslot() {
@@ -27,6 +29,10 @@ public class Appointments {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public void setNotes(String notes) {

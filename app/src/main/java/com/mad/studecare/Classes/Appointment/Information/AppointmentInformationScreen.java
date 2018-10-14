@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mad.studecare.Classes.Home.HomeScreen;
+import com.mad.studecare.Models.API;
 import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
 import com.mad.studecare.Models.Constants;
@@ -79,6 +80,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
             }
         }
 
+
         // Grab the appointment, if there is one.
         for (Appointments appointment : mAppointments) {
             if (appointment.getTimeslot().equals(mTimeSlot)) {
@@ -103,7 +105,8 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         mMonth.setText(month.format(calendar));
         mDayText.setText(day_text.format(calendar));
         mTime.setText(mTimeSlot.getTime());
-        mPicture.setImageResource(mTimeSlot.getDoctor().getPicture());
+        mPicture.setImageResource(R.mipmap.doc1);
+        //mPicture.setImageResource(mTimeSlot.getDoctor().getPicture());
         mName.setText(mTimeSlot.getDoctor().getName());
         mQualifications.setText(mTimeSlot.getDoctor().getQualifications());
         mSpecialties.setText(mTimeSlot.getDoctor().getSpecialties());
@@ -112,11 +115,11 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     public void save(View v) {
         // Navigated from TimeSlots. Create a new Appointment.
         if (mFromHome) {
-            mAppointment.setNotes(mNotesEdit.getText().toString());
+
         }
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
-            Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString());
+            Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString(), "asd");
             AppointmentsList.GetInstance().AddToList(newAppointments);
         }
 

@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public class AppointmentsList {
     private static AppointmentsList singleton;
-    private ArrayList<Appointments> mAppointmentsList;
+    private static ArrayList<Appointments> mAppointmentsList;
 
-    // Initialize singleton, if null, create a new instance.
+    // Initialize singleton, if null, create a new instance
     public static void InitInstance() {
         if (singleton == null) {
             singleton = new AppointmentsList();
+            mAppointmentsList = new ArrayList<>();
         }
     }
 

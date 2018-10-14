@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public class TimeSlotsList {
     private static TimeSlotsList singleton;
-    private ArrayList<TimeSlots> mTimeSlotsList;
+    private static ArrayList<TimeSlots> mTimeSlotsList;
 
     // Initialize singleton, if null, create a new instance.
     public static void InitInstance() {
         if (singleton == null) {
             singleton = new TimeSlotsList();
+            mTimeSlotsList = new ArrayList<>();
         }
     }
 
@@ -33,5 +34,9 @@ public class TimeSlotsList {
 
     public void SetList(ArrayList<TimeSlots> list) {
         mTimeSlotsList = list;
+    }
+
+    public void AddToList(TimeSlots timeSlot) {
+        mTimeSlotsList.add(timeSlot);
     }
 }

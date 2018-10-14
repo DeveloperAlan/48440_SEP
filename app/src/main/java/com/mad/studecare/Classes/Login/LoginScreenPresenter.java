@@ -15,12 +15,16 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mad.studecare.Models.API;
+import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
+import com.mad.studecare.Models.Doctors.Doctors;
 import com.mad.studecare.Models.Doctors.DoctorsList;
+import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.Models.Users;
 import com.mad.studecare.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,17 +59,6 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                     //This code is executed if the server responds, whether or not the response contains data.
                     //The String 'response' contains the server's response.
                     Log.d("POST", "SUCCESS: " + response);
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        Users newUser = new Users();
-                        newUser.setAccessToken(jsonObject.getString(context.getString(R.string.api_access_token)));
-                        newUser.setUserId(jsonObject.getString(context.getString(R.string.api_user)));
-                        Log.d("POST", newUser.getAccessToken() + " " + newUser.getUserId());
-                        Log.d("POST", "USER!: " + newUser.getAccessToken());
-                    } catch (JSONException | NullPointerException e) {
-                        e.printStackTrace();
-                    }
                 }
             }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
                 @Override
@@ -79,7 +72,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                 public Map getHeaders() throws AuthFailureError {
                     Map headers = new HashMap<>();
                     String credentials = mUsername + ":" + mPassword;
-                    String auth = "Basic "
+                    String auth = "Bearer "
                             + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 //                headers.put("Content-Type", "application/json");
                     headers.put("Authorization", auth);
@@ -109,7 +102,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         protected void onPreExecute() {
             mView.showProgress();
             // Load Singleton
-            DoctorsList.InitInstance();
+            DoctorsList.GetInstance();
             TimeSlotsList.InitInstance();
             AppointmentsList.InitInstance();
             super.onPreExecute();
@@ -118,13 +111,163 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         @Override
         protected Void doInBackground(String... strings) {
 
+
+            JSONObject requestBody = new JSONObject();
+            try {
+                requestBody.put("access_token", API.ACCESS_TOKEN);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
             // Appointments
-            RequestQueue appointmentQueue = Volley.newRequestQueue(context);
-            JsonObjectRequest getAppointmentRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_APPOINTMENTS, null,
+            RequestQueue doctorQueue = Volley.newRequestQueue(context);
+            JsonObjectRequest getDoctorRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_DOCTORS, requestBody,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             // display response
+
+                            try {
+
+                                JSONArray array = response.getJSONArray("rows");
+                                Log.d("ROWS", array.toString());
+                                for(int i = 1; i < array.length(); i++) {
+                                    JSONObject tSlot = array.getJSONObject(i);
+                                    String name = tSlot.getString("name");
+                                    Log.d("VALUE", name);
+                                    String id = tSlot.getString("id");
+                                    String specialities = tSlot.getString("specialties");
+                                    String qualifications = tSlot.getString("qualifications");
+                                    int picture = Integer.parseInt(tSlot.getString("picture"));
+                                    float rating = Float.parseFloat(tSlot.getString("rating"));
+                                    Log.d("VALUE", name + qualifications + Integer.toString(picture) + Float.toString(rating));
+                                    DoctorsList.GetInstance().AddToList(new Doctors(id, name, specialities, qualifications, picture, rating));
+                                    Log.d("SIZE", Integer.toString(DoctorsList.GetInstance().getList().size()));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            Log.d("POSTDOCT", "DOCTOR DOWNLOAD DATA RESPONSE " + response.toString());
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("POST", "DOCTOR DOWNLOAD DATA ERROR: " + error.toString());
+                        }
+                    }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> user = new HashMap<>();
+                    user.put("access_token", API.ACCESS_TOKEN);
+                    return user;
+                }
+
+                @Override
+                public Map getHeaders() throws AuthFailureError {
+                    Map headers = new HashMap<>();
+                    String auth = "Bearer "
+                            + API.ACCESS_TOKEN;
+//                headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", auth);
+                    return headers;
+                }
+
+
+            };
+
+            doctorQueue.add(getDoctorRequest);
+
+            //TimeSlot
+            RequestQueue timeslotQueue = Volley.newRequestQueue(context);
+            JsonObjectRequest getTimeslotRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_TIMESLOTS, requestBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // display response
+
+                            try {
+
+                                JSONArray array = response.getJSONArray("rows");
+                                Log.d("ROWS", array.toString());
+                                for(int i = 1; i < array.length(); i++) {
+                                    JSONObject tSlot = array.getJSONObject(i);
+                                    String id = tSlot.getString("id");
+                                    Doctors doctor = null;
+                                    for(Doctors doc : DoctorsList.GetInstance().getList()) {
+                                        if(tSlot.getString("doctorId").equals(doc.getId())) {
+                                            doctor = doc;
+                                        }
+                                    }
+                                    String time = tSlot.getString("time");
+                                    String date = tSlot.getString("date");
+                                    TimeSlotsList.GetInstance().AddToList(new TimeSlots(id, doctor, time, date));
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            Log.d("POSTTIMESLOT", "TIMESLOT DOWNLOAD DATA RESPONSE " + response.toString());
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("POST", "TIMESLOT DOWNLOAD DATA ERROR: " + error.toString());
+                        }
+                    }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> user = new HashMap<>();
+                    user.put("access_token", API.ACCESS_TOKEN);
+                    return user;
+                }
+
+                @Override
+                public Map getHeaders() throws AuthFailureError {
+                    Map headers = new HashMap<>();
+                    String auth = "Bearer "
+                            + API.ACCESS_TOKEN;
+//                headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", auth);
+                    return headers;
+                }
+
+            };
+            timeslotQueue.add(getTimeslotRequest);
+
+            // Appointments
+            RequestQueue appointmentQueue = Volley.newRequestQueue(context);
+            JsonObjectRequest getAppointmentRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_APPOINTMENTS, requestBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // display response
+
+                            try {
+
+                                JSONArray array = response.getJSONArray("rows");
+                                Log.d("ROWS", array.toString());
+                                for(int i = 1; i < array.length(); i++) {
+                                    JSONObject tSlot = array.getJSONObject(i);
+                                    Doctors doctor = null;
+                                    String id = tSlot.getString("id");
+                                    TimeSlots timeSlot = null;
+                                    for(TimeSlots slot : TimeSlotsList.GetInstance().GetList()) {
+                                        if(slot.getId().equals(id)) {
+                                            timeSlot = slot;
+                                        }
+                                    }
+                                    String notes = tSlot.getString("notes");
+                                    AppointmentsList.GetInstance().AddToList(new Appointments(timeSlot, notes, id));
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                             Log.d("POST", "APPOINTMENTS DOWNLOAD DATA RESPONSE " + response.toString());
                         }
                     },
@@ -140,58 +283,19 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                     return user;
                 }
 
+                @Override
+                public Map getHeaders() throws AuthFailureError {
+                    Map headers = new HashMap<>();
+                    String auth = "Bearer "
+                            + API.ACCESS_TOKEN;
+//                headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", auth);
+                    return headers;
+                }
+
             };
             appointmentQueue.add(getAppointmentRequest);
 
-            // Appointments
-            RequestQueue timeslotQueue = Volley.newRequestQueue(context);
-            JsonObjectRequest getTimeslotRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_TIMESLOTS, null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            // display response
-                            Log.d("POST", "TIMESLOT DOWNLOAD DATA RESPONSE " + response.toString());
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("POST", "TIMESLOT DOWNLOAD DATA ERROR: " + error.toString());
-                        }
-                    }) {
-                protected Map<String, String> getParams() {
-                    Map<String, String> user = new HashMap<>();
-                    user.put("access_token", API.ACCESS_TOKEN);
-                    return user;
-                }
-
-            };
-            timeslotQueue.add(getTimeslotRequest);
-
-            // Appointments
-            RequestQueue doctorQueue = Volley.newRequestQueue(context);
-            JsonObjectRequest getDoctorRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_USERS, null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            // display response
-                            Log.d("POST", "DOCTOR DOWNLOAD DATA RESPONSE " + response.toString());
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("POST", "DOCTOR DOWNLOAD DATA ERROR: " + error.toString());
-                        }
-                    }) {
-                protected Map<String, String> getParams() {
-                    Map<String, String> user = new HashMap<>();
-                    user.put("access_token", API.ACCESS_TOKEN);
-                    return user;
-                }
-
-            };
-            doctorQueue.add(getDoctorRequest);
 
             return null;
         }

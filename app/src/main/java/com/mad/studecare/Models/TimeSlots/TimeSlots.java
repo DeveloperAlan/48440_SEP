@@ -14,11 +14,13 @@ import java.util.Locale;
 
 public class TimeSlots {
 
+    private String id;
     private Doctors doctor;
     private String time;
     private String date;
 
-    public TimeSlots(Doctors doctor, String time, String date) {
+    public TimeSlots(String id, Doctors doctor, String time, String date) {
+        this.id = id;
         this.doctor = doctor;
         this.time = time;
         this.date = date;
@@ -44,6 +46,10 @@ public class TimeSlots {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setTime(String time) {
