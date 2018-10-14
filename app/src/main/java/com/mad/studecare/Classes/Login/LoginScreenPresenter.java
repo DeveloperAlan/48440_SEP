@@ -58,6 +58,10 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                 public void onResponse(String response) {
                     //This code is executed if the server responds, whether or not the response contains data.
                     //The String 'response' contains the server's response.
+
+
+                    //SHOULD RETURN USERID STORE IT IN A GLOBAL VARIABLE U CAN ACCESS ANYWHERE
+
                     Log.d("POST", "SUCCESS: " + response);
                 }
             }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
@@ -261,6 +265,8 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                                         }
                                     }
                                     String notes = tSlot.getString("notes");
+                                    String userId = tSlot.getString("userId");
+                                    //if(userId.equals(THE ID OF THE USER THEN U ADD)
                                     AppointmentsList.GetInstance().AddToList(new Appointments(timeSlot, notes, id));
 
                                 }
@@ -358,11 +364,6 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         @Override
         protected void onPostExecute(Void aVoid) {
             mView.hideProgress();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             mView.loginAuthenticated();
         }
     }

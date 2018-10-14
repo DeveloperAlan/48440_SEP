@@ -130,7 +130,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         }
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
-            Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString(), "asd");
+            Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString(), "userId should go here");
             AppointmentsList.GetInstance().AddToList(newAppointments);
             Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
         }
