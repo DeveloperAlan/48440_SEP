@@ -267,28 +267,30 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                             try {
 
                                 JSONArray array = response.getJSONArray("rows");
+
                                 Log.d("ROWS", array.toString());
                                 for(int i = 1; i < array.length(); i++) {
                                     JSONObject tSlot = array.getJSONObject(i);
-                                    Doctors doctor = null;
-                                    String id = tSlot.getString("id");
                                     TimeSlots timeSlot = null;
                                     for(TimeSlots slot : TimeSlotsList.GetInstance().GetList()) {
-                                        if(slot.getId().equals(id)) {
+                                        if(tSlot.getString("timeSlotId").equals(slot.getId())) {
                                             timeSlot = slot;
                                         }
                                     }
+
                                     String notes = tSlot.getString("notes");
                                     String userId = tSlot.getString("userId");
                                     //if(userId.equals(THE ID OF THE USER THEN U ADD)
-                                    AppointmentsList.GetInstance().AddToList(new Appointments(timeSlot, notes, id));
+                                    //if(Users.getInstance().getUserId().equals(userId)) {
+                                        AppointmentsList.GetInstance().AddToList(new Appointments(timeSlot, notes, userId));
+                                    //}
 
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.d("POST", "APPOINTMENTS DOWNLOAD DATA RESPONSE " + response.toString());
+                           Log.d("POST", "APPOINTMENTS DOWNLOAD DATA RESPONSE " + response.toString());
                         }
                     },
                     new Response.ErrorListener() {

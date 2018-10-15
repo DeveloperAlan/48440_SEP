@@ -10,13 +10,14 @@ import com.mad.studecare.Models.TimeSlots.TimeSlots;
 public class Appointments {
 
     private TimeSlots timeslot;
+    //private String id;
     private String notes;
-    private String userEmail;
+    private String userId;
 
-    public Appointments(TimeSlots timeslot, String notes, String userEmail) {
+    public Appointments(TimeSlots timeslot, String notes, String userId) {
         this.timeslot = timeslot;
         this.notes = notes;
-        userEmail = userEmail;
+        this.userId = userId;
     }
 
     public TimeSlots getTimeslot() {
@@ -31,8 +32,8 @@ public class Appointments {
         return notes;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserId() {
+        return userId;
     }
 
     public void setNotes(String notes) {

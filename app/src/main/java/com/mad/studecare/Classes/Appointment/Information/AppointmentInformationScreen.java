@@ -1,6 +1,7 @@
 package com.mad.studecare.Classes.Appointment.Information;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.mad.studecare.Classes.Home.HomeScreen;
 import com.mad.studecare.Models.API;
 import com.mad.studecare.Models.Appointments.Appointments;
@@ -17,12 +24,18 @@ import com.mad.studecare.Models.Appointments.AppointmentsList;
 import com.mad.studecare.Models.Constants;
 import com.mad.studecare.Models.TimeSlots.TimeSlots;
 import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
+import com.mad.studecare.Models.Users;
 import com.mad.studecare.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +47,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     private String IntDoctor;
     private String IntTime;
     private String IntNotes;
+    private String mTimeSlotId;
     private ArrayList<TimeSlots> mTimeSlotsList = TimeSlotsList.GetInstance().GetList();
     private ArrayList<Appointments> mAppointments = AppointmentsList.GetInstance().GetList();
     private TimeSlots mTimeSlot;
@@ -71,6 +85,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         IntDate = getIntent().getStringExtra(Constants.TIMESLOT_DATE);
         IntNotes = getIntent().getStringExtra(Constants.APPOINTMENT_NOTE);
         mFromHome = getIntent().getExtras().getBoolean(Constants.FROM_HOME);
+        mTimeSlotId = getIntent().getStringExtra(Constants.TIMESLOT_ID);
 
         // Grab the Timeslot with intent details.
         for (TimeSlots timeSlot : mTimeSlotsList) {
@@ -130,9 +145,39 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         }
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
-            Appointments newAppointments = new Appointments(mTimeSlot, mNotesEdit.getText().toString(), "userId should go here");
-            AppointmentsList.GetInstance().AddToList(newAppointments);
             Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_APPOINTMENTS, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //This code is executed if the server responds, whether or not the response contains data.
+                    //The String 'response' contains the server's response.
+                    Log.d("POST", "SUCCESS: " + response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                    } catch (JSONException | NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //This code is executed if there is an error.
+                    Log.d("POST", "ERROR: " + error.toString());
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> appt = new HashMap<>();
+                    appt.put("timeslotId", mTimeSlotId);
+                    appt.put("notes", mNotesEdit.getText().toString());
+                    appt.put("userId", Users.getInstance().getUserId());
+                    appt.put("access_token", API.ACCESS_TOKEN);
+                    return appt;
+                }
+            };
+            queue.add(request);
         }
 
         Intent intent = new Intent(this, HomeScreen.class);
