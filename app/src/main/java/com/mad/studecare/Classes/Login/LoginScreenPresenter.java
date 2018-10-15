@@ -50,20 +50,22 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         this.mUsername = email;
         this.mPassword = password;
         RequestQueue queue = Volley.newRequestQueue(context);
+        JSONObject requestBody = new JSONObject();
+        try {
+            requestBody.put("access_token", API.ACCESS_TOKEN);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         if(validEmail(email) && validPassword(password)){
 
-            final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_SIGN_IN, new Response.Listener<String>() {
+            JsonObjectRequest authenticateUser = new JsonObjectRequest(Request.Method.POST, API.BASE_URL_SIGN_IN, requestBody, new Response.Listener<JSONObject>() {
                 @Override
-                public void onResponse(String response) {
-                    //This code is executed if the server responds, whether or not the response contains data.
-                    //The String 'response' contains the server's response.
-
-
-                    //SHOULD RETURN USERID STORE IT IN A GLOBAL VARIABLE U CAN ACCESS ANYWHERE
-
-                    Log.d("POST", "SUCCESS: " + response);
+                public void onResponse(JSONObject response) {
+                    Log.d("response", response.toString());
+                    new DownloadData(context).execute();
                 }
+
             }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
                 @Override
                 public void onErrorResponse(VolleyError error) {
@@ -76,7 +78,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                 public Map getHeaders() throws AuthFailureError {
                     Map headers = new HashMap<>();
                     String credentials = mUsername + ":" + mPassword;
-                    String auth = "Bearer "
+                    String auth = "Basic "
                             + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 //                headers.put("Content-Type", "application/json");
                     headers.put("Authorization", auth);
@@ -89,9 +91,8 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                     return user;
                 }
             };
-            queue.add(request);
+            queue.add(authenticateUser);
 
-            new DownloadData(context).execute();
         }
     }
 
