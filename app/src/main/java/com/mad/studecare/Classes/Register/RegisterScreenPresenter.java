@@ -1,6 +1,7 @@
 package com.mad.studecare.Classes.Register;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -25,13 +26,14 @@ import org.json.JSONObject;
 
 public class RegisterScreenPresenter implements RegisterScreenContract.presenter {
 
-    private RegisterScreenContract.view mView;
+    private RegisterScreen mView;
 
     String mUsername;
     String mPassword;
     String mFullName;
+    boolean mAlreadyRegistered;
 
-    public RegisterScreenPresenter(RegisterScreenContract.view view) {
+    public RegisterScreenPresenter(RegisterScreen view) {
         mView = view;
     }
 
@@ -53,7 +55,7 @@ public class RegisterScreenPresenter implements RegisterScreenContract.presenter
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        Users newUser = new Users();
+                        Users newUser = Users.getInstance();
                         newUser.setAccessToken(jsonObject.getString(context.getString(R.string.api_access_token)));
 //                    newUser.setEmail(jsonObject.getString(context.getString(R.string.api_email)));
                         newUser.setUserId(jsonObject.getString(context.getString(R.string.api_user)));
@@ -63,17 +65,22 @@ public class RegisterScreenPresenter implements RegisterScreenContract.presenter
                         e.printStackTrace();
                     }
                 }
-            }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            }, new Response.ErrorListener() {
+                public boolean mAlreadyRegistered = false; //Create an error listener to handle errors appropriately.
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //This code is executed if there is an error.
                     Log.d("POST", "ERROR: " + error.toString());
+                    Snackbar.make(mView.findViewById(R.id.activity_register_screen), R.string.email_already_registered_text,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             }) {
                 protected Map<String, String> getParams() {
                     Map<String, String> user = new HashMap<>();
                     user.put("email", mUsername);
                     user.put("password", mPassword);
+                    user.put("name", mFullName);
                     user.put("access_token", API.ACCESS_TOKEN);
                     return user;
                 }

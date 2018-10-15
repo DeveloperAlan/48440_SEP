@@ -2,9 +2,21 @@ package com.mad.studecare.Models;
 
 public class Users {
 
+    private static Users users;
     private String email;
     private String name;
     private String userId;
+    private String accessToken;
+
+    public static Users getInstance() {
+        if (users == null) {
+            users = new Users();
+        }
+        return users;
+    }
+
+    private Users() {
+    }
 
     public String getName() {
         return name;
@@ -29,8 +41,6 @@ public class Users {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
-
-    private String accessToken;
 
     public String getEmail() {
         return email;

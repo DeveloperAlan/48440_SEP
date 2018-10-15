@@ -21,6 +21,7 @@
     <string name="login_error_incorrect_details">Invalid username or password.</string>
     <string name="login_header_text">UTS:</string>
     <string name="login_header_sub_text">Medical</string>
+    <string name="email_already_registered_text">Email has already been registered.</string>
 
     <!--API-->
     <string name="api_email">"email"</string>
