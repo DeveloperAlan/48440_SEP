@@ -265,24 +265,27 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                             // display response
 
                             try {
-
                                 JSONArray array = response.getJSONArray("rows");
 
                                 Log.d("ROWS", array.toString());
                                 for(int i = 1; i < array.length(); i++) {
                                     JSONObject tSlot = array.getJSONObject(i);
+                                    /*
                                     TimeSlots timeSlot = null;
                                     for(TimeSlots slot : TimeSlotsList.GetInstance().GetList()) {
-                                        if(tSlot.getString("timeSlotId").equals(slot.getId())) {
+                                        if(tSlot.getString("timeslotId").equals(slot.getId())) {
                                             timeSlot = slot;
-                                        }
-                                    }
 
+                                        }
+                                    }*/
                                     String notes = tSlot.getString("notes");
                                     String userId = tSlot.getString("userId");
                                     //if(userId.equals(THE ID OF THE USER THEN U ADD)
                                     //if(Users.getInstance().getUserId().equals(userId)) {
-                                        AppointmentsList.GetInstance().AddToList(new Appointments(timeSlot, notes, userId));
+                                        Appointments appointment = new Appointments(tSlot.getString("timeslotId"), notes, userId);
+
+                                        AppointmentsList.GetInstance().AddToList(appointment);
+                                        Log.d("POST", "APPOINTMENTS SIZE " + AppointmentsList.GetInstance().GetList().size());
                                     //}
 
                                 }

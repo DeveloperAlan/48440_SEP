@@ -17,6 +17,8 @@ import com.mad.studecare.Models.Appointments.Appointments;
 import com.mad.studecare.Models.Appointments.AppointmentsAdapter;
 import com.mad.studecare.Models.Appointments.AppointmentsList;
 import com.mad.studecare.Models.Constants;
+import com.mad.studecare.Models.TimeSlots.TimeSlots;
+import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.Models.Users;
 import com.mad.studecare.R;
 
@@ -79,9 +81,15 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
     @Override
     public void editAppointment(Appointments appointment) {
         Intent intent = new Intent(this, AppointmentInformationScreen.class);
-        intent.putExtra(Constants.DOCTOR_NAME, appointment.getTimeslot().getDoctor().getName());
-        intent.putExtra(Constants.TIMESLOT_TIME, appointment.getTimeslot().getTime());
-        intent.putExtra(Constants.TIMESLOT_DATE, appointment.getTimeslot().getDate());
+        TimeSlots timeSlot = null;
+        for(TimeSlots slot : TimeSlotsList.GetInstance().GetList()) {
+            if (appointment.getTimeslot().equals(slot.getId())) {
+                timeSlot = slot;
+            }
+        }
+        intent.putExtra(Constants.DOCTOR_NAME, timeSlot.getDoctor().getName());
+        intent.putExtra(Constants.TIMESLOT_TIME, timeSlot.getTime());
+        intent.putExtra(Constants.TIMESLOT_DATE, timeSlot.getDate());
         intent.putExtra(Constants.FROM_HOME, true);
         intent.putExtra(Constants.APPOINTMENT_NOTE, appointment.getNotes());
         startActivity(intent);

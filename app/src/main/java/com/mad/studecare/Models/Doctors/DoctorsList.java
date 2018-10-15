@@ -16,7 +16,7 @@ public class DoctorsList {
     public static DoctorsList GetInstance() {
         if (singleton == null) {
             singleton = new DoctorsList();
-            mDoctorsList = new ArrayList<Doctors>();
+            mDoctorsList = new ArrayList<>();
         } return singleton;
     }
 

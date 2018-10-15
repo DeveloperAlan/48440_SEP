@@ -23,6 +23,8 @@ import com.github.vipulasri.timelineview.TimelineView;
 import com.mad.studecare.Classes.Home.HomePresenter;
 import com.mad.studecare.Classes.Home.HomeScreen;
 import com.mad.studecare.Classes.Home.HomeScreenContract;
+import com.mad.studecare.Models.TimeSlots.TimeSlots;
+import com.mad.studecare.Models.TimeSlots.TimeSlotsList;
 import com.mad.studecare.R;
 import com.mad.studecare.Utils.MenuItemClickListener;
 import com.mad.studecare.Utils.SortList;
@@ -89,20 +91,26 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Appointments appointment = mAppointmentsList.get(position);
-        if(appointment.getTimeslot().getDoctor().getPicture() == 4) {
+        TimeSlots timeSlot = null;
+        for(TimeSlots slot : TimeSlotsList.GetInstance().GetList()) {
+            if (appointment.getTimeslot().equals(slot.getId())) {
+                timeSlot = slot;
+            }
+        }
+        if(timeSlot.getDoctor().getPicture() == 4) {
             holder.picture.setImageResource(R.mipmap.doc1);
-        } else if(appointment.getTimeslot().getDoctor().getPicture() == 1) {
+        } else if(timeSlot.getDoctor().getPicture() == 1) {
             holder.picture.setImageResource(R.mipmap.doc4);
-        } else if(appointment.getTimeslot().getDoctor().getPicture() == 5) {
+        } else if(timeSlot.getDoctor().getPicture() == 5) {
             holder.picture.setImageResource(R.mipmap.doc5);
-        } else if(appointment.getTimeslot().getDoctor().getPicture() == 3) {
+        } else if(timeSlot.getDoctor().getPicture() == 3) {
             holder.picture.setImageResource(R.mipmap.doc2);
         } else {
             holder.picture.setImageResource(R.mipmap.doc3);
         }
-        holder.time.setText(appointment.getTimeslot().getTime());
-        holder.date.setText(appointment.getTimeslot().getDate());
-        holder.name.setText(appointment.getTimeslot().getDoctor().getName());
+        holder.time.setText(timeSlot.getTime());
+        holder.date.setText(timeSlot.getDate());
+        holder.name.setText(timeSlot.getDoctor().getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

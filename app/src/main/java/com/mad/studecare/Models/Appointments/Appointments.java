@@ -9,22 +9,22 @@ import com.mad.studecare.Models.TimeSlots.TimeSlots;
 
 public class Appointments {
 
-    private TimeSlots timeslot;
+    private String timeslot;
     //private String id;
     private String notes;
     private String userId;
 
-    public Appointments(TimeSlots timeslot, String notes, String userId) {
-        this.timeslot = timeslot;
+    public Appointments(String timeslot, String notes, String userId) {
+        this.timeslot= timeslot;
         this.notes = notes;
         this.userId = userId;
     }
 
-    public TimeSlots getTimeslot() {
+    public String getTimeslot() {
         return timeslot;
     }
 
-    public void setTimeslot(TimeSlots timeslot) {
+    public void setTimeslot(String timeslot) {
         this.timeslot = timeslot;
     }
 
