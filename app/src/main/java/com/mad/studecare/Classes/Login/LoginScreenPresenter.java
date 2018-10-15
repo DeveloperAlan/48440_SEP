@@ -63,6 +63,19 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.d("response", response.toString());
+
+                    try {
+                        Users user = Users.getInstance();
+                        user.setAccessToken(response.getString("token"));
+
+                        JSONObject userDetails = response.getJSONObject("user");
+                        user.setUserId(userDetails.getString("id"));
+                        user.setName(userDetails.getString("name"));
+                        user.setEmail(userDetails.getString("email"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     new DownloadData(context).execute();
                 }
 
