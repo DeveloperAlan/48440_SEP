@@ -281,6 +281,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                                     String notes = tSlot.getString("notes");
                                     String userId = tSlot.getString("userId");
                                     String id = tSlot.getString("id");
+                                    Log.d("GETID", "ID is " + id);
                                     //if(userId.equals(THE ID OF THE USER THEN U ADD)
                                     //if(Users.getInstance().getUserId().equals(userId)) {
                                         Appointments appointment = new Appointments(id,tSlot.getString("timeslotId"), notes, userId);

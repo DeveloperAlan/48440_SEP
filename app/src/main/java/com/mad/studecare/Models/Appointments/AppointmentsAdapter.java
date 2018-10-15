@@ -91,6 +91,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Appointments appointment = mAppointmentsList.get(position);
+
         TimeSlots timeSlot = null;
         for(TimeSlots slot : TimeSlotsList.GetInstance().GetList()) {
             if (appointment.getTimeslot().equals(slot.getId())) {

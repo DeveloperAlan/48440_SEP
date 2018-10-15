@@ -55,7 +55,7 @@ public class HomeScreen extends AppCompatActivity implements HomeScreenContract.
 
         // Populate Date data
         presenter.populateDate();
-
+        test = AppointmentsList.GetInstance().GetList();
 
         // Setting RecyclerView adapter
         mAppointmentsAdapter = new AppointmentsAdapter(AppointmentsList.GetInstance().GetList(), this, presenter);

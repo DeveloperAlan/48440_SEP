@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -99,7 +100,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
 
         // Grab the appointment, if there is one.
         for (Appointments appointment : mAppointments) {
-            if (appointment.getTimeslot().equals(mTimeSlot)) {
+            if (appointment.getTimeslot().equals(mTimeSlot.getId())) {
                 mAppointment = appointment;
             }
         }
@@ -141,35 +142,38 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     public void save(View v) {
         // Navigated from TimeSlots. Create a new Appointment.
         if (mFromHome) {
-
+            mAppointment.setNotes(mNotesEdit.getText().toString());
+            goToHome();
         }
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
-                        Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
+            Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
 
-                        RequestQueue queue = Volley.newRequestQueue(this);
-                        final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_APPOINTMENTS, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                //This code is executed if the server responds, whether or not the response contains data.
-                                //The String 'response' contains the server's response.
-                                Log.d("POST", "SUCCESS: " + response);
+            RequestQueue queue = Volley.newRequestQueue(this);
+            final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_APPOINTMENTS, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //This code is executed if the server responds, whether or not the response contains data.
+                    //The String 'response' contains the server's response.
+                    Log.d("POST", "SUCCESS: " + response);
 
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    Appointments appointment = new Appointments(jsonObject.getString("id"), mTimeSlotId, mNotesEdit.getText().toString(), Users.getInstance().getUserId());
-                                    Log.d("PRE", "SIZE BEFORE: " + AppointmentsList.GetInstance().GetList().size());
-                                    AppointmentsList.GetInstance().AddToList(appointment);
-                                    Log.d("AFTER", "SIZE AFTER: " + AppointmentsList.GetInstance().GetList().size());
-                                } catch (JSONException | NullPointerException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                //This code is executed if there is an error.
-                                Log.d("POST", "ERROR: " + error.toString());
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        Appointments appointment = new Appointments(jsonObject.getString("id"), mTimeSlotId, mNotesEdit.getText().toString(), Users.getInstance().getUserId());
+                        AppointmentsList.GetInstance().AddToList(appointment);
+
+
+                        goToHome();
+
+                    } catch (JSONException | NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //This code is executed if there is an error.
+                    Log.d("POST", "ERROR: " + error.toString());
                 }
             }) {
                 protected Map<String, String> getParams() {
@@ -182,16 +186,54 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
                 }
             };
             queue.add(request);
+
         }
-
-        Intent intent = new Intent(this, HomeScreen.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-
     }
+
+    private void goToHome() {
+        finish();
+        Intent intent = new Intent(this, HomeScreen.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 
     public void delete(View v) {
+        /*
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest dr = new StringRequest(Request.Method.DELETE,  API.BASE_URL_APPOINTMENTS + mAppointment.getId(),
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        for (Appointments appointment : AppointmentsList.GetInstance().GetList()) {
+                            if (appointment.getId().equals(mAppointment.getId())) {
+                                Log.d("PRE", "SIZE BEFORE: " + AppointmentsList.GetInstance().GetList().size());
+                                AppointmentsList.GetInstance().GetList().remove(appointment);
+                                Log.d("AFTER", "SIZE AFTER: " + AppointmentsList.GetInstance().GetList().size());
+                                goToHome();
+                            }
+                        }
 
+
+                    }
+                    }, new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                        // error.
+
+                    }
+                    }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> ID = new HashMap<>();
+                ID.put("access_token", API.ACCESS_TOKEN);
+                return ID;
+            }
+        };
+
+        queue.add(dr);*/
     }
+
 }
