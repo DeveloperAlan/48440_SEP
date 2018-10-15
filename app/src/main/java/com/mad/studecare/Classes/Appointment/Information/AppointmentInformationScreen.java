@@ -145,27 +145,31 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         }
         // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         else {
-            Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
+                        Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
 
-            RequestQueue queue = Volley.newRequestQueue(this);
-            final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_APPOINTMENTS, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    //This code is executed if the server responds, whether or not the response contains data.
-                    //The String 'response' contains the server's response.
-                    Log.d("POST", "SUCCESS: " + response);
+                        RequestQueue queue = Volley.newRequestQueue(this);
+                        final StringRequest request = new StringRequest(Request.Method.POST, API.BASE_URL_APPOINTMENTS, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                //This code is executed if the server responds, whether or not the response contains data.
+                                //The String 'response' contains the server's response.
+                                Log.d("POST", "SUCCESS: " + response);
 
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                    } catch (JSONException | NullPointerException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //This code is executed if there is an error.
-                    Log.d("POST", "ERROR: " + error.toString());
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    Appointments appointment = new Appointments(jsonObject.getString("id"), mTimeSlotId, mNotesEdit.getText().toString(), Users.getInstance().getUserId());
+                                    Log.d("PRE", "SIZE BEFORE: " + AppointmentsList.GetInstance().GetList().size());
+                                    AppointmentsList.GetInstance().AddToList(appointment);
+                                    Log.d("AFTER", "SIZE AFTER: " + AppointmentsList.GetInstance().GetList().size());
+                                } catch (JSONException | NullPointerException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                //This code is executed if there is an error.
+                                Log.d("POST", "ERROR: " + error.toString());
                 }
             }) {
                 protected Map<String, String> getParams() {
@@ -181,9 +185,10 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         }
 
         Intent intent = new Intent(this, HomeScreen.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+
     }
 
     public void delete(View v) {

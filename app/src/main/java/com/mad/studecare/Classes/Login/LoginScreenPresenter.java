@@ -258,7 +258,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
 
             // Appointments
             RequestQueue appointmentQueue = Volley.newRequestQueue(context);
-            JsonObjectRequest getAppointmentRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_APPOINTMENTS, requestBody,
+            final JsonObjectRequest getAppointmentRequest = new JsonObjectRequest(Request.Method.GET, API.BASE_URL_APPOINTMENTS, requestBody,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -280,12 +280,14 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                                     }*/
                                     String notes = tSlot.getString("notes");
                                     String userId = tSlot.getString("userId");
+                                    String id = tSlot.getString("id");
                                     //if(userId.equals(THE ID OF THE USER THEN U ADD)
                                     //if(Users.getInstance().getUserId().equals(userId)) {
-                                        Appointments appointment = new Appointments(tSlot.getString("timeslotId"), notes, userId);
+                                        Appointments appointment = new Appointments(id,tSlot.getString("timeslotId"), notes, userId);
+                                        if(Users.getInstance().getUserId().equals(userId)) {
+                                            AppointmentsList.GetInstance().AddToList(appointment);
+                                        }
 
-                                        AppointmentsList.GetInstance().AddToList(appointment);
-                                        Log.d("POST", "APPOINTMENTS SIZE " + AppointmentsList.GetInstance().GetList().size());
                                     //}
 
                                 }

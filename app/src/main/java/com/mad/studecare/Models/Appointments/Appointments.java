@@ -9,12 +9,14 @@ import com.mad.studecare.Models.TimeSlots.TimeSlots;
 
 public class Appointments {
 
+    private String id;
     private String timeslot;
     //private String id;
     private String notes;
     private String userId;
 
-    public Appointments(String timeslot, String notes, String userId) {
+    public Appointments(String id, String timeslot, String notes, String userId) {
+        this.id = id;
         this.timeslot= timeslot;
         this.notes = notes;
         this.userId = userId;
@@ -30,6 +32,14 @@ public class Appointments {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserId() {
