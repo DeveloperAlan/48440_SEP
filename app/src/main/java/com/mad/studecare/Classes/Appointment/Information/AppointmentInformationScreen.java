@@ -141,12 +141,40 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     }
 
     public void save(View v) {
-        // Navigated from TimeSlots. Create a new Appointment.
+        // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
         if (mFromHome) {
             mAppointment.setNotes(mNotesEdit.getText().toString());
-            goToHome();
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            final StringRequest request = new StringRequest(Request.Method.PUT, API.BASE_URL_APPOINTMENTS + mAppointment.getId(), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //This code is executed if the server responds, whether or not the response contains data.
+                    //The String 'response' contains the server's response.
+                    Log.d("POST", "SUCCESS: " + response);
+
+                    goToHome();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //This code is executed if there is an error.
+                    Log.d("POST", "ERROR: " + error.toString());
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> appt = new HashMap<>();
+                    appt.put("timeslotId", mAppointment.getTimeslot());
+                    appt.put("notes", mNotesEdit.getText().toString());
+                    appt.put("userId", Users.getInstance().getUserId());
+                    appt.put("access_token", API.ACCESS_TOKEN);
+                    return appt;
+                }
+            };
+            queue.add(request);
+
         }
-        // Navigated from HOME. Do not create a new Appointment. Edit the homeNavigated appointment
+        // Navigated from TimeSlots. Create a new Appointment.
         else {
             Log.d("APPSIZE", Integer.toString(AppointmentsList.GetInstance().GetList().size()));
 
