@@ -74,6 +74,20 @@
                     android:textColor="@android:color/white"
                     android:text="January"/>
 
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/home_month"
+                    android:paddingLeft="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:text="name"/>
+
             </RelativeLayout>
 
 
@@ -112,12 +126,14 @@
         app:layout_anchorGravity="bottom|right|end"/>
 
     <ImageButton
+        android:id="@+id/logout_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="4dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_action_settings"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:onClick="logout"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

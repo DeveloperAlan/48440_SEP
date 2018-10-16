@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
@@ -142,6 +143,9 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
         // Remove all removed TimeSlots
         mRemovedTimeSlotsTime.clear();
 
+
+        SortList sort = new SortList();
+
         for(TimeSlots slot : mFilterList) {
             if (time.after(slot.getDateTime())) {
                 mRemovedTimeSlotsTime.add(slot);
@@ -149,6 +153,7 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
         }
 
         mFilterList.removeAll(mRemovedTimeSlotsTime);
+        Collections.sort(mFilterList, sort);
 
         mView.updateList(mFilterList);
         // Sort & Change
@@ -156,6 +161,9 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
     }
 
     private void filterDate(Date date) {
+
+
+        SortList sort = new SortList();
         // Adding all the removed TimeSlots for a new filter
         mFilterList.addAll(mRemovedTimeSlotsDate);
         // Remove all removed TimeSlots
@@ -168,6 +176,8 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
         }
 
         mFilterList.removeAll(mRemovedTimeSlotsDate);
+
+        Collections.sort(mFilterList, sort);
 
         mView.updateList(mFilterList);
 
@@ -200,7 +210,7 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
                 }
             }
 
-            //Collections.sort(mFilterList, sort);
+            Collections.sort(testList, sort);
 
             mView.updateList(testList);
             // Sort & Change

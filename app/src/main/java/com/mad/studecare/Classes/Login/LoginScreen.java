@@ -60,6 +60,7 @@ public class LoginScreen extends AppCompatActivity implements LoginScreenContrac
 
     @Override
     public void loginAuthenticated() {
+
         Intent intent = new Intent(this, LoadingScreen.class);
         startActivity(intent);
         finish();
@@ -81,5 +82,13 @@ public class LoginScreen extends AppCompatActivity implements LoginScreenContrac
                 password.setError(error);
                 break;
         }
+    }
+
+    @Override
+    public void invalidUser() {
+        username.setError("Invalid username or password");
+        password.setError("Invalid username or password");
+        username.setText("");
+        password.setText("");
     }
 }

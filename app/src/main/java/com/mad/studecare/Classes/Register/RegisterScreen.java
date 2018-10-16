@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mad.studecare.R;
 
@@ -36,6 +37,7 @@ public class RegisterScreen extends AppCompatActivity implements RegisterScreenC
     public void register(View v) {
         if(presenter.RegisterUser(email.getText().toString(), password.getText().toString(), fullname.getText().toString(), this)){
             finish();
+            Toast.makeText(this, "Registration successful! Please sign in.", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.mad.studecare.Classes.Appointment.Information;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -152,7 +155,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
                     //This code is executed if the server responds, whether or not the response contains data.
                     //The String 'response' contains the server's response.
                     Log.d("POST", "SUCCESS: " + response);
-
+                    updateToast();
                     goToHome();
                 }
             }, new Response.ErrorListener() {
@@ -190,8 +193,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
                         JSONObject jsonObject = new JSONObject(response);
                         Appointments appointment = new Appointments(jsonObject.getString("id"), mTimeSlotId, mNotesEdit.getText().toString(), Users.getInstance().getUserId());
                         AppointmentsList.GetInstance().AddToList(appointment);
-
-
+                        makeToast();
                         goToHome();
 
                     } catch (JSONException | NullPointerException e) {
@@ -219,8 +221,16 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
         }
     }
 
+    private void makeToast() {
+        Toast.makeText(this, "Appointment made", Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateToast() {
+        Toast.makeText(this, "Appointment updated", Toast.LENGTH_SHORT).show();
+    }
+
     private void goToHome() {
-        finish();
+
         Intent intent = new Intent(this, HomeScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -228,6 +238,31 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
 
 
     public void delete(View v) {
+        if(mFromHome) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Are you sure you want to cancel this appointment?")
+                    .setMessage("")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            confirmDelete();
+                        }
+                    }) .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            })
+                    .create()
+                    .show();
+        } else {
+            finish();
+        }
+
+    }
+
+    private void confirmDelete() {
+
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest dr = new StringRequest(Request.Method.DELETE,  API.BASE_URL_APPOINTMENTS + mAppointment.getId() + "?access_token=" + API.ACCESS_TOKEN,
                 new Response.Listener<String>()
@@ -235,27 +270,43 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
                     @Override
                     public void onResponse(String response) {
                         // response
-                        for (Appointments appointment : AppointmentsList.GetInstance().GetList()) {
-                            if (appointment.getId().equals(mAppointment.getId())) {
-                                Log.d("PRE", "SIZE BEFORE: " + AppointmentsList.GetInstance().GetList().size());
-                                AppointmentsList.GetInstance().GetList().remove(appointment);
-                                Log.d("AFTER", "SIZE AFTER: " + AppointmentsList.GetInstance().GetList().size());
-                                goToHome();
+                        Iterator<Appointments> iter = AppointmentsList.GetInstance().GetList().iterator();
+
+                        while (iter.hasNext()) {
+                            Appointments appt = iter.next();
+
+                            if (appt.getId().equals(mAppointment.getId())) {
+                                iter.remove();
+                                break;
                             }
                         }
+                        showCancelToast();
+                        goToHome();
+/*
+                        for (Appointments appointment : AppointmentsList.GetInstance().GetList()) {
+                            if (appointment.getId().equals(mAppointment.getId())) {
+                                AppointmentsList.GetInstance().GetList().remove(appointment);
+                                showCancelToast();
+                                goToHome();
+                            }
+                        }*/
 
 
                     }
-                    }, new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                        // error.
+                }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // error.
 
-                    }
-                    });
+            }
+        });
 
         queue.add(dr);
+    }
+
+    private void showCancelToast() {
+        Toast.makeText(this, "Appointment cancelled", Toast.LENGTH_SHORT).show();
     }
 
 }

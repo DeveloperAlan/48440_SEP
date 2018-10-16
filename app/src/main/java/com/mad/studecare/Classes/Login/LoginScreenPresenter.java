@@ -40,6 +40,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
     private static LoginScreenContract.view mView;
     String mUsername;
     String mPassword;
+    private Boolean isUser = false;
 
     public LoginScreenPresenter(LoginScreenContract.view view) {
         this.mView = view;
@@ -73,6 +74,8 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                         user.setName(userDetails.getString("name"));
                         user.setEmail(userDetails.getString("email"));
 
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -83,6 +86,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //This code is executed if there is an error.
+                    mView.invalidUser();
                     Log.d("POST", "ERROR: " + error.toString());
                 }
             }) {
@@ -118,7 +122,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
 
         @Override
         protected void onPreExecute() {
-            mView.showProgress();
+           // mView.showProgress();
             // Load Singleton
             DoctorsList.GetInstance();
             TimeSlotsList.InitInstance();
@@ -385,7 +389,7 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            mView.hideProgress();
+            //mView.hideProgress();
             mView.loginAuthenticated();
         }
     }

@@ -21,6 +21,7 @@ public interface LoginScreenContract {
 
         void textFieldError(String error, String field);
 
+        void invalidUser();
     }
 
     interface presenter {
