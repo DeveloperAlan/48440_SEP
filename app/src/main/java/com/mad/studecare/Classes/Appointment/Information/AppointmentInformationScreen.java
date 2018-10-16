@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -199,9 +200,8 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
 
 
     public void delete(View v) {
-        /*
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest dr = new StringRequest(Request.Method.DELETE,  API.BASE_URL_APPOINTMENTS + mAppointment.getId(),
+        StringRequest dr = new StringRequest(Request.Method.DELETE,  API.BASE_URL_APPOINTMENTS + mAppointment.getId() + "?access_token=" + API.ACCESS_TOKEN,
                 new Response.Listener<String>()
                 {
                     @Override
@@ -225,15 +225,9 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
                         // error.
 
                     }
-                    }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> ID = new HashMap<>();
-                ID.put("access_token", API.ACCESS_TOKEN);
-                return ID;
-            }
-        };
+                    });
 
-        queue.add(dr);*/
+        queue.add(dr);
     }
 
 }
