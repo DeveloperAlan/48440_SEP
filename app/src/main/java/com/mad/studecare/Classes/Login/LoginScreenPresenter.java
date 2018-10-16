@@ -390,6 +390,11 @@ public class LoginScreenPresenter implements LoginScreenContract.presenter {
         @Override
         protected void onPostExecute(Void aVoid) {
             //mView.hideProgress();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             mView.loginAuthenticated();
         }
     }

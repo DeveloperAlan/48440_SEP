@@ -14,6 +14,7 @@ import com.mad.studecare.R;
 import com.mad.studecare.Utils.SortList;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -165,6 +166,8 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
 
         SortList sort = new SortList();
         // Adding all the removed TimeSlots for a new filter
+        ArrayList<TimeSlots> test = new ArrayList<>();
+        test.addAll(mFilterList);
         mFilterList.addAll(mRemovedTimeSlotsDate);
         // Remove all removed TimeSlots
         mRemovedTimeSlotsDate.clear();
@@ -194,18 +197,18 @@ public class AppointmentScreenPresenter implements AppointmentScreenContract.pre
         SortList sort = new SortList();
 
         // Adding all the removed TimeSlots for a new filter
-        mFilterList.addAll(mRemovedDoctors);
+        //mFilterList.addAll(mRemovedDoctors);
         // Remove all removed TimeSlots
-        mRemovedDoctors.clear();
+       // mRemovedDoctors.clear();
 
         if(mChosenDoctors.isEmpty()) {
-            mView.updateList(mFilterList);
+            mView.updateList(new ArrayList<TimeSlots>());
         } else {
             for(TimeSlots slot : mFilterList) {
                 for(Doctors d : mChosenDoctors) {
                     if(slot.getDoctor() == d) {
                         testList.add(slot);
-                        mRemovedDoctors.add(slot);
+                        //mRemovedDoctors.add(slot);
                     }
                 }
             }

@@ -124,7 +124,6 @@ public class AppointmentScreen extends AppCompatActivity implements AppointmentS
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startConfirmationScreen(timeSlot);
-                        finish();
                     }
                 }) .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
