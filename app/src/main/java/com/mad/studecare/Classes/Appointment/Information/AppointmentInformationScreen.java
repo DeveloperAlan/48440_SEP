@@ -214,6 +214,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
                     appt.put("userId", Users.getInstance().getUserId());
                     appt.put("access_token", API.ACCESS_TOKEN);
                     return appt;
+
                 }
             };
             queue.add(request);
@@ -230,7 +231,7 @@ public class AppointmentInformationScreen extends AppCompatActivity implements A
     }
 
     private void goToHome() {
-
+        finish();
         Intent intent = new Intent(this, HomeScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
